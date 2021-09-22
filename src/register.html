@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<title>CryptoLife | Registration</title>
+	<!--favicon-->
+	<link rel="icon" href="assets/images/favicon-32x32.png" type="image/png" />
+	<!-- loader-->
+	<link href="assets/css/pace.min.css" rel="stylesheet" />
+	<script src="assets/js/pace.min.js"></script>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+	<!-- Icons CSS -->
+	<link rel="stylesheet" href="assets/css/icons.css" />
+	<!-- App CSS -->
+	<link rel="stylesheet" href="assets/css/app.css" />
+</head>
+
+<body class="bg-theme bg-theme6">
+	<!-- wrapper -->
+	<div class="wrapper">
+		<div class="section-authentication-register d-flex align-items-center justify-content-center">
+			<div class="row">
+				<div class="col-12 col-lg-10 mx-auto">
+					<div class="card radius-15">
+						<div class="row no-gutters">
+							<div class="col-lg-6">
+								<div class="card-body p-md-5">
+									<div class="text-center">
+										<img src="assets/images/logo-icon.png" width="80" alt="">
+										<h3 class="mt-4 font-weight-bold">Cryptolife Ready Check</h3>
+										<p>To access to the Cryptolife Smart Contract you need a Wallet Browser Extension or an App connected to the <span class="chainName">BCS</span> with at least <span id="minimumSummToRegister"><span id="walletCheck" class="pr-2"><span class="spinner-border spinner-border-sm" role="status"><span class="sr-only">Loading...</span></span></span></span> <span class="crypto">BNB</span> at the balance to register. </p>
+									</div>
+									<ul class="list-group list-group-flush text-white font-14">
+										<li class="list-group-item align-items-center bg-transparent">
+											<div class="row">
+												<span id="walletCheck" class="pr-2"><span class="spinner-border" role="status"><span class="sr-only">Loading...</span></span></span>&nbsp;<h4 class="mt-1">Wallet&nbsp;Check</h4>									
+											</div>
+											<div class="row card shadow collapse radius-15 mt-4" id="walletCard">
+												<div class="card-body">
+													<h5 class="card-title">Please install or login to the Wallet</h5>
+													<p class="card-text">The Wallet needs to your authentication and to access to the Blockchain.</p>
+													<p>You can download and install a recommended wallet <a href="https://metamask.io/" target="_blank" class="text-info">MetaMask</a>.</p>
+													<p>The Wallet contains your accounts (named addresses in Blockchain) where you will make and receive your cryptocurrency payments.</p><p>Never give anyone the secret key or mnemonic phrase for your addresses!</p>
+													<button class="btn btn-sm btn-light collapsed" type="button" data-target="#t1_details" data-toggle="collapse" aria-expanded="false">Show Video Instruction ▼</button>
+													<div class="border collapse" id="t1_details" style="">
+														<div class="p-2 text-monospace">
+															<div>08:30 - 09:00 Breakfast in CR 2A</div>
+															<div>09:00 - 10:30 Live sessions in CR 3</div>
+															<div>10:30 - 10:45 Break</div>
+															<div>10:45 - 12:00 Live sessions in CR 3</div>
+														</div>
+													</div>
+												</div>
+											</div>										
+											<div class="row card shadow collapse radius-15 mt-4" id="walletMobileCard">
+												<div class="card-body">
+													<h5 class="card-title">Please open the site trough the Wallet Dapp Browser</h5>
+													<p class="card-text">The Wallet needs to your authentication and to access to the Blockchain.</p>
+													<p>You can download and install a recommended wallet app <a href="https://metamask.io/" target="_blank" class="text-info">MetaMask</a>.</p>
+													<p>The Wallet contains your accounts (named addresses in Blockchain) where you will make and receive your cryptocurrency payments.</p><p>Never give anyone the secret key or mnemonic phrase for your addresses!</p>
+													<button class="btn btn-sm btn-light collapsed" type="button" data-target="#t1_details" data-toggle="collapse" aria-expanded="false">Show Video Instruction ▼</button>
+													<div class="border collapse" id="t1_details" style="">
+														<div class="p-2 text-monospace">
+															<div>08:30 - 09:00 Breakfast in CR 2A</div>
+															<div>09:00 - 10:30 Live sessions in CR 3</div>
+															<div>10:30 - 10:45 Break</div>
+															<div>10:45 - 12:00 Live sessions in CR 3</div>
+														</div>
+													</div>
+												</div>
+											</div>										
+										</li>
+										<li class="list-group-item align-items-center bg-transparent">
+											<div class="row">
+												<span id="chainCheck" class="pr-2"> <span class="spinner-border" role="status"><span class="sr-only">Loading...</span></span></span> <h4 class="mt-1">Blockchain Check</h4>
+											</div>
+											<div class="row card shadow radius-15 mt-4 collapse" id="chainCard" >
+												<div class="card-body">
+													<h5 class="card-title">Please connect to the <span class="chainName">BSC</span></h5>
+													<p class="card-text">The Cryptolife Smart Contract published in it. You need switch your current Blockchain in the Wallet to the <span class="chainName">BSC</span>.</p>
+													<p> If you don't have this chain in the Wallet you can add it manualy in the Wallet Settings.</p>
+													<p>For <a href="https://metamask.io/" target="_blank" class="text-info">MetaMask</a> just click on "Networks", choose "Custom RPC" and fill fields by configuration below.</p>
+													<p> The <span class="chainName">BSC</span> configuration:</p>
+													<ul class="mb-2">
+														<li>Network Name: Smart Chain</li>
+														<li>New RPC URL: https://bsc-dataseed.binance.org/</li>
+														<li>ChainID: 56</li>
+														<li>Symbol: BNB</li>
+														<li>Block Explorer URL: https://bscscan.com</li>
+													</ul>
+													<button class="btn btn-sm btn-light collapsed" type="button" data-target="#t2_details" data-toggle="collapse" aria-expanded="false">Show Video Instruction ▼</button>
+													<div class="border collapse" id="t2_details" style="">
+														<div class="p-2 text-monospace">
+															<div>08:30 - 09:00 Breakfast in CR 2A</div>
+															<div>09:00 - 10:30 Live sessions in CR 3</div>
+															<div>10:30 - 10:45 Break</div>
+															<div>10:45 - 12:00 Live sessions in CR 3</div>
+														</div>
+													</div>
+												</div>
+											</div>										
+										</li>
+										<li class="list-group-item align-items-center bg-transparent">
+											<div class="row">
+												<span id="contractCheck" class="pr-2"> <span class="spinner-border" role="status"><span class="sr-only">Loading...</span></span></span><h4 class="mt-1">Contract Access Check</h4>	
+											</div>
+										</li>
+										<li class="list-group-item align-items-center bg-transparent">
+											<div class="row" >
+												<span id="balanceCheck" class="pr-2"> <span class="spinner-border" role="status"><span class="sr-only">Loading...</span></span></span><h4 class="mt-1">Balance Check</h4>
+											</div>
+											<div class=" row card shadow radius-15 mt-4 collapse" id="balanceCard">
+												<div class="card-body">
+													<h5 class="card-title">Please deposit some <span class="crypto">BNB</span> to the Wallet</h5>
+													<p class="card-text">To <span class="mp0">Basic</span> Registration you need at least <span class="mp0Price">0</span>&nbsp;<span class="crypto">BNB</span> plus about <span class="commission">0.005</span>&nbsp;<span class="crypto">BNB</span> to pay the <span class="chainName">BSC</span> transaction fee.</p>
+													<p> We recommend buying  <span class="crypto">BNB</span> at the world's largest crypto exchange <a href="https://www.binance.com/ru/buy-sell-crypto?channel=card&fiat=USD&ref=HDJONDBN" target="_blank" class="text-info binanceLink">binance.com</a>.</p>
+													<p> Our link gives an additional 10% exchange commission cashback at the <a href="https://www.binance.com/ru/buy-sell-crypto?channel=card&fiat=USD&ref=HDJONDBN" target="_blank" class="text-info binanceLink">binance.com</a> in the registration case.</p>
+													<button class="btn btn-sm btn-light collapsed" type="button" data-target="#t3_details" data-toggle="collapse" aria-expanded="false">Show Video Instruction ▼</button>
+													<div class="border collapse" id="t3_details" style="">
+														<div class="p-2 text-monospace">
+															<div>08:30 - 09:00 Breakfast in CR 2A</div>
+															<div>09:00 - 10:30 Live sessions in CR 3</div>
+															<div>10:30 - 10:45 Break</div>
+															<div>10:45 - 12:00 Live sessions in CR 3</div>
+														</div>
+													</div>
+												</div>
+											</div>	
+										</li>
+									</ul>
+									<div class="text-center mt-4">
+										<h5 id="checkPass">Checking...</h5>
+										<p id="passDesc"></p>
+									</div>
+								</div>
+
+							</div>
+							<div class="col-lg-6 ">
+								<div class=" h-100 justify-content-center d-flex bg-dark-blue " style="align-items: center; border-top-right-radius: 15px; border-bottom-right-radius: 15px;">
+									<img src="assets/images/login-images/register-frent-img.jpg" class="card-img login-img " alt="...">									
+								</div>
+							</div>
+						</div>
+						<!--end row-->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end wrapper -->
+	<!-- JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/popper.min.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<!--plugins-->
+	<script src="assets/plugins/simplebar/js/simplebar.min.js"></script>
+	<script src="assets/plugins/metismenu/js/metisMenu.min.js"></script>
+	<script src="assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
+	<!-- Notifications JS -->
+	<script src="assets/plugins/notifications/js/lobibox.min.js"></script>
+	<script src="assets/plugins/notifications/js/notifications.min.js"></script>
+	<!-- App JS -->
+	<script src="assets/js/web3.min.js"></script>
+   <script src="assets/js/truffle-contract.js"></script>
+   <script src="assets/js/check.js"></script>
+
+</body>
+
+</html>

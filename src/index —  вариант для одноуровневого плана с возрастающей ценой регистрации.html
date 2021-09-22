@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<title>CryptoLife | Account</title>
+	<!--favicon-->
+	<link rel="icon" href="assets/images/favicon-32x32.png" type="image/png" />
+	<!-- Vector CSS -->
+	<link href="assets/plugins/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
+	<!--plugins-->
+	<link href="assets/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
+	<link href="assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />
+	<link href="assets/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />
+	<!-- loader-->
+	<link href="assets/css/pace.min.css" rel="stylesheet" />
+	<script src="assets/js/pace.min.js"></script>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+	<!-- Icons CSS -->
+	<link rel="stylesheet" href="assets/css/icons.css" />
+	<!-- App CSS -->
+	<link rel="stylesheet" href="assets/css/app.css" />
+	
+	
+</head>
+
+<body class="bg-theme bg-theme6">
+	<!-- wrapper -->
+	<div class="wrapper">
+		<!--header-->
+		<header class="top-header">
+			<nav class="navbar navbar-expand">
+				<div class="sidebar-header">
+					<div class="d-none d-lg-flex">
+						<img src="assets/images/logo-icon.png" class="logo-icon-2" alt="" />
+					</div>
+					<div>
+						<h4 class="d-none d-lg-flex logo-text">CryptoLife</h4>
+					</div>
+					<a href="javascript:;" class="toggle-btn ml-lg-auto"> <i class="bx bx-menu"></i>
+					</a>
+				</div>
+				<div class="right-topbar ml-auto">
+					<ul class="navbar-nav">
+						<li class="nav-item dropdown dropdown-user-profile" id="userIdContainer">
+							<a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-toggle="dropdown" aria-expanded="false">
+								<div class="media user-box align-items-center">
+									<div class="media-body user-info">
+										<p class="user-name mb-0"><span class="">Partner ID</span></p>
+										<p class="designattion mb-0"><span id="userId" class="float-right"> <span class="badge badge-pill badge-danger">Not Registered</span></span></p>
+									</div>
+									<div><i class="bx bx-share-alt"></i>
+									</div>
+									<!--img src="https://via.placeholder.com/110x110" class="user-img" alt="user avatar"-->
+								</div>
+							</a>
+							<div class="dropdown-menu dropdown-menu-right">	<a class="dropdown-item" href="javascript:;"><i
+										class="bx bx-user"></i><span>Profile</span></a>
+								<a class="dropdown-item" href="javascript:;"><i
+										class="bx bx-cog"></i><span>Settings</span></a>
+								<a class="dropdown-item" href="javascript:;"><i
+										class="bx bx-tachometer"></i><span>Dashboard</span></a>
+								<a class="dropdown-item" href="javascript:;"><i
+										class="bx bx-wallet"></i><span>Earnings</span></a>
+								<a class="dropdown-item" href="javascript:;"><i
+										class="bx bx-cloud-download"></i><span>Downloads</span></a>
+								<div class="dropdown-divider mb-0"></div>	<a class="dropdown-item" href="javascript:;"><i
+										class="bx bx-power-off"></i><span>Logout</span></a>
+							</div>
+						</li>
+						<li class="nav-item dropdown dropdown-user-profile">
+							<a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-toggle="dropdown" aria-expanded="false">
+								<div class="media user-box align-items-center">
+									<div class="media-body user-info">
+										<p class="user-name mb-0"><span class="">Wallet</span> <span class="float-right"><span id="balance">0.02</span> <span class="crypto">ETH</span></span></p>
+										<p class="designattion mb-0"><span id="userAccount">0x0</span> - <span class="badge badge-success">Online</span></p>
+									</div>
+									<div><i class="bx bx-id-card"></i>
+									</div>
+									<!--img src="https://via.placeholder.com/110x110" class="user-img" alt="user avatar"-->
+								</div>
+							</a>
+							<div class="dropdown-menu dropdown-menu-right">	<a class="dropdown-item" href="javascript:;"><i
+										class="bx bx-user"></i><span>Profile</span></a>
+								<a class="dropdown-item" href="javascript:;"><i
+										class="bx bx-cog"></i><span>Settings</span></a>
+								<a class="dropdown-item" href="javascript:;"><i
+										class="bx bx-tachometer"></i><span>Dashboard</span></a>
+								<a class="dropdown-item" href="javascript:;"><i
+										class="bx bx-wallet"></i><span>Earnings</span></a>
+								<a class="dropdown-item" href="javascript:;"><i
+										class="bx bx-cloud-download"></i><span>Downloads</span></a>
+								<div class="dropdown-divider mb-0"></div>	<a class="dropdown-item" href="javascript:;"><i
+										class="bx bx-power-off"></i><span>Logout</span></a>
+							</div>
+						</li>
+
+						<li class="nav-item dropdown dropdown-lg">
+							<a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="javascript:;" data-toggle="dropdown">	<i class="bx bx-bell vertical-align-middle"></i>
+								<span class="msg-count" id="newMessBage">0</span>
+							</a>
+							<div class="dropdown-menu dropdown-menu-right">
+								<a href="javascript:;">
+									<div class="msg-header">
+										<h6 class="msg-header-title"><span id="newMessCount">0</span> New</h6>
+										<p class="msg-header-subtitle">Last Notifications</p>
+									</div>
+								</a>
+								<div class="header-notifications-list" id="header-notifications-list">
+									<a class="dropdown-item" href="javascript:;" id="messege">
+										<div class="media align-items-center">
+											<div class="notify bg-light-purple text-primary" id="messIcon"><i class="bx bx-user-plus"></i>
+											</div>
+											<div class="media-body">
+												<h6 class="msg-name"><span id="messTitle">New Customers</span><span class="msg-time float-right" id="messDateTime">14 Sec
+													ago</span></h6>
+												<p class="msg-info">5 new user registered</p>
+											</div>
+										</div>
+									</a>
+								</div>
+								<a href="javascript:;">
+									<div class="text-center msg-footer">View All Notifications</div>
+								</a>
+							</div>
+						</li>
+						<li class="nav-item dropdown dropdown-user-profile">
+							<a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-toggle="dropdown" aria-expanded="false">
+								<div class="media user-box current-currency align-items-center">
+									<div class="media-body user-info">
+										<p class="user-name mb-0"><span class="align-left">Excnange Rate</p>
+										<p class="designattion mb-0">1 <span class="crypto">ETH</span> = <span id="currentExchangeRate">$2,500</span></p>
+									</div>
+									<div><i class="bx bx-dollar" id="current-currency"></i>
+									</div>
+								</div>
+							</a>
+							<div class="dropdown-menu dropdown-menu-right">	
+								<a class="dropdown-item" href="javascript:;" id="USD"><i
+										class="bx bx-dollar" ></i><span>1968.32</span></a>
+								<a class="dropdown-item" href="javascript:;" id="EUR"><i
+										class="bx bx-euro"></i><span >1653.75</span></a>
+								<a class="dropdown-item" href="javascript:;" id="ILS"><i
+										class="bx bx-shekel"></i><span >6984.57</span></a>
+								<a class="dropdown-item" href="javascript:;" id="GBP"><i
+										class="bx bx-pound"></i><span>1416.22</span></a>
+								<a class="dropdown-item" href="javascript:;" id="JPY"><i
+										class="bx bx-yen"></i><span >217627.72</span></a>
+								<a class="dropdown-item" href="javascript:;" id="WAN"><i
+										class="bx bx-won"></i><span >3559.99</span></a>
+								<a class="dropdown-item" href="javascript:;"id="RUB"><i
+										class="bx bx-ruble"></i><span >143756.76</span></a>
+							</div>
+						</li>
+						<li class="nav-item dropdown dropdown-language">
+							<a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-toggle="dropdown">
+								<div class="lang d-flex">
+									<div><i class="flag-icon flag-icon-um"></i>
+									</div>
+									<div><span>En</span>
+									</div>
+								</div>
+							</a>
+							<div class="dropdown-menu dropdown-menu-right">	<a class="dropdown-item" href="javascript:;"><i
+										class="flag-icon flag-icon-de"></i><span>German</span></a>
+								<a class="dropdown-item" href="javascript:;"><i
+										class="flag-icon flag-icon-fr"></i><span>French</span></a>
+								<a class="dropdown-item" href="javascript:;"><i
+										class="flag-icon flag-icon-um"></i><span>English</span></a>
+								<a class="dropdown-item" href="javascript:;"><i
+										class="flag-icon flag-icon-in"></i><span>Hindi</span></a>
+								<a class="dropdown-item" href="javascript:;"><i
+										class="flag-icon flag-icon-cn"></i><span>Chinese</span></a>
+								<a class="dropdown-item" href="javascript:;"><i
+										class="flag-icon flag-icon-ae"></i><span>Arabic</span></a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</header>
+		<!--end header-->
+		<!-- error -->
+
+		<div class="error-404 align-items-center justify-content-center" id="error">
+			<div class="card shadow-none bg-transparent">
+				<div class="card-body text-center">
+					<h1 class="display-4 mt-5">Something wrong</h1>
+					<p>We are currently working hard on this page. Try reload it.</p>
+				</div>
+			</div>
+		</div>	
+		<!-- end error -->
+		<!--navigation-->
+		<div class="nav-container">
+			<div class="mobile-topbar-header">
+				<div class="">
+					<img src="assets/images/logo-icon.png" class="logo-icon-2" alt="" />
+				</div>
+				<div>
+					<h4 class="logo-text">CryptoLife</h4>
+				</div>
+				<a href="javascript:;" class="toggle-btn ml-auto"> <i class="bx bx-menu"></i>
+				</a>
+			</div>
+			<nav class="topbar-nav">
+				<ul class="metismenu" id="menu">
+					<li>
+						<a href="javascript:;">
+							<div class="parent-icon"><i class="bx bx-home-alt"></i>
+							</div>
+							<div class="menu-title">Main</div>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:;" >
+							<div class="parent-icon"><i class='bx bx-sitemap'></i>
+							</div>
+							<div class="menu-title">Structure</div>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:;">
+							<div class="parent-icon"><i class="bx bx-line-chart"></i>
+							</div>
+							<div class="menu-title">Statistics</div>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:;">
+							<div class="parent-icon"><i class="bx bx-info-square"></i>
+							</div>
+							<div class="menu-title">Information</div>
+						</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+		<!--end navigation-->
+	
+		<!--page-wrapper-->
+		<div class="page-wrapper">
+			<!--page-content-wrapper-->
+			<div class="page-content-wrapper">
+				<div class="page-content">
+					<div class="row">
+						<div class="col-12 col-lg-4">
+							<div class="card radius-15">
+								<div class="card-body">
+									<div class="media align-items-center mb-4">
+										<div class="media-body">
+											<h4 class="mb-0 font-weight-bold text-white" ><i class="bx bx-dollar" id="current-currency-income"></i><span id="income">10,000,000</span> <span class="badge badge-pill badge-success" id="incomePlus">+1,329</span></h4>
+											<p class="font-10 m-0 text-primary"> <span class="crypto pr-1">ETH</span> <span id="incomeCrypto">25.75</span> <span class="badge badge-pill badge-success text-primary" id="incomeCryptoPlus">+1.25</span></p>
+											<p class="mb-0 text-white"><span class="text-white" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Total income at current exchange rates" style="cursor: pointer;">Total Income <i class="bx bx-info-circle"></i></span></p>
+										</div>
+										<div class="font-35 text-white"><i class='bx bx-wallet'></i>
+										</div>
+									</div>
+									<ul class="list-group list-group-flush mb-0">
+										<li class="list-group-item d-flex justify-content-between align-items-center bg-transparent"><span class="text-white" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Direct income from slots of all levels" style="cursor: pointer;">Direct Income <i class="bx bx-info-circle"></i></span><span><span class="badge badge-pill badge-success" id="directIncomePlus"></span> <span id="directIncome">325,250</span> <span class="crypto">ETH</span></span>
+										</li>
+										<li class="list-group-item d-flex justify-content-between align-items-center bg-transparent"><span class="text-white" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Income from actions of partners in your network" style="cursor: pointer;">Network Bonuses <i class="bx bx-info-circle"></i></span><span><span class="badge badge-pill badge-success" id="networkIncomePlus"></span> <span id="networkIncome">75,250</span> <span class="crypto">ETH</span></span>
+										</li>
+										<li class="list-group-item d-flex justify-content-between align-items-center bg-transparent"><span class="text-white" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Lost income due to low level" style="cursor: pointer;">Lost Profit <i class="bx bx-info-circle"></i></span> <span><span class="badge badge-pill badge-danger" id="lostProfitPlus"></span> <span id="lostProfit">1,250</span> <span class="crypto">ETH</span></span>
+										</li>
+									</ul>
+									<ul class="list-group list-group-flush mb-0">
+										<li style="padding-bottom: 0 !important; padding-top: 0 !important; padding-right: 0 !important" class="font-20 list-group-item d-flex justify-content-between align-items-center bg-transparent"><span id="levelUpText">Level Up</span> <button type="button" class="btn btn-primary btn-sm m-1 px-4 levelUpButton" data-toggle="modal" data-target="#levelUpModal"><i class="bx bx-upvote mr-1" style="font-size:0.875rem"></i><span class="nextLevelPrice">0,04</span> <span class="crypto">ETH</span></button>
+										</li>
+									</ul>
+
+								</div>
+
+							</div>
+						</div>
+						<div class="col-12 col-lg-8">
+							<div class="card-deck flex-column flex-lg-row">
+								<div class="card radius-15">
+									<div class="card-body">
+										<div class="media align-items-center">
+											<div class="media-body">
+												<h4 class="mb-0 font-weight-bold text-white" id="level">12</h4>
+												<p class="mb-0 text-white">Current Level</p>
+											</div>
+											<div class="font-35 text-white"><i class='bx bx-sort-up'></i>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="card radius-15">
+									<div class="card-body">
+										<div class="media align-items-center">
+											<div class="media-body">
+												<h4 class="mb-0 font-weight-bold text-white" ><span id="referals">12</span> <span class="badge badge-pill badge-success" id="referalsPlus">+2</span></h4>
+												<p class="mb-0 text-white"><span class="text-white" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Number of personally invited partners" style="cursor: pointer;">Referals <i class="bx bx-info-circle"></i></span></p>
+											</div>
+											<div class="font-35 text-white"><i class='bx bx-group'></i>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="card radius-15">
+									<div class="card-body">
+										<div class="media align-items-center">
+											<div class="media-body">
+												<h4 class="mb-0 font-weight-bold text-white" ><span id="network">54</span> <span class="badge badge-pill badge-success" id="networkPlus">+15</span></h4>
+												<p class="mb-0 text-white"><span class="text-white" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="The total number of partners in your network" style="cursor: pointer;">Network Size <i class="bx bx-info-circle"></i></span></p>
+											</div>
+											<div class="font-35 text-white"><i class='bx bx-sitemap'></i>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--end row-->
+							<div class="card-deck flex-column flex-lg-row">
+								<div class="card radius-15">
+									<div class="card-body">
+										<div class="media align-items-center">
+											<div class="media-body">
+												<div>
+													<h5 class="mb-4"><span class="text-white" data-toggle="tooltip" data-placement="top" data-html="true" data-original-title="<h6>A bonus for the <b>most active</b> leader!</h6><p>It is collected as a 5% fee from each transaction until it reaches the required amount.</p><p>Then it is paid to the Partner who invited the largest number of referrals during the collection period.</p><p>Once paid, collection and counting starts over.</p>" style="cursor: pointer;">Next Top Leader Bonus Progress <i class="bx bx-info-circle"></i></span></h5>
+												</div>
+											
+												<div class="progress-wrapper" style="width: 90%">
+													<p class="mb-1">Leading result <span id="topResult">13</span> <i class="bx bx-group"></i> <span class="float-right"><span id="topSumm">100</span> <span class="crypto">ETH</span></span>
+													<div class="progress radius-10" style="height:5px;">
+														<div class="progress-bar bg-info" role="progressbar" style="width: 0%" id="topLeaderBar"></div>
+													</div>
+													<hr>
+													<p class="mb-1" id="topMess">
+													</p>
+												</div>
+											</div>
+											<div class="font-35 text-white"><i class='bx bx-trophy'></i>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="card radius-15">
+									<div class="card-body">
+										<div class="media align-items-center">
+											<div class="media-body">
+												<div>
+													<h5 class="mb-4"><span class="text-white" data-toggle="tooltip" data-placement="top" title="" data-original-title="At the beginning of the project, new partners can register at a special price" style="cursor: pointer;">Privileged registrations <i class="bx bx-info-circle"></i></span></h5>
+												</div>
+												<div class="progress-wrapper" style="width: 90%">
+													<p class="mb-1">Registrations for <span id="regPrice">0.02</span> <span class="crypto">ETH</span> left <span class="float-right" id="regsToCup">327</span>
+													</p>
+													<div class="progress radius-10" style="height:5px;">
+														<div class="progress-bar bg-warning" role="progressbar" style="width: 0%" id="priceBar"></div>
+													</div>
+													<hr>
+													<p class="mb-1">Next price: <span id="nextRegPrice">0,03</span> <span class="crypto">ETH</span> <span class="float-right">Maximum: <span>0.05 <span class="crypto">ETH</span></span></span>
+													</p>
+												</div>
+											</div>
+											<div class="font-35 text-white"><i class='bx bx-coin'></i>
+											</div>								</div>
+									</div>
+								</div>						
+							</div>
+						</div>
+					</div>
+					<!--end row-->
+					<h6 class="mb-0 text-uppercase">Active Pools</h6>
+					<hr>
+					<div id="pools">
+						<div class="row">
+							<div class="col-12 col-lg-3" id="levelCard">
+								<div class="card radius-15">
+									<div class="card-body">
+										<h6 class="mb-4">
+											<i class='bx bx-error mr-1 text-warning' style="display: none;" id="levelWarning"></i>
+											<i class='bx bx-error mr-1 text-danger' style="display: none;" id="levelDanger"></i>
+											Level <span id="poolLevel">1</span> 
+										</h6>
+										<hr>
+										<div class="font-35 text-dark" width="100%" style="text-align: center;">
+											<i class='bx bx-user '></i>	
+											<i class='bx bx-user '></i>	
+											<i class='bx bx-user '></i>
+										</div>
+										<div class="text-white justify-content-between align-items-center">
+											<span><span id="slots"> 7</span> <i class='bx bx-group '></i></span>
+											<span class="float-right"><span id="reloads">2</span> <i class='bx bx-rotate-left '></i></span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-12 col-lg-3" id="nextLevelCard">
+								<div class="card radius-15">
+									<div class="card-body">
+										<h6 class="mb-4">
+											Level <span id="poolLevel">2</span> <span class="float-right"><span class="nextLevelPrice">0,04</span> <span class="crypto">ETH</span></span>
+										</h6>
+										<hr>
+										<div class="text-white" width="100%" style="text-align: center;">
+											<button type="button" class="btn btn-primary m-1 px-4 levelUpButton"  data-toggle="modal" data-target="#levelUpModal"><i class="bx bx-upvote mr-1"></i><span class="nextLevelPrice">81,92</span> <span class="crypto">ETH</span></button>
+										</div>
+										<div class="font-20 text-white" style="text-align: center;" id ="buttonUnderline">
+											Level Up
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--end row-->
+						</div>
+				</div>
+			</div>
+			<!--end page-content-wrapper-->
+		</div>
+		<!--end page-wrapper-->
+		<!--start overlay-->
+		<div class="overlay toggle-btn-mobile"></div>
+		<!--end overlay-->
+		<!--Start Back To Top Button--> <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
+		<!--End Back To Top Button-->
+		<!--footer -->
+		<div class="footer">
+			<p class="mb-0">CryptoLife @2021</p>
+		</div>
+		<!-- end footer -->
+	</div>
+	<!-- end wrapper -->
+	<!-- start modals -->
+	<!-- Level up -->
+	<div class="modal fade" id="levelUpModal" tabindex="-1" style="display: none;" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Level Up Conformation</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">	<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body font-13"><p>Do you whant to up your account to Level&nbsp;<span class="modalLevel">7</span> for <span class="nextLevelPrice">1.28</span>?</p><p>You will get access to the Level&nbsp;<span class="modalLevel">7</span> pools and lifetime unlimited reopens of Level&nbsp;<span id="modalCurrentLevel">5</span> pools.</p></div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-light" data-dismiss="modal">No</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal" id="modalLevelUpBtn">Level Up</button>
+					</div>
+			</div>
+		</div>
+	</div>
+	<!-- Registration -->
+	<div class="modal fade" id="registerModal" tabindex="-1" style="display: none;" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Registration notice</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">	<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body font-13">
+					<p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+					<p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+					<p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-light" data-dismiss="modal">No</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal" id="modalRegistrationBtn">Registration</button>
+				</div>
+			</div>
+		</div>
+	</div>	
+	<!-- end modals -->
+	<!--start switcher>
+	<div class="switcher-wrapper">
+		<div class="switcher-btn"> <i class='bx bx-cog bx-spin'></i>
+		</div>
+		<div class="switcher-body">
+			<h5 class="mb-0 text-uppercase">Theme Customizer</h5>
+			<hr/>
+			<p class="mb-0">Gaussian Texture</p>
+			  <hr>
+			  
+			  <ul class="switcher">
+				<li id="theme1"></li>
+				<li id="theme2"></li>
+				<li id="theme3"></li>
+				<li id="theme4"></li>
+				<li id="theme5"></li>
+				<li id="theme6"></li>
+			  </ul>
+               <hr>
+			  <p class="mb-0">Gradient Background</p>
+			  <hr>
+			  
+			  <ul class="switcher">
+				<li id="theme7"></li>
+				<li id="theme8"></li>
+				<li id="theme9"></li>
+				<li id="theme10"></li>
+				<li id="theme11"></li>
+				<li id="theme12"></li>
+			  </ul>
+		</div>
+	</div-->
+	<!--end switcher-->
+	<!-- JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/popper.min.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<!--plugins-->
+	<script src="assets/plugins/simplebar/js/simplebar.min.js"></script>
+	<script src="assets/plugins/metismenu/js/metisMenu.min.js"></script>
+	<script src="assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
+	<!-- App JS -->
+
+   <script src="assets/js/web3.min.js"></script>
+   <script src="assets/js/truffle-contract.js"></script>
+   <script src="assets/js/app.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<title>CryptoLife | Account</title>
+	<!--favicon-->
+	<link rel="icon" href="assets/images/favicon-32x32.png" type="image/png" />
+	<!-- Vector CSS -->
+	<link href="assets/plugins/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
+	<!--plugins-->
+	<link rel="stylesheet" href="assets/plugins/notifications/css/lobibox.min.css">
+	<link href="assets/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
+	<link href="assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />
+	<link href="assets/plugins/metismenu/css/metismenu.min.css" rel="stylesheet" />
+	<!-- loader-->
+	<link href="assets/css/pace.min.css" rel="stylesheet" />
+	<script src="assets/js/pace.min.js"></script>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+	<!-- Icons CSS -->
+	<link rel="stylesheet" href="assets/css/icons.css" />
+	<!-- App CSS -->
+	<link rel="stylesheet" href="assets/css/app.css" />
+
+	
+</head>
+
+<body class="bg-theme bg-theme6">
+	<!-- wrapper -->
+	<div class="wrapper">
+		<!--header-->
+		<header class="top-header">
+			<nav class="navbar navbar-expand">
+				<div class="sidebar-header">
+					<div class="d-none d-lg-flex">
+						<img src="assets/images/logo-icon.png" class="logo-icon-2" alt="" />
+					</div>
+					<div>
+						<h4 class="d-none d-lg-flex logo-text">CryptoLife</h4>
+					</div>
+					<a href="javascript:;" class="toggle-btn ml-lg-auto"> <i class="bx bx-menu"></i>
+					</a>
+				</div>
+				<div class="right-topbar ml-auto">
+					<ul class="navbar-nav">
+						<li class="nav-item dropdown dropdown-user-profile" id="userIdContainer">
+							<a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-toggle="dropdown" aria-expanded="false">
+								<div class="media user-box align-items-center">
+									<div class="media-body user-info">
+										<p class="user-name mb-0"><span class="">Partner ID</span></p>
+										<p class="designattion mb-0"><span id="userId" class="float-right"> <span class="badge badge-pill badge-danger">Not Registered</span></span></p>
+									</div>
+									<div><i class="bx bx-share-alt"></i>
+									</div>
+									<!--img src="https://via.placeholder.com/110x110" class="user-img" alt="user avatar"-->
+								</div>
+							</a>
+							<div class="dropdown-menu dropdown-menu-right">	<a class="dropdown-item" href="javascript:;"><i
+										class="bx bx-user"></i><span>Profile</span></a>
+								<a class="dropdown-item" href="javascript:;"><i
+										class="bx bx-cog"></i><span>Settings</span></a>
+								<a class="dropdown-item" href="javascript:;"><i
+										class="bx bx-tachometer"></i><span>Dashboard</span></a>
+								<a class="dropdown-item" href="javascript:;"><i
+										class="bx bx-wallet"></i><span>Earnings</span></a>
+								<a class="dropdown-item" href="javascript:;"><i
+										class="bx bx-cloud-download"></i><span>Downloads</span></a>
+								<div class="dropdown-divider mb-0"></div>	<a class="dropdown-item" href="javascript:;"><i
+										class="bx bx-power-off"></i><span>Logout</span></a>
+							</div>
+						</li>
+						<li class="nav-item dropdown dropdown-user-profile">
+							<a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-toggle="dropdown" aria-expanded="false">
+								<div class="media user-box align-items-center">
+									<div class="media-body user-info">
+										<p class="user-name mb-0"><span class="">Wallet</span> <span class="float-right"><span id="balance">0.0000</span> <span class="crypto">ETH</span></span></p>
+										<p class="designattion mb-0"><span id="userAccount">0x000000000000...000000</span> - <span class="badge badge-danger" id="userAccountBage">Offline</span></p>
+									</div>
+									<div><img src="img/BNB.svg" width="26" height="26" id="cryptoLogo"></i>
+									</div>
+									<!--img src="https://via.placeholder.com/110x110" class="user-img" alt="user avatar"-->
+								</div>
+							</a>
+							<div class="dropdown-menu dropdown-menu-right">	
+								<a class="dropdown-item" href="javascript:;">
+									<i class="bx bx-credit-card"></i>
+									 <span>Buy <span class="crypto">ETH</span> for <i class="bx bx-dollar current-currency"></i>on Binance.com</span>
+								</a>
+								<div class="dropdown-divider mb-0"></div>
+								<a class="dropdown-item" href="javascript:;">
+									<i class="bx bx-wallet"></i> 
+									<span> <span class="crypto">ETH</span> withdrawal via Binance.com</span>
+								</a>
+							</div>
+						</li>
+
+						<li class="nav-item dropdown dropdown-lg" id="messageCOntainer">
+							<a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="javascript:;" data-toggle="dropdown">	<i class="bx bx-bell vertical-align-middle"></i>
+								<span class="msg-count" id="newMessBage">0</span>
+							</a>
+							<div class="dropdown-menu dropdown-menu-right">
+								<a href="javascript:;">
+									<div class="msg-header">
+										<h6 class="msg-header-title"><span id="newMessCount">0</span> New</h6>
+										<p class="msg-header-subtitle">Last <span id="showMessCount">0</span> Messages</p>
+									</div>
+								</a>
+								<div class="header-notifications-list" id="header-notifications-list">
+									<a class="dropdown-item" href="javascript:;" id="messege">
+										<div class="media align-items-center">
+											<div class="notify bg-light-purple text-warning" id="messIcon"><i class="bx bx-user-plus"></i>
+											</div>
+											<div class="media-body">
+												<h6 class="msg-name"><span id="messTitle">New Customers</span><span class="msg-time float-right" id="messDateTime">14 Sec
+													ago</span></h6>
+												<p class="msg-info">5 new user registered</p>
+											</div>
+										</div>
+									</a>
+								</div>
+								<a href="messages.html">
+									<div class="text-center msg-footer">View All Messages</div>
+								</a>
+							</div>
+						</li>
+						<li class="nav-item dropdown dropdown-user-profile">
+							<a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-toggle="dropdown" aria-expanded="false">
+								<div class="media user-box align-items-center">
+									<div class="media-body user-info">
+										<p class="user-name mb-0"><span class="align-left">Exchange Rate</p>
+										<p class="designattion mb-0">1 <span class="crypto">ETH</span> = <span id="currentExchangeRate">$2,500</span></p>
+									</div>
+									<div><i class="bx bx-dollar current-currency"></i>
+									</div>
+								</div>
+							</a>
+							<div class="dropdown-menu dropdown-menu-right">	
+								<a class="dropdown-item" href="javascript:;" id="USD">
+									<i class="bx bx-dollar" ></i>
+									<span class="float-right">1968.32</span>
+								</a>
+								<a class="dropdown-item" href="javascript:;" id="EUR">
+									<i class="bx bx-euro"></i>
+									<span class="float-right">1653.75</span>
+								</a>
+								<a class="dropdown-item" href="javascript:;" id="ILS">
+									<i class="bx bx-shekel"></i>
+									<span class="float-right">6984.57</span>
+								</a>
+								<a class="dropdown-item" href="javascript:;" id="GBP">
+									<i class="bx bx-pound"></i>
+									<span class="float-right">1416.22</span>
+								</a>
+								<a class="dropdown-item" href="javascript:;" id="JPY">
+									<i class="bx bx-yen"></i>
+									<span class="float-right">217627.72</span>
+								</a>
+								<a class="dropdown-item" href="javascript:;" id="WAN">
+									<i class="bx bx-won"></i>
+									<span class="float-right">3559.99</span>
+								</a>
+								<a class="dropdown-item" href="javascript:;"id="RUB">
+									<i class="bx bx-ruble"></i>
+									<span class="float-right">143756.76</span>
+								</a>
+							</div>
+						</li>
+						<li class="nav-item dropdown dropdown-language">
+							<a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-toggle="dropdown">
+								<div class="lang d-flex">
+									<div><i class="flag-icon flag-icon-um"></i>
+									</div>
+									<div><span>En</span>
+									</div>
+								</div>
+							</a>
+							<div class="dropdown-menu dropdown-menu-right">	
+								<!--a class="dropdown-item" href="javascript:;"><i
+										class="flag-icon flag-icon-de"></i><span>German</span></a>
+								<a class="dropdown-item" href="javascript:;"><i
+										class="flag-icon flag-icon-fr"></i><span>French</span></a-->
+								<a class="dropdown-item" href="javascript:;"><i
+										class="flag-icon flag-icon-um"></i><span>English</span></a>
+								<!--a class="dropdown-item" href="javascript:;"><i
+										class="flag-icon flag-icon-in"></i><span>Hindi</span></a>
+								<a class="dropdown-item" href="javascript:;"><i
+										class="flag-icon flag-icon-cn"></i><span>Chinese</span></a>
+								<a class="dropdown-item" href="javascript:;"><i
+										class="flag-icon flag-icon-ae"></i><span>Arabic</span></a-->
+							</div>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</header>
+		<!--end header-->
+		<!-- error -->
+
+		<div class="error-404 align-items-center justify-content-center" id="error">
+			<div class="card shadow-none bg-transparent">
+				<div class="card-body text-center">
+					<h1 class="display-4 mt-5">Something wrong</h1>
+					<p>We are currently working hard on this page. Try reload it.</p>
+				</div>
+			</div>
+		</div>	
+		<!-- end error -->
+
+		<!--navigation-->
+		<div class="nav-container">
+			<div class="mobile-topbar-header">
+				<div class="">
+					<img src="assets/images/logo-icon.png" class="logo-icon-2" alt="" />
+				</div>
+				<div>
+					<h4 class="logo-text">CryptoLife</h4>
+				</div>
+				<a href="javascript:;" class="toggle-btn ml-auto"> <i class="bx bx-menu"></i>
+				</a>
+			</div>
+			<nav class="topbar-nav">
+				<ul class="metismenu" id="menu">
+					<li>
+						<a href="account.html">
+							<div class="parent-icon"><i class="bx bx-home-alt"></i>
+							</div>
+							<div class="menu-title">Main</div>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:;" >
+							<div class="parent-icon"><i class='bx bx-sitemap'></i>
+							</div>
+							<div class="menu-title">Structure</div>
+						</a>
+					</li>
+					<!--li>
+						<a href="javascript:;">
+							<div class="parent-icon"><i class="bx bx-line-chart"></i>
+							</div>
+							<div class="menu-title">Statistics</div>
+						</a>
+					</li-->
+					<li>
+						<a href="messages.html" >
+							<div class="parent-icon"><i class="bx bx-info-square"></i>
+							</div>
+							<div class="menu-title">Messages</div>
+						</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+		<!--end navigation-->
+	
+		<!--page-wrapper-->
+		<div class="page-wrapper">
+			<!--page-content-wrapper-->
+			<div class="page-content-wrapper">
+				<div class="page-content">
+
+					<section id = "networkData">				
+
+						<h5 class="mb-0 text-uppercase">Network Structure</h5>
+						<hr>
+						<span class="spinner-border" role="status"><span class="sr-only">Loading...</span></span>
+						<div id="structure">
+
+								<div class="row no-gutters" id="referralCard">
+									<div class="col-lg-2 py-2">
+										<h6>Referral</h6>
+										<div class="card border border-white radius-15">
+											<div class="card-body">
+												<div class="media align-items-center">
+													<div class="media-body pr-4 ">
+														<h6 class="mb-0 font-weight-bold text-white">ID <span id="refId">123</span></h6>
+														<p class="mb-0 mt-2 text-white pr-2"><span class="mp0" >Basic</span> <span class="float-right" id="mp0Level">3</span></p>
+														<p class="mb-0 text-white pr-2"><span class="mp1" >Fast</span> <span class="float-right" id="mp1Level">3</span></p>
+														<p class="mb-2 text-white pr-2"><span class="mp2" >VIP</span> <span class="float-right" id="mp2Level">3</span></p>
+														<div class="justify-content-between align-items-center ">
+															<span id="referralsTooltip"  data-toggle="tooltip" data-original-title="Number of the Partner's referrals" data-placement="bottom" style="cursor: pointer;"><span id="referrals">3</span> <i class="bx bx-group "></i></span>
+															<span class="float-right" id="networkTooltip"  data-toggle="tooltip" data-original-title="Total number of Partners in the Partner's Network" data-placement="bottom" style="cursor: pointer;"><span id="network">1</span> <i class="bx bx-sitemap "></i></span>
+														</div>
+													</div>
+													<div class="font-40" id="userAvatar"><i class="bx bx-user"></i>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-2 py-2" id="depth">
+										<h6 class="pl-5" id="title">Depth</h6>
+										<div class="row" id="networkCard">
+											<div class="col-lg-2 text-center flex-column d-none d-lg-flex">
+												<div class="row h-50" id="topLine">
+													<div class="col" >&nbsp;</div>
+													<div class="col">&nbsp;</div>
+												</div>
+												<h5 class="m-2 ml-3">
+		                                <span class="badge badge-pill bg-light border font-12">&nbsp;</span>
+		                            </h5>
+												<div class="row h-50" id="bottomLine">
+													<div class="col border-right" >&nbsp;</div>
+													<div class="col border-right" >&nbsp;</div>
+												</div>
+											</div>
+
+											<div class="col-lg-10 py-3" >
+												<div class="card radius-15">
+													<div class="card-body">
+														<div class="media align-items-center">
+															<div class="media-body pr-4 ">
+																<h6 class="mb-0 font-weight-bold text-white">ID <span id="refId">123</span></h6>
+																<p class="mb-0 mt-2 text-white pr-2"><span class="mp0" >Basic</span> <span class="float-right" id="mp0Level">3</span></p>
+																<p class="mb-0 text-white pr-2"><span class="mp1" >Fast</span> <span class="float-right" id="mp1Level">3</span></p>
+																<p class="mb-2 text-white pr-2"><span class="mp2" >VIP</span> <span class="float-right" id="mp2Level">3</span></p>
+																<div class="justify-content-between align-items-center ">
+																	<span id="referralsTooltip"  data-toggle="tooltip" data-original-title="Number of the Partner's referrals" data-placement="bottom" style="cursor: pointer;"><span id="referrals">3</span> <i class="bx bx-group "></i></span>
+																	<span class="float-right" id="networkTooltip"  data-toggle="tooltip" data-original-title="Total number of Partners in the Partner's Network" data-placement="bottom" style="cursor: pointer;"><span id="network">1</span> <i class="bx bx-sitemap "></i></span>
+																</div>
+															</div>
+															<div class="font-30" id="userAvatar"><i class="bx bx-user"></i>
+															</div>
+														</div>
+													</div>
+												</div>											
+											</div>
+										</div>
+										<div class="row" id="filler">
+											<div class="col-lg-2 text-center flex-column d-none d-lg-flex">
+												<div class="row">
+													<div class="col border-right font-60">&nbsp;</div>
+												</div>
+												<div class="row">
+													<div class="col border-right  font-30">&nbsp;</div>
+												</div>
+												<div class="row">
+													<div class="col border-right  font-60">&nbsp;</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg" id="spacer">
+										<!--spacer-->
+									</div>
+								</div>
+							<!--end row-->
+						</div>
+					</section>	
+				</div>
+			</div>
+			<!--end page-content-wrapper-->
+		</div>
+		<!--end page-wrapper-->
+		<!--start overlay-->
+		<div class="overlay toggle-btn-mobile"></div>
+		<!--end overlay-->
+		<!--Start Back To Top Button--> <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
+		<!--End Back To Top Button-->
+		<!--footer -->
+		<div class="footer" id="footer">
+			<p class="mb-0">CryptoLife @2021</p>
+		</div>
+		<!-- end footer -->
+	</div>
+	<!-- end wrapper -->
+
+	<!-- JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/popper.min.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<!--plugins-->
+	<script src="assets/plugins/simplebar/js/simplebar.min.js"></script>
+	<script src="assets/plugins/metismenu/js/metismenu.min.js"></script>
+	<script src="assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
+	<!-- Notifications JS -->
+	<script src="assets/plugins/notifications/js/lobibox.min.js"></script>
+	<script src="assets/plugins/notifications/js/notifications.min.js"></script>
+	<!-- App JS -->
+
+   <script src="assets/js/web3.min.js"></script>
+   <script src="assets/js/truffle-contract.js"></script>
+   <script src="assets/js/structure.js"></script>
+	<div class="lobibox-notify-wrapper center top" style="margin-left: -200px;"></div>
+</body>
+
+</html>
