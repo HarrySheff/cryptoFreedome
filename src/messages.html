@@ -8,7 +8,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<title>CryptoLife | Messages</title>
 	<!--favicon-->
-	<link rel="icon" href="assets/images/favicon-32x32.png" type="image/png" />
+	<link rel="apple-touch-icon" sizes="76x76" href="img/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+	<link rel="manifest" href="img/site.webmanifest">
+	<link rel="mask-icon" href="img/safari-pinned-tab.svg" color="#7100bc">
+	<link rel="shortcut icon" href="android-chrome-72x72.png" />
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="theme-color" content="#ffffff">
 	<!-- Vector CSS -->
 	<link href="assets/plugins/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
 	<!--plugins-->
@@ -18,7 +25,7 @@
 	<link href="assets/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />
 	<!-- loader-->
 	<link href="assets/css/pace.min.css" rel="stylesheet" />
-	<script src="assets/js/pace.min.js"></script>
+	<script data-pace-options='{ "ajax": false }' src="assets/js/pace.min.js"></script>
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
 	<!-- Icons CSS -->
@@ -37,21 +44,21 @@
 			<nav class="navbar navbar-expand">
 				<div class="sidebar-header">
 					<div class="d-none d-lg-flex">
-						<img src="assets/images/logo-icon.png" class="logo-icon-2" alt="" />
+						<a href="index.html"><img src="assets/images/logo-icon.png" class="logo-icon-2" alt="" width="38" height="38" /></a>
 					</div>
 					<div>
-						<h4 class="d-none d-lg-flex logo-text">CryptoLife</h4>
+						<a href="index.html"><h4 class="d-none d-lg-flex logo-text">CryptoLife</h4></a>
 					</div>
 					<a href="javascript:;" class="toggle-btn ml-lg-auto"> <i class="bx bx-menu"></i>
 					</a>
 				</div>
 				<div class="right-topbar ml-auto">
 					<ul class="navbar-nav">
-						<li class="nav-item dropdown dropdown-user-profile" id="userIdContainer">
+						<li class="nav-item dropdown dropdown-user-profile" id="userIdContainer" style="display: none;">
 							<a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-toggle="dropdown" aria-expanded="false">
 								<div class="media user-box align-items-center">
 									<div class="media-body user-info">
-										<p class="user-name mb-0"><span class="">Partner ID</span></p>
+										<p class="user-name mb-0"><span id="partnerID">Partner ID</span></p>
 										<p class="designattion mb-0"><span id="userId" class="float-right"> <span class="badge badge-pill badge-danger">Not Registered</span></span></p>
 									</div>
 									<div><i class="bx bx-share-alt"></i>
@@ -59,37 +66,22 @@
 									<!--img src="https://via.placeholder.com/110x110" class="user-img" alt="user avatar"-->
 								</div>
 							</a>
-							<div class="dropdown-menu dropdown-menu-right">
+							<div class="dropdown-menu dropdown-menu-right">	
+
 								<a class="dropdown-item" href="javascript:;"><i
 										class="bx bx-copy"></i><span>General referral link</span></a>
 								<a class="dropdown-item" href="javascript:;"><i
 										class="bx bx-copy"></i><span>Direct registration link</span></a>
-								<div class="dropdown-divider mb-0"></div>	
-								<a class="dropdown-item" href="javascript:;"><i
-										class="bx bxl-whatsapp"></i><span>Share in WhatsApp</span></a>
-								<a class="dropdown-item" href="javascript:;"><i
-										class="bx bxl-telegram"></i><span>Share in Telegram</span></a>
-								<a class="dropdown-item" href="javascript:;"><i
-										class="bx bxl-messenger"></i><span>Share in Messenger</span></a>
-
-								<a class="dropdown-item" href="javascript:;"><i
-										class="bx bxl-facebook-circle"></i><span>Share in Facebook</span></a>
-								<a class="dropdown-item" href="javascript:;"><i
-										class="bx bxl-twitter"></i><span>Share in Twitter</span></a>
-								<a class="dropdown-item" href="javascript:;"><i
-										class="bx bxl-linkedin"></i><span>Share in LinkedIn</span></a>
-								<a class="dropdown-item" href="javascript:;"><i
-										class="bx bxl-pinterest"></i><span>Share in Pinterest</span></a>
 							</div>
 						</li>
-						<li class="nav-item dropdown dropdown-user-profile">
+						<li class="nav-item dropdown dropdown-user-profile" id="walletContainer">
 							<a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-toggle="dropdown" aria-expanded="false">
 								<div class="media user-box align-items-center">
 									<div class="media-body user-info">
-										<p class="user-name mb-0"><span class="">Wallet</span> <span class="float-right"><span id="balance">0.0000</span> <span class="crypto">ETH</span></span></p>
+										<p class="user-name mb-0"><span id="wallet">Wallet</span> <span class="float-right"><span id="balance">0.0000</span> <span class="crypto">ETH</span></span></p>
 										<p class="designattion mb-0"><span id="userAccount">0x000000000000...000000</span> - <span class="badge badge-danger" id="userAccountBage">Offline</span></p>
 									</div>
-									<div><img src="img/BNB.svg" width="26" height="26" id="cryptoLogo"></i>
+									<div><!--i class="bx bx-wallet"--><img src="img/BNB.svg" width="26" height="26" id="cryptoLogo"></i>
 									</div>
 									<!--img src="https://via.placeholder.com/110x110" class="user-img" alt="user avatar"-->
 								</div>
@@ -97,12 +89,12 @@
 							<div class="dropdown-menu dropdown-menu-right">	
 								<a class="dropdown-item" href="javascript:;">
 									<i class="bx bx-credit-card"></i>
-									 <span>Buy <span class="crypto">ETH</span> for <i class="bx bx-dollar current-currency"></i>on Binance.com</span>
+									 <span><span id="binanceLink0">Buy </span><span class="crypto">ETH</span> <span class="binanceLinkFor">for</span> <i class="bx bx-dollar current-currency"></i><span class="binanceLinkTail">via Binance.com</span></span>
 								</a>
 								<div class="dropdown-divider mb-0"></div>
 								<a class="dropdown-item" href="javascript:;">
 									<i class="bx bx-wallet"></i> 
-									<span> <span class="crypto">ETH</span> withdrawal via Binance.com</span>
+									 <span><span id="binanceLink1">Sell </span><span class="crypto">ETH</span> <span class="binanceLinkFor">for</span> <i class="bx bx-dollar current-currency"></i><span class="binanceLinkTail">via Binance.com</span></span>
 								</a>
 							</div>
 						</li>
@@ -140,8 +132,8 @@
 							<a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-toggle="dropdown" aria-expanded="false">
 								<div class="media user-box align-items-center">
 									<div class="media-body user-info">
-										<p class="user-name mb-0"><span class="align-left">Exchange Rate</p>
-										<p class="designattion mb-0">1 <span class="crypto">ETH</span> = <span id="currentExchangeRate">$2,500</span></p>
+										<p class="user-name mb-0"><span class="align-left" id="a-ex-p1">Exchange Rate</p>
+										<p class="designattion mb-0">1 <span class="crypto">ETH</span> = <span id="currentExchangeRate"><span class="spinner-border spinner-border-sm" role="status"><span class="sr-only">Loading...</span></span></span></p>
 									</div>
 									<div><i class="bx bx-dollar current-currency"></i>
 									</div>
@@ -192,15 +184,16 @@
 										class="flag-icon flag-icon-de"></i><span>German</span></a>
 								<a class="dropdown-item" href="javascript:;"><i
 										class="flag-icon flag-icon-fr"></i><span>French</span></a-->
-								<a class="dropdown-item" href="javascript:;"><i
+								<a class="dropdown-item" href="javascript:;" lang="en"><i
 										class="flag-icon flag-icon-um"></i><span>English</span></a>
+								<a class="dropdown-item" href="javascript:;" lang="ru"><i
+										class="flag-icon flag-icon-ru"></i><span>Русский</span></a>	
 								<!--a class="dropdown-item" href="javascript:;"><i
 										class="flag-icon flag-icon-in"></i><span>Hindi</span></a>
 								<a class="dropdown-item" href="javascript:;"><i
 										class="flag-icon flag-icon-cn"></i><span>Chinese</span></a>
 								<a class="dropdown-item" href="javascript:;"><i
 										class="flag-icon flag-icon-ae"></i><span>Arabic</span></a-->
-
 							</div>
 						</li>
 					</ul>
@@ -238,14 +231,14 @@
 						<a href="account.html">
 							<div class="parent-icon"><i class="bx bx-home-alt"></i>
 							</div>
-							<div class="menu-title">Main</div>
+							<div class="menu-title" id="menu-1">Main</div>
 						</a>
 					</li>
 					<li>
 						<a href="structure.html" >
 							<div class="parent-icon"><i class='bx bx-sitemap'></i>
 							</div>
-							<div class="menu-title">Structure</div>
+							<div class="menu-title"  id="menu-2">Structure</div>
 						</a>
 					</li>
 					<!--li>
@@ -259,7 +252,7 @@
 						<a href="javascript:;">
 							<div class="parent-icon"><i class="bx bx-info-square"></i>
 							</div>
-							<div class="menu-title">Messages</div>
+							<div class="menu-title"  id="menu-3">Messages</div>
 						</a>
 					</li>
 				</ul>
@@ -273,8 +266,8 @@
 			<div class="page-content-wrapper">
 			
 				<div class="page-content">
-						<h5 class="mb-0 text-uppercase">Message history</h5>
-						<hr>
+					<h5 class="mb-0"><span class="spinner-border spinner font-14 mr-2" role="status"><span class="sr-only">Loading...</span></span> <span id="m-title-1">Please wait. Message History is loading from the Contract...</span></h5>
+					<hr>
 					<div class="email-wrapper">
 
 						<div class="email-content">
@@ -329,8 +322,14 @@
 	<!-- Notifications JS -->
 	<script src="assets/plugins/notifications/js/lobibox.min.js"></script>
 	<script src="assets/plugins/notifications/js/notifications.min.js"></script>
+	<!-- Localization -->
+	<script src="assets/js/l100n.js"></script>
+	<script src="assets/js/errorsStrings.js"></script>
+	<script src="assets/js/messagesStrings.js"></script>
+	<script src="assets/js/accountPageStrings.js"></script>
+	<script src="assets/js//messagesPageStrings.js"></script>
 	<!-- App JS -->
-
+	<script src="/socket.io/socket.io.js"></script>
    <script src="assets/js/web3.min.js"></script>
    <script src="assets/js/truffle-contract.js"></script>
    <script src="assets/js/messages.js"></script>

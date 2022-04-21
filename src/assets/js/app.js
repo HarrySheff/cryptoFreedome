@@ -4,7 +4,7 @@ App = {
   account: '0x0000000000000000000000000000000000000000',
   crypto: "BNB",
   chainId: 0,
-  chainName: 'Binance Smart Chain',
+  chainName: 'Smart Chain - Testnet',
   mainChainId: '0x61', // '0x539',
   balance: 0,
   exchange: {},
@@ -33,12 +33,12 @@ App = {
   partnersCount: 0,
   maxRegPrice: 0,
   nextRegPrice: 0,
-	topLeader: '0x0',
-	topBalance: 0,
-	topBonusSumm: 0,
-	topResult: 0,
+
+	basicIncomeBalance: 0,
+	basicIncomeSumm: 0,
+	basicIncomeResult: 0,
 	topDelta: 0,
-	topMinimumLevel: 0,	
+	basicIncomeMinimumLevel: 0,	
 	sponsorId: 1,
 	mp:['Light', 'Smart', 'Prime'],
 	registrationPrices: [],
@@ -47,160 +47,393 @@ App = {
 	currentTimeToPricesUpdate: 120,
 	roundId: 0,
 	hasError: false,
+	events:[],
+	eventsSet: new Set(),
+	rateCorrection: 0.001,
+	lastSeenBlockNumber: 0,
+	langs: {'en':{'name':'En', 'flag':'flag-icon flag-icon-um'}, 'ru':{'name':'Ру', 'flag':'flag-icon flag-icon-ru'}}, // It's inportant to use lower case
+	mode: 'test',
+	providerAddress: 'https://data-seed-prebsc-2-s1.binance.org:8545',
+	explorerUrl: 'https://testnet.bscscan.com',
+	contractAddress: '0xC4C8DAfFb937638009eBCcc1E3122cE658D8f45f',
+	cryptoDecimasNumber: 5,
+	maxLevel: 16,
 
 	// An Error section show and hide function
 	showError: function(show, title, text){
 
+		// Check action type
 		if (show) {
+
+			// Show th error section
+
+			// Restore css class d-flex to show the section
 			$("#error").addClass('d-flex');
+
+			// Show error secction
 			$("#error").show();
+
+			// Set the section title
 			$("#error h1")[0].innerHTML = title;
+
+			// Set the section description text
 			$("#error p")[0].innerHTML = text;
+
+			// Hide a navigation panel
 			$(".nav-container").hide();
+
+			// Hide a page content
 			$(".page-wrapper").hide();
+
+			// Hide a partner info section
   		$("#userIdContainer").hide();
+
+  		// Hide an account info section
   		$("#accountData").hide();
+
+  		// Hide a notification section
   		$("#messageContainer").hide();			
 
+  		// Hide an open menu button near the logo
 			$(".sidebar-header > a").hide();
 
 		} else {
+
+			//Hide the error section
+
+			// Remove css class d-flex to allow hide the section
 			$("#error").removeClass('d-flex');
+			
+			// hide the error section
 			$("#error").hide();
+
+			// Show the navigation panel
 			$(".nav-container").show();
+
+			// Show the page content
 			$(".page-wrapper").show();
+
+			// Shoe the partner info section
 			$("#userIdContainer").show();
+
+			// Show the open menu button
 			$(".sidebar-header > a").show();
+
+			// Show the account section
   		$("#accountData").show();
+
+  		// Show the notification section
   		$("#messageContainer").show();			
 		}
+
+	},
+
+	// Get value from cookies
+	getValueFromCookies(_value, _prefix, _notNumber){
+
+		// Set cookies sthring
+		var cookiesValue = "; " + document.cookie;
+
+		// Split cookies string on parts with and without varible name
+		var parts = cookiesValue.split("; " + _prefix+'_' +_value + "=");
+
+		// Check parts number
+		// Second part should starts from value of varible 
+		// If exist second part use a value from start to splitter ";"
+		if (parts.length == 2) {
+			
+			// Second part exist 
+
+			// Get cookie value
+			let temp = parts.pop().split(";").shift();
+
+			// Number check
+			if (_notNumber){
+
+				// Value is not number
+
+				// Log the cookie value
+				console.log( _value+": " + temp);
+
+				// Return the cookie value
+				return temp;				
+			} else
+
+			// Convert the cookie value to number from string
+			temp = parseInt(temp,10);
+
+			// Check for null and zero
+			if (temp != null && temp >0) {
+				
+				// Log the cookie value
+				console.log( _value+": " + temp);
+
+				// Return the cookie value
+				return temp;
+			} else return 0;
+		} else return 0;
 
 	},
 
 	// An app initiaion
   init:  async function() {
 
-  	App.showError(true, "Loading...", "Waiting for the application loading.");
-  	App.showRegistration(false);
+  	// Show the app initiation text instead of the content
+  	App.showError(true, l100n.localize_string("err-load-h"), l100n.localize_string("err-load-p"));
+
+		// Get language from the cookies 
+		let temp = App.getValueFromCookies('lang', 'cryptolife', true);
+			
+		// Check for null and zero values
+		if (temp!= null && temp !=0) {
+			App.changeLang(temp);  	
+		} else {
+			App.changeLang("en");
+		}
+  	// Set the content default values
   	App.setDefaults();
+
+  	// Log the step finish text
 		console.log('--- App initiated ---');
+
+		// Go to the next step
 		return App.initWeb3();
   },
 
   // Web3 initiation
   initWeb3: async function() {
     
-    // Modern dapp browsers...
+    // Modern dapp browsers check
 		if (window.ethereum) {
+
+			// Set an web3 proveder
 		  App.web3Provider = window.ethereum;
+
+		  // Define the account change actions
 			window.ethereum.on('accountsChanged', (accounts) => {
+
 				// Handle the new accounts, or lack thereof.
 				// "accounts" will always be an array, but it can be empty.
 				if (accounts.length === 0) {
-					// the Wallet is locked or the user has not connected any accounts
+
+					// The Wallet is locked or the user has not connected any accounts
+
+					// Mark the page as has an error
+					App.hasError = true;
+
+					// Show the error text istead of the content
+					App.showError(true, l100n.localize_string("err-wallet-h"), l100n.localize_string("err-wallet-p")+App.chainName+'.');
+
+					// Log an error
 					console.log('Please connect to the Wallet.');
 
-					App.hasError = true;
-					App.showError(true, 'the Wallet is Dissconnected', 'Plese connect to the Wallet and choose '+App.chainName+'.');
-
+					// Check if the account is changed
 				} else if (accounts[0] !==  App.account) {
+
+					// The acoount is changed
+
+					// Set a new account
 				  App.account = accounts[0];
 				}
-					  		 
+				
+				// Reload the page
 				window.location.reload();
 			});
 
+			// Define the chain change action
 			window.ethereum.on('chainChanged', (chainId) => {
-			 	// Handle the new chain.
-		  	// Correctly handling chain changes can be complicated.
-			  // We recommend reloading the page unless you have good reason not to.
 
+				// Reload the page
 			  window.location.reload();
 			});
 
+			// Try to get an account from the wallet
 		  try {
+
+		  	// Log the step start
 		  	console.log('--- Try request an account ---');
-		  	App.showError(true, 'Login to the Wallet', "Please Login and allow the Criptolife access to it. ")
+
+		  	// Show the login text istead of the page content
+		  	App.showError(true, l100n.localize_string("err-login-h"), l100n.localize_string("err-login-p"))
 
 		    // Request account access
-
 		    let accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
 		    
+		    // Check the acounts array
 		    if (accounts && accounts.length > 0){
+
+		    	// The accounts array is setted and not empty
+
+		    	// Set the account as first in the acounts array
 		    	App.account = accounts[0];
 		    } else {
 
+		    	// The accounts array is not setted
+
+		    	// Mark the page as has an error
 		    	App.hasError = true;
-			    App.showError(true, 'Access denied...', 'Plese allow the Criptolife access to the Wallet.');
+
+		    	// Shoe the error text instead of the page content
+			    App.showError(true, l100n.localize_string("err-access-h"), l100n.localize_string("err-access-p"));
+
+			    // Render the page
 			    return App.render();
 		    }
 
 		  } catch (error) {
-		    // User denied account access...
+
+		    // User denied account access
+
+		    // Mark the page has an error
+		    App.hasError = true;
+
+		    // Show the error text instead of the content
+		    App.showError(true, l100n.localize_string("err-access-h"), l100n.localize_string("err-access-p"));
+
+		    // Log the error
 		    console.warn("User denied account access");
 
-		    App.hasError = true;
-		    App.showError(true, 'Access denied...', 'Plese allow the Criptolife access to the Wallet.');
+		    // Render the page
 		    return App.render();
 		  }
 
+		  // Try to get chain ID
 		  try {
 
+		  	// Set the chain ID from the wallet
 		  	App.chainId = await ethereum.request({ method: 'eth_chainId' });
+
 		  } catch (error){
+
+		  	// Somthing wrong
+
+		  	// Show the error popup
 				Lobibox.notify('warning', {
-					pauseDelayOnHover: true,
+					pauseDelayOnHover: true, 
 					icon: 'bx bx-error',
 					continueDelayOnInactiveTab: false,
 					rounded: true,
 					position: 'top center',
 					msg: error.message
-				});		
+				});
+
+				// Log the error		
 	  		console.warn(error);
 
+	  		// Mark the page as has an error
 	  		App.hasError = true;
-	  		App.showError(true, 'Chain connection problem...', 'Plese check if the Wallet connected to '+App.chainName+'.');
+
+	  		// Show he error text instead of the content
+	  		App.showError(true, l100n.localize_string("err-chprob-h"), l100n.localize_string("err-chprob-p"));
+
+	  		// Rnder the page
 	  		return App.render();
 
 		  }
 
+		  // Check the chain ID
 		  if (App.chainId !== App.mainChainId){
 
+		  	// Connected to the wrong chain
+		  	
+	  		if (ethereum.isMetaMask){
 
-		  	App.hasError = true;
-	  		App.showError(true, 'Connected to the wrong chain', 'Please connect to the '+App.chainName+' in the Wallet.');
+	  			App.hasError = true;
+	  			App.showError(true, l100n.localize_string("err-wrongM-h"), l100n.localize_string("err-wrongM-p1")+App.chainName+l100n.localize_string("err-wrongM-p2"));
+	  			$('#chainSwithcLink').off('click').on('click', async function(){
 
-	  		console.log(App.chainId);
+	  				await ethereum.request({ method:"wallet_switchEthereumChain", params:[{chainId:App.mainChainId}]})
+	  				.catch(function(_error){
+
+	  					// Have an error
+
+				  		// Pop up the error
+							Lobibox.notify('warning', {
+								pauseDelayOnHover: true,
+								icon: 'bx bx-error',
+								continueDelayOnInactiveTab: false,
+								rounded: true,
+								position: 'top center',
+								msg: _error.message
+							});	
+	  				});
+
+	  			});
+
+	  		} else {
+
+	  			App.hasError = true;
+	  			App.showError(true,  l100n.localize_string("err-wrong-h"), l100n.localize_string("err-wrong-p1")+App.chainName+l100n.localize_string("err-wrong-p2"));
+	  		}
+
+	  		// Rnder the page
 	  		return App.render();
 
 		  }
 		}
 
-		// Legacy dapp browsers...
+		// Legacy dapp browsers check
 		else if (window.web3) {
+
+			// Legacy browser detected
+
+			// Set an web3 proveder
 		  App.web3Provider = window.web3.currentProvider;
 		  
-		  let temp = await web3.eth.getAccounts();
-			App.account = temp[0];
+		  // Get the acoounts array
+		  let accounts = await web3.eth.getAccounts();
+
+		  // Check the acounts array
+		  if (accounts && accounts.length > 0){
+
+		    // The accounts array is setted and not empty
+
+		    // Set the account as first in the acounts array
+		    App.account = accounts[0].toLowerCase();
+		  } else {
+
+		    // The accounts array is not setted
+
+		    // Mark the page as has an error
+		    App.hasError = true;
+
+		    // Show the error text instead of the page content
+			  App.showError(true, l100n.localize_string("err-access-h"), l100n.localize_string("err-access-p"));
+
+			  // Render the page
+			  return App.render();
+		  }			
 
 		}	else {
 
 			// If no injected web3 instance is detected, connect to the testnet
 
+			// Set the web3 proveder
 		  App.web3Provider = new Web3.providers.HttpProvider('https://data-seed-prebsc-1-s1.binance.org:8545');
-		  App.showError(true, 'No Wallet detected', "Please install the Wallet and connect to it. ");
+
+		  // Show the error text instead of the page content
+		  App.showError(true, l100n.localize_string("err-nowallet-h"), l100n.localize_string("err-nowallet-p"));
+
+		  // Mark the page as has an error
 		  App.hasError = true;
+
+		  // Render the page
 		  return App.render();
 		}
 
+		// Reinitiate web3 with new provider
 		web3 = new Web3(App.web3Provider);		
 
+		// Get a current block number in the chain
 		web3.eth.getBlockNumber(function(err, result){ 
 
+			// Set the current block number in the chain	
 			App.currentBlock = result;
 
+			// Log the step finish text
 			console.log('--- Web3 initiated ---');
 			
+			// Go to the next step
 			return App.initContract();
 
 		});    
@@ -209,39 +442,31 @@ App = {
  	// Initiate a Сontract
   initContract: function() {
 
-  		App.showError(true, "Initiating Contract...", "Waiting for the Contract data.");
-	    $.getJSON("../contracts/CryptoLife.json", function (data) {
+  	// Show an initiatig contract text instead of the page content
+  	App.showError(true, l100n.localize_string("err-init-h"), l100n.localize_string("err-init-p"));
 
-	      // Instance a new truffle contract from the artifact
-	      App.contracts.CryptoLife = TruffleContract(data);
+  	// Get the smart contract data
+	  $.getJSON("../contracts/CryptoLife.json", function (data) {
+
+	    // Instance a new truffle contract from the artifact
+	    App.contracts.CryptoLife = TruffleContract(data);
 	      
-	      //Connect provider to interact with contract
-	      App.contracts.CryptoLife.setProvider(App.web3Provider);
+	    //Connect provider to interact with contract
+	    App.contracts.CryptoLife.setProvider(App.web3Provider);
 
-	      console.log('--- Contract initiated ---');
-	      return App.initAccount();
+	    // Log the step finish text
+	    console.log('--- Contract initiated ---');
 
-	    });   
+	    // Go to the next step
+	    return App.initAccount();
+
+	  });   
   },
 
   // A Current Address data load from cookies and wallet
   initAccount: async function(){
 
-
-	  //Reading cookies function
-		function getCookie(name) {
-		// Set cookies sthring
-		  let value = "; " + document.cookie;
-
-		  // Split cookies string on parts with and without varible name
-		  let parts = value.split("; " + name + "=");
-
-		  // Check parts number
-		  //Second part should starts from value of varible 
-		  // If exist second part, return a value from start to splitter ";"
-		  if (parts.length == 2) return parts.pop().split(";").shift();
-		}
-
+		// Get a sponsor ID from the page address link
 		function getRefiralFromLink() {
 
 			// Split link on parts with and without arguments
@@ -266,20 +491,20 @@ App = {
 			return 0;
 		}
 
+		//Looking for the sponsor ID
 
-
-		//Get network number and convert it to number from string
-		let temp = parseInt(getCookie( App.account+'_network'),10);
-		if (temp != null && temp >0) {
-			App.networkStart = temp;
-			console.log( "network: " + App.networkStart);
-		}
-
-
-		// Get sponsor ID from link 
+		// Get the sponsor ID from the link 
 		temp = getRefiralFromLink();
+
+		// Check the sponsor ID value
 		if (temp != null && temp >0) {
+
+			// The value is not null
+
+			// Set the sponsor ID value
 			App.sponsorId = temp;
+
+			// Log the sponsor ID value
 			console.log( "sponsor ID: " + App.sponsorId);
 
 			// Cookie expiration date
@@ -288,50 +513,114 @@ App = {
 			// Add one year
 			date.setDate(date.getDate() + 360); 
 
-			// Save sponsor ID  in the cooke
+			// Save the sponsor ID in the cookies 
 			document.cookie = 'cryptolife_ref='+temp+'; path=/; expires=' + date;
 
 		} else {
-			temp = parseInt(getCookie( 'cryptolife_ref'),10);
-			if (temp != null && temp >0) {
-				App.sponsorId = temp;
-				console.log( "sponsor ID: " + App.sponsorId);
-			}
+
+			// The sponsor ID value is null
+
+			// Get the sponsor ID from the cookies 
+			App.sponsorId = App.getValueFromCookies('ref', 'cryptolife', true);
 		}
 
 
-		//Get referrals lenght and convert it to number from string
-		temp = parseInt(getCookie( App.account+'_referrals'),10);
-		if (temp != null && temp >0) {
-			App.referralsLenght = temp;
-			console.log( "referrals: " + App.referralsLenght);
-		}
-
-		//Get last seen block
-		temp = parseInt(getCookie( App.account+'_lastSeenBlock'),10);
-		if (temp != null && temp >0) {
-			App.lastSeenBlock = temp;
-			console.log('lastSeenBlock: ' + App.lastSeenBlock);
-		}				
-
-		//Get currency
-		temp = getCookie( App.account+'_currentCurrency');
-		if (temp != null ) {
-			App.currentCurrency = temp;
-			console.log('currentCurrency: ' + App.currentCurrency);
-		}	
-
+		// Check the account value
 		if (App.account == undefined){
+
+			// The account is undefined
+
+			// Set an zero wallet value
 			App.account = '0x0000000000000000000000000000000000000000';
+
+			// Log an account receive error
 		  console.log('No account receive from Wallet');
+
+		  // Mark the page as has an error
 		  App.hasError = true;
-		  App.showError(true, 'No access to the account', "Please check if the Wallet is Login and reload the page. ")
+
+		  // Show an error message instead of the content
+		  App.showError(true, l100n.localize_string("err-acc-h"), l100n.localize_string("err-acc-p"));
+
+		  // Render the page
 		  return App.render();
 		} else {
 
+			// The account value is setted
+
+			// Open a socket
+
+			App.socket = io(window.location.host,{autoConnect: false});
+
+			App.socket.auth = {account: App.account};
+
+			App.socket.on('setAccountData',(response)=>{
+
+				// Get network number 
+				App.networkStart = response?response.network:0;
+
+				// Get referrals
+				App.referralsLenght = response?response.referrals:0;
+
+				// Get last seen block
+				App.lastSeenBlock = response?response.lastSeenBlock:0;
+
+		  	// Largest seen block number
+		  	App.lastSeenBlockNumber = App.lastSeenBlock;
+
+				// Get direct income 
+				App.directIncome = response?response.directIncome:0;
+
+				// Get network income 
+				App.networkIncome = response?response.networkIncome:0;
+
+				// Get missing income 
+				App.lostProfit = response?response.lostProfit:0;
+
+				// Get events 
+				App.events = response?response.events:[];
+
+				// Get chats
+				App.chats = response?response.chats:[];
+
+			});
+
+			App.socket.connect();
+
+			// Get current currency
+			let temp = App.getValueFromCookies('currentCurrency', App.account, true);
+
+			// Check for null and zero values
+			if (temp != null && temp !=0)	App.currentCurrency = temp;
+
+			// Get the account balance
+			App.getBalance();
+
+
+			// Log step finish message
+			console.log('--- Account initiated ---');	
+		}
+
+  	return App.deployContract();
+  },
+
+  // Get the account balance
+  getBalance: function(){
+
+  	// Check the account
+  	if (App.account != undefined && App.account != '0x0000000000000000000000000000000000000000'){
+
+  		// The account has a value
+
+  		// Get an account balance
 	 		web3.eth.getBalance(App.account, web3.eth.defaultBlock, function(err, balance){
-		        	
+		    
+		    // Check for errors    	
 		  	if (err != null) {
+
+		  		// Have an error
+
+		  		// Pop up the error
 					Lobibox.notify('warning', {
 						pauseDelayOnHover: true,
 						icon: 'bx bx-error',
@@ -339,30 +628,44 @@ App = {
 						rounded: true,
 						position: 'top center',
 						msg: err.message
-					});		  		
+					});	
+
+					// Log the error	  		
 		    	console.log(err);
+
 		  	} else {
+
+		  		// No errors
+
+		  		// Set the balance
 		    	App.balance = balance;
 		  	}
 			});
-
-			console.log('--- Account initiated ---');	
-		}
-
-  	return App.deployContract();
+	 	}
   },
 
   // The Contract deployment  
-  deployContract: async function () {
+  deployContract: async function() {
   	
     // Get deployed contract
 
+    // Deploy the contract
     App.contracts.CryptoLife.deployed().then(function(instance){
+
+    	// Set a contract instance
    		App.cryptoLife = instance;
+
+   		// Log the step finished text
    		console.log('--- Contract deployed ---');
+
+   		// Go to the next step
    		return App.loadContractData();
     })
+
+    // Catch the errors
     .catch(function(error){
+
+    	// Pop up the error
 			Lobibox.notify('warning', {
 				pauseDelayOnHover: true,
 				icon: 'bx bx-error',
@@ -371,9 +674,17 @@ App = {
 				position: 'top center',
 				msg: error.message
 			});
+
+			// Log the error
   		console.warn(error);
+
+  		// Mark the page as has an error
   		App.hasError = true;
-  		App.showError(true, 'Contract not found...', 'Plese check if the Wallet connected to '+App.chainName+'.');
+
+  		// Show an error message instead of the content
+  		App.showError(true, l100n.localize_string("err-nofound-h"), l100n.localize_string("err-chprob-p")+App.chainName+'.');
+
+  		// Render the page
   		return App.render();
   	});
 	},
@@ -381,98 +692,155 @@ App = {
 	// Registration check the Сurrent address in the Сontract
 	checkRegistration: async function(){
 
-		let isRegistered = await	App.cryptoLife.isRegistered({from:App.account}).catch(function(error) {
-					Lobibox.notify('warning', {
-						pauseDelayOnHover: true,
-						icon: 'bx bx-error',
-						continueDelayOnInactiveTab: false,
-						rounded: true,
-						position: 'top center',
-						msg: error.message
-					});
-		      console.warn(error);
+		// Get and set a registration status from the contract
+		let isRegistered = await	App.cryptoLife.isRegistered({from:App.account})
 
-		      return false;
+		// Chatch the errors
+		.catch(function(error) {
+
+			// Pop up the error
+			Lobibox.notify('warning', {
+				pauseDelayOnHover: true,
+				icon: 'bx bx-error',
+				continueDelayOnInactiveTab: false,
+				rounded: true,
+				position: 'top center',
+				msg: error.message
+			});
+		  
+		  // Log the error
+		  console.warn(error);
+
+		  // Return false
+		  return false;
 		      
-		    });
+		});
 
+		// Return the result
 		return isRegistered;			
 	},
 
 	// Check the registration of the Сurrent address and load the corresponding data
 	loadContractData: async function(init) {
 
+		// Check current account for the registration
 		if (await App.checkRegistration()){
 
+			// The account is registered
+
+			// Load data of the partner
 			await App.loadPartnerData();
 
  		} else {
 
-			
-			await web3.eth.getBlockNumber(function(err, blockNumber){
-				App.registrationBlock = blockNumber; 
-			});
+			// The account is not registered
+
+			// Redirect to the marketing palans page
+			window.location.assign('marketing.html');
 		}
 
-		await App.loadTopLeaderData();
+		// Load a Basic Income data
+		await App.loadBasicIncomeData();
+
+		// Load a registration prices
 		await App.loadRegistrationPrices();
+
+		// Start timer for a prices update
 		App.startPricesTimer();
 
-		App.readPastEvents();
-
+		// Log the step finish 
  		console.log('--- Contract Data loaded ---');
 
-		return App.render();
+ 		App.render();
+
+ 		// Start reading events from the chain
+		return App.readPastEvents();
 	}, 
 
 	// Load a Top Leader data and bonus progress from the Contract
-	loadTopLeaderData: async function() {
+	loadBasicIncomeData: async function() {
 
-		let top = await App.cryptoLife.getTopLeaderData({from:App.account}).catch(function(error){
+		// Get the Basic Income data from the contract
+		let top = await App.cryptoLife.getbasicIncomeData()
 
+		// Chatch the errors
+		.catch(function(error){
+
+			// Pop up the error
+			Lobibox.notify('warning', {
+				pauseDelayOnHover: true,
+				icon: 'bx bx-error',
+				continueDelayOnInactiveTab: false,
+				rounded: true,
+				position: 'top center',
+				msg: error.message
+			});
+
+			// Log an error
 			console.warn(error);
 
 		});
 
+		// Check received data
 		if (top !=null){
 
-
-			// Set an address of the Top Leader
-			App.topLeader = top[0];
+			//The data is not null
 
 			// Set contract balance
-			App.topBalance = top[1];
+			App.basicIncomeBalance = top[0];
 
-			// Set summ of the Top Leader bonus
-			App.topBonusSumm = top[2];
+			// Set summ of the Basic Income
+			App.basicIncomeSumm = top[1];
 
-			// Set result of the Top Leader
-      App.topResult = top[3];
+			// Set requiered summ to next payment
+      App.basicIncomeResult = top[2];
 
-			// Set delta between results of the Top Leader and the Partner
-			App.topDelta = top[4];
 
 			// Set required active marketing plan
-			App.topMp = top[5];	
+			App.basicIncomeMp = top[3];	
 
 			// Set minimum required level 
-			App.topMinimumLevel = top[6];	
+			App.basicIncomeMinimumLevel = top[4];	
 		}		    		
   },
 
   // Load Partner's data from the Contract
   loadPartnerData: async function (toRender) {
 
-				
-			let partner = await	App.cryptoLife.getMyData({from:App.account}).catch(function(error) {
+		// Get data from the contract
+		let partner = await	App.cryptoLife.getMyData({from:App.account})
 
-			  console.warn(error);
+		// Catch the errors
+		.catch(function(error) {
 
-			  if(toRender) { return App.render()}
+				// Pop up the error
+				Lobibox.notify('warning', {
+					pauseDelayOnHover: true,
+					icon: 'bx bx-error',
+					continueDelayOnInactiveTab: false,
+					rounded: true,
+					position: 'top center',
+					msg: error.message
+				});
+
+				// Log an error
+				console.warn(error);
+
+				// Check for page render need
+			  if(toRender) { 
+
+			  	// Page render needs
+
+			  	// Render the page
+			  	return App.render();
+			  }
 			      
-			});
+		});
 
+			// Check a data of the partner
 			if (partner != null && partner[0]>0){
+
+				// Data is not null and partner ID above zero
 
 				//Cookie expiration date
 				let date = new Date;
@@ -482,245 +850,275 @@ App = {
 
 				//Convert to UTC format
 				date = date.toUTCString();
-				    		
+				
+				// Set the partner ID
 				App.partnerId = partner[0];
+
+				// Clear the marketing plan levels array
 				App.level = [];
+
+				// Set a Basic marketing plan level
 				App.level.push(partner[1]);
+
+				// Check for a Fast marketing plan activation
 				if (partner[2].length > 0) {
+
+					// The Fast marketing plan is active
+
+					// Set a Fast marketing plan level
 					App.level.push(partner[2]);
+
+					// Check for a VIP marketing plan activation
 					if (partner[3].length > 0) {
+
+						// The VIP marketing plan is active
+
+						// Set a VIP marketing plan level
 						App.level.push(partner[3]);
 					}
 				}
-				App.date = partner[4];
-				App.registrationBlock = partner[5];
-				App.referrals = partner[6];
-				App.referralsPlus = App.referrals.length - App.referralsLenght;
-				App.networkPlus = partner[7] - App.networkStart;
-				App.network = partner[7];
-				App.nextLevelPrice = await App.cryptoLife.getNextLevelPrices(App.roundId.toString(), {from:App.account});
-				   			
-				document.cookie = App.account +'_network='+App.network+'; path=/; expires=' + date;
 
-				document.cookie = App.account +'_referrals='+App.referrals.length+'; path=/; expires=' + date;
+				// Set a registration of the partner date timestamp
+				App.date = partner[4];
+
+				// Set a registration of the partner block number
+				App.registrationBlock = partner[5];
+
+				// Set an array of refferals of the partner
+				App.referrals = partner[6];
+
+				// Calculate and set a number of new refferals of the partner
+				App.referralsPlus = App.referrals.length - App.referralsLenght;
+
+				// Calculate and set a number of new members of the partner's network 
+				App.networkPlus = partner[7] - App.networkStart;
+
+				// Set the number of members of the partner's network
+				App.network = partner[7];
+
+				// Get from the contract and set next level prices
+				App.nextLevelPrice = await App.cryptoLife.getNextLevelPrices(App.roundId.toString(), {from:App.account});
+				
+
+				// Save the number of members of the partner's network to database    			
+				if(App.networkPlus>0) App.socket.emit('setNetwork', App.network);
+
+				// Save the number of the partner's referrals to database
+				if(App.referralsPlus>0) App.socket.emit('setReferrals', App.referrals.length);
 			
 			}
 
-		if(toRender) { return App.render()}
+		// Check for page render need
+		if(toRender) { 
+
+			// Page render needs
+
+			// Render the page
+			return App.render()
+		}
 	},	
 
-	// Read past events pagination function
-	// Due to logs of 5000 blocks limitations in BSC 
+	// Read past events from server's database 
 	readPastEvents: async function (){
+			for(let event of App.events){
+				
+				
+				await this.eventHandling(event, event.blockNumber>App.lastSeenBlock).catch(()=>{});
+			}
+			App.render();
+			// Change an account details section title
+			$("#accountData > h5")[0].innerHTML = '<span id="a-title-2">'+l100n.localize_string("a-title-2")+'</span>';
+			$("#accountData > h5").addClass('text-uppercase');
 
-		// Set starting block number
-		let blockToRead = App.registrationBlock*1;
+			// Return with listening new blocks
+			App.listenForEvents();						
 
-		// Loop until the range of the last blocks is reduced to 5000
-		while (App.currentBlock - blockToRead > 5000){
+	},	
 
-			// Listern events in the current range
-			await App.listenForEvents(blockToRead, blockToRead+5000);
+	// Hanndling of events function
+	eventHandling: async function (_event, _needRender){
 
-			// Increase start block number
-			blockToRead+=5000;
-		}
+		return new Promise(async function(resolve, reject){
 
-		// Return with listening new blocks
-		return App.listenForEvents(blockToRead, 'latest');
-	},			
 
-	// Handle events of the Contract
-  listenForEvents: async function(_startBlock, _endBlock){
+		  // Is it common partner's event
+			if (_event.args.partnerAddress.toLowerCase() == App.account) {
 
-			// Cookie expiration date
-			let date = new Date;
+				// It's a common partner's event
+	  						
+	  		// Switch event type and call suitable function
+				switch (_event.event){
 
-			// Add one year
-			date.setDate(date.getDate() + 360); 
+				  case 'bonusPaidOut': 
+				  	await bonusPaidOut(_event, _needRender).catch((_error)=>{console.warn(_error); reject(_error)});
+				  	resolve(true);
+				  break;
 
-			// Convert to UTC format
-			date = date.toUTCString();
+				  case 'missingBounus': 
+				  	await missingBounus(_event, _needRender).catch((_error)=>{console.warn(_error); reject(_error)});
+				  	resolve(true);
+				  break;
 
-	    // Conters to pr_event muliply renders
-	    let missingBounusCount = 0;
-			let missingBounusCounter = 0; 
-			let bonusPaidOutCount = 0;
-			let bonusPaidOutCounter = 0; 
-			let poolReopenCount = 0;
-			let poolReopenCounter = 0; 
-			let referralsCount = 0;
-			let referralsCounter = 0; 
-	  	let levelUpCount = 0;
-	  	let levelUpCounter = 0;
+				  case 'poolIsReopened':
+				  	await poolIsReopened(_event, _needRender).catch((_error)=>{console.warn(_error); reject(_error)});
+				  	resolve(true);
+				  break;
 
-	  	// Largest seen block number
-	  	let lastSeenBlockNumber = App.lastSeenBlock;
+				  case 'registration': 
+				  	await registration(_event, _needRender).catch((_error)=>{console.warn(_error); reject(_error)});
+				  	resolve(true);
+				  break;
 
-	  	function addNotification(_type, _title, _info, _event, _block){
+				  case 'levelUp': 
+				  	await levelUp(_event, _needRender).catch((_error)=>{console.warn(_error); reject(_error)});
+				  	resolve(true);
+				  break;
+				}
 
-				let mess = {};
-				mess.type = _type;
-				mess.title = _title;
-				mess.info = _info;
-				mess.dateTime =  _block.timestamp*1000; 
-				mess.new = _event.blockNumber > App.lastSeenBlock;
-				mess.logIndex = _event.logIndex;
-					
-					// Add new notiication to the list of notifications
-					App.notifications.push(mess);				
-	  	}
+				// Check for referral registration case
+			} else {
 
-	  	function updateLastSeenBlock(_event){
+				if(_event.event == 'registration' && _event.args.sponsorAddress.toLowerCase() == App.account) {
 
-				// Largest seen block check
-				if (_event.blockNumber > lastSeenBlockNumber){
+					// It's a refferal registration
 
-					// _Event's block number is largest
+					// Call new referal handling fauction
+					await newReferral (_event, _needRender).catch((_error)=>{console.warn(_error); reject(_error)});
+					 resolve(true);
+				} else {
 
-					// Set last seen block in the cooke
-					document.cookie = App.account +'_lastSeenBlock='+_event.blockNumber+'; path=/; expires=' + date;
-								
-					// Set new largest block number
-					lastSeenBlockNumber = _event.blockNumber;
-				}	  		
-	  	}
+					reject('Unknown event');
+				}
+			}
+		});
 
-			// Catch bonus paid out
-	    App.cryptoLife.bonusPaidOut(
-	    		{partnerAddress: App.account},
-	    		{fromBlock: _startBlock,
-	    		toBlock: _endBlock},
-	    		function (_error, _event){
 
-	    		// Check for errors	
-			    if (_error == null) {
+			async function bonusPaidOut (_event, _needRender){
 
-			    	//No errors
+				return new Promise (async function(resolve, reject){
 
-			    	web3.eth.getBlock(_event.blockNumber, false, async function (_err, _block) {
-
-				    	// Check a bonus type
+							// Check a bonus type
 							switch (_event.args.bonusType.toString()){
 
 								case '1':
 
 									// It's a direct bonus
 
-									// Increment direct income summ								
-									App.directIncome +=_event.args.amount/10**18;
-
 									// Check for new income									    	
 									if (_event.blockNumber > App.lastSeenBlock) {
 
 										// An income is new 
-										
+														
+										// Increment direct income summ								
+										App.directIncome +=_event.args.amount;
+
 										//Increase a direct income plus summ	  
-										App.directIncomePlus += _event.args.amount/10**18;
-											
+										App.directIncomePlus += _event.args.amount;							
+
+										// Set direct income to the database
+										App.socket.emit('setDirectIncome', App.directIncome);
 									}
+
 
 									// Add new nitification to the list of notifications 
 									addNotification(
 										'directBonus', 
-										'Direct bonus ' + (_event.args.amount/10**18).toFixed(6)+' '+App.crypto, 'Level '+_event.args.level+' '+ App.mp[_event.args.mp]+' slot was taken by a Partner.',
-										_event,
-										_block
-										);
-							    	
+										'<span class="m-bpo-p1">'+l100n.localize_string("m-bpo-p1")+'</span>' + (_event.args.amount).toFixed(App.cryptoDecimasNumber)+' '+App.crypto, 
+										'<span class="m-bpo-p2">'+l100n.localize_string("m-bpo-p2")+'</span>'+_event.args.level+'<span class="m-bpo-p3">'+l100n.localize_string("m-bpo-p3")+'</span>'+ App.mp[_event.args.mp]+'<span class="m-bpo-p4">'+l100n.localize_string("m-bpo-p4")+'</span>',
+										_event
+									);
+											    	
 								break;
 
 								case '0':
 
-									// It's a Top Leader bonus
-
-									// Increment network income summ											
-									App.networkIncome += _event.args.amount/10**18;
-									
+									// It's a Basic Income
+													
 									// Check for new income		    	
 									if (_event.blockNumber > App.lastSeenBlock) {
 
 										// An income is new 
-										
-										//Increase a network income plus summ	  										  
-										App.networkIncomePlus += _event.args.amount/10**18;
+
+										// Increment network income summ											
+										App.networkIncome += _event.args.amount;		
+
+										// Increase a network income plus summ	  										  
+										App.networkIncomePlus += _event.args.amount;
+
+										// Set network income to the database
+										App.socket.emit('setNetworkIncome', App.networkIncome);
 									}
 
 									// Add new nitification to the list of notifications
 									addNotification(
 										'leaderBonus',
-										'Top Leader bonus received!',
-										'Congratulations Top Leader! Your bonus is '+(_event.args.amount/10**18).toFixed(6)+' '+App.crypto+'.<br>Keep growing & take the next one too!',
-										_event,
-										_block
-										);
+										'<span class="m-bpo-p5">'+l100n.localize_string("m-bpo-p5")+'</span>',
+										'<span class="m-bpo-p6">'+l100n.localize_string("m-bpo-p6")+'</span>'+(_event.args.amount).toFixed(App.cryptoDecimasNumber)+' '+App.crypto+'<span class="m-bpo-p7">'+l100n.localize_string("m-bpo-p7")+'</span>',
+										_event
+									);
 
 								break;
 
 								default:
-									App.networkIncome += _event.args.amount/10**18;
+
+									// It's a network income
+													
+									// Check for new income		
 									if (_event.blockNumber > App.lastSeenBlock) {
-										App.networkIncomePlus += _event.args.amount/10**18;
+
+										// An income is new 
+
+										// Increment network income summ	
+										App.networkIncome += _event.args.amount;
+
+										//Increase a network income plus summ
+										App.networkIncomePlus += _event.args.amount;
+
+										// Set network income to the database
+										App.socket.emit('setNetworkIncome', App.networkIncome);
 									}	
 
 									// Add new nitification to the list of notifications
 									addNotification(
 										'networkBonus',
-										'Network bonus ' +(_event.args.amount/10**18).toFixed(6)+' '+App.crypto, 'A Prtner at depth '+_event.args.bonusType+' took a Level '+_event.args.level+' '+ App.mp[_event.args.mp]+' slot.',
-										_event,
-										_block
-										);
+										'<span class="m-bpo-p1">'+l100n.localize_string("m-bpo-p1")+'</span>' +(_event.args.amount).toFixed(App.cryptoDecimasNumber)+' '+App.crypto, 
+										'<span class="m-bpo-p8">'+l100n.localize_string("m-bpo-p8")+'</span>'+_event.args.bonusType+'<span class="m-bpo-p9">'+l100n.localize_string("m-bpo-p9")+'</span>'+_event.args.level+'<span class="m-bpo-p10">'+l100n.localize_string("m-bpo-p10")+'</span>'+ App.mp[_event.args.mp]+'<span class="m-bpo-p11">'+l100n.localize_string("m-bpo-p11")+'</span>',
+										_event
+									);
 
 								break;					    	
 							}
+							// Update last seen block in the cookie
+							updateLastSeenBlock(_event.blockNumber);
 
-							// Update a last seen block
-							updateLastSeenBlock(_event);
+							 // Check if it need for render
+							if (_needRender) {
 
-							// Increase an _events counter
-							bonusPaidOutCounter++;
+								// It's need to render
 
-			    		// Compare counted _events number with total past events number
-							if ((bonusPaidOutCount > 0 && bonusPaidOutCount == bonusPaidOutCounter)) {
-		
-								// Check for new event							
-								if (_event.blockNumber > App.currentBlock){
+								// Check for Basic Income paied event
+								if (_event.args.bonusType.toString() == '0'){
 
-									//The event is new and have to update rendered info
+									// This is a Basic Income paid event
 
-									// Check for Top Leader Bonus paied event
-									if (_event.args.bonusType.toString() == '0'){
+									// Update Basic Income data
+									await App.loadBasicIncomeData();
 
-										// This is a Top Leader Bonus paid event
+									// Render Total Income
+									App.changheCurrentCurrency(App.currentCurrency);
 
-										// Update Top Leader Bonus data
-										await App.loadTopLeaderData();
+									// Render Incomes
+									App.renderIncomes();
 
-										// Render Total Income
-										App.changheCurrentCurrency(App.currentCurrency);
+									// Render next Basic Income progress
+									App.renderBasicIncomeProress();
 
-										// Render Incomes
-										App.renderIncomes();
+								} else if (_event.args.bonusType.toString() == '1') {
 
-										// Render next Top Leader Bonus progress
-										App.renderTopLeaderBonusProress();
-
-									} else if (_event.args.bonusType.toString() == '1') {
-
-										await App.loadPartnerData(true);
-
-									} else {
-
-										// Render Total Income
-										App.changheCurrentCurrency(App.currentCurrency);
-
-										// Render Incomes
-										App.renderIncomes();
-
-									}
+									await App.loadPartnerData(true);
 
 								} else {
-										
+
 									// Render Total Income
 									App.changheCurrentCurrency(App.currentCurrency);
 
@@ -734,313 +1132,361 @@ App = {
 
 							}
 
-						});
-														
-					} else {
+							resolve(true);					
+					});		 
+	  	}
 
-						// Something wrong and has an error
+			function missingBounus (_event, _needRender){
 
-						// Show an error popup
-						Lobibox.notify('warning', {
-							pauseDelayOnHover: true,
-							icon: 'bx bx-error',
-							continueDelayOnInactiveTab: false,
-							rounded: true,
-							position: 'top center',
-							msg: _error
-						});
+				return new Promise ((resolve, reject)=>{
 
-						// Lod the error message
-						console.log("_Event error: "+ _error);
+					// Check for new event
+					if (_event.blockNumber > App.lastSeenBlock) {
+
+						// The event is new 
+								    	
+						// Increase a missing income plus sum
+						App.lostProfitPlus += _event.args.amount;
+
+						// Increase a missing income sum
+						App.lostProfit += _event.args.amount;
+
+						// Save missing income value to the database
+						App.socket.emit('setLostProfit', App.lostProfit);
+
 					}
-	    }).watch(function(){bonusPaidOutCount ++;});
-	  	
-	  	// Chatch lost profit
-	  	App.cryptoLife.missingBounus(
-	    	{partnerAddress: App.account},
-	    	{fromBlock: _startBlock,
-	    	toBlock:_endBlock}, 
-	    	function (_error, _event){
 
-				App.lostProfit += _event.args.amount/10**18;
-			
-				if (_event.blockNumber > App.lastSeenBlock) {
-							    	
-					App.lostProfitPlus += _event.args.amount/10**18;
+					  	// Set a temporary string 
+					  	let temp = '';
 
-				}
+							// Check a missing income type
+					    switch (_event.args.bonusType.toString( )){
+					    	case '1':
 
-			  web3.eth.getBlock(_event.blockNumber, false, async function (_err, _block) {
+					    			// Check a level
+						    		if (_event.args.level == 1) {
 
-			  	let temp = '';
+						    			// Missed first level income
+						    			// Partner have to just activate a required marketing plan to receive bonuses
 
-					// Check a bonus type
-			    switch (_event.args.bonusType.toString( )){
-			    	case '1':
+						    			// Set a reqquired marketing plan activation call prefix for a message info  
+						    			temp = '<span class="m-miss-p1">'+l100n.localize_string("m-miss-p1")+'</span>'+App.mp[_event.args.mp];
 
-			    		if (_event.args.level == 1) {
-			    			temp = 'Activate '+App.mp[_event.args.mp];
-			    		} else if (App.level.length-1 < _event.args.mp) {
-			    			temp = 'Activate '+App.mp[_event.args.mp] + ' and raise its Level to '+ _event.args.level;
-			    		} else {
-			    			temp = 'Raise the level of '+App.mp[_event.args.mp]+' to '+ _event.args.level;
-			    		}
+						    			// in the case of the higher level check the required marketing plan activation
+						    		} else if (App.level.length-1 < _event.args.mp) {
 
-			    		// Add new nitification to the list of notifications
-			    		addNotification(
-								'missed',
-								(_event.args.amount/10**18).toFixed(6)+' '+App.crypto+' of profit lost',
-								temp +'<br>to receive '+App.mp[_event.args.mp]+' Level ' +  _event.args.level + ' bonuses.',
-								_event,
-								_block
-								);
+						    			// The required marketing plan is no active
 
-			    	break;
+						    			// Set a reqquired marketing plan activation and level up call prefix for a message info 
+						    			temp = '<span class="m-miss-p1">'+l100n.localize_string("m-miss-p1")+'</span>'+App.mp[_event.args.mp] + '<span class="m-miss-p2">'+l100n.localize_string("m-miss-p2")+'</span>'+ _event.args.level;
+						    		} else {
 
-			    	default:
+						    			// The required marketing plan is active
 
-			    		
-			    		if (_event.args.bonusMp == 2 && _event.args.bonusType < 4){
-			    			temp = 'additional ';
-			    		}
+						    			// Set a level up call prefix for a message info 
+						    			temp = '<span class="m-miss-p3">'+l100n.localize_string("m-miss-p3")+'</span>'+App.mp[_event.args.mp]+'<span class="m-miss-p4">'+l100n.localize_string("m-miss-p4")+'</span>'+ _event.args.level;
+						    		}
 
-			    		// Add new nitification to the list of notifications
-			    		addNotification(
-								'missed',
-								(_event.args.amount/10**18).toFixed(6)+' '+App.crypto+' of profit lost',
-								'Activate '+App.mp[_event.args.bonusMp]+' to receive '+temp+'<br>network bonuses at a depth of '+_event.args.bonusType+'.',
-								_event,
-								_block
-								);
+						    		// Add new nitification to the list of notifications
+						    		addNotification(
+											'missed',
+											'<span class="m-miss-p5">'+l100n.localize_string("m-miss-p5")+'</span>'+(_event.args.amount).toFixed(App.cryptoDecimasNumber)+' '+App.crypto,
+											temp +'<span class="m-miss-p6">'+l100n.localize_string("m-miss-p6")+'</span>' +  _event.args.level + '<span class="m-miss-p7">'+l100n.localize_string("m-miss-p7")+'</span>',
+											_event
+											);
 
-			    	break;	
-			    } 
-		    	
+					    	break;
 
-					// Update a last seen block
-					updateLastSeenBlock(_event);
+					    	default:
 
-					// Increase an _events counter
-		    	missingBounusCounter++;
+					    			// Chek for missed income type and depth
+						    		if (_event.args.bonusMp == 2 && _event.args.bonusType < 4){
 
-			   	// Compare counted _events number with total past events number
-					if ((missingBounusCount > 0 && missingBounusCount == missingBounusCounter)) {
+						    			// It's VIP network income from a depth less than four
 
-						// Data of all past _events processed or new _event
+						    			// Add description to the missed income type for the massage info
+						    			temp = '<span class="m-miss-p8">'+l100n.localize_string("m-miss-p8")+'</span>';
+						    		} else {
+						    			temp = '<span class="m-miss-p10">'+l100n.localize_string("m-miss-p10")+'</span>';
+						    		}
 
-						// Update and render incomes 
-						App.renderIncomes();
+						    		// Add new nitification to the list of notifications
+						    		addNotification(
+											'missed',
+											'<span class="m-miss-p5">'+l100n.localize_string("m-miss-p5")+'</span>'+(_event.args.amount).toFixed(App.cryptoDecimasNumber)+' '+App.crypto,
+											'<span class="m-miss-p1">'+l100n.localize_string("m-miss-p1")+'</span>'+App.mp[_event.args.bonusMp]+'<span class="m-miss-p9">'+l100n.localize_string("m-miss-p9")+'</span>'+temp+_event.args.bonusType+'.',
+											_event
+											);
 
-						// Update and render notifications
-						App.renderNotifications();
-					}
+					    	break;	
+					    } 
+
+							// Update last seen block in the cookie
+							updateLastSeenBlock(_event.blockNumber);
+
+							// Check if it need for render
+							if (_needRender) {
+
+								// It's need to render
+
+								// Update and render incomes 
+								App.renderIncomes();
+
+								// Render notifications
+								App.renderNotifications();
+							}
+							resolve(true);
+
 				});
+   		}
 
-   	  }).watch(function(){missingBounusCount ++;});
+			function poolIsReopened (_event, _needRender){
 
-	  	// Chatch pool reopen
-	  	App.cryptoLife.poolIsReopened(
-	    	{partnerAddress: App.account},
-	    	{fromBlock: _startBlock,
-	    	toBlock:_endBlock}, 
-	    	function (error, _event){
+				return new Promise((resolve, reject)=>{
+				  		
+					  	// Add new nitification to the list of notifications
+					    addNotification(
+								'reopen'+_event.args.mp,
+								'<span class="m-re-p1">'+l100n.localize_string("m-re-p1")+'</span>',
+								'<span class="m-re-p2">'+l100n.localize_string("m-re-p2")+'</span>'+App.mp[_event.args.mp]+'<span class="m-re-p3">'+l100n.localize_string("m-re-p3")+'</span>'+_event.args.level+'<span class="m-re-p4">'+l100n.localize_string("m-re-p4")+'</span>',
+								_event
+							);
 
-			  web3.eth.getBlock(_event.blockNumber, false, function (_err, _block) {
+					    // Update last seen block in the cookie
+							updateLastSeenBlock(_event.blockNumber);
 
-			    addNotification(
-						'reopen'+_event.args.mp,
-						'Reopen of the pool',
-						'Your '+App.mp[_event.args.mp]+' Level '+_event.args.level+' pool was reopened.',
-						_event,
-						_block
-						);
+							// Check if it need for render
+							if (_needRender) {
 
-					// Update a last seen block
-					updateLastSeenBlock(_event);
+								// It's need to render
 
-					// Increase an _events counter
-			    poolReopenCounter++;
+								// Reload the data of the partner
+								App.loadPartnerData(true);
+							}
+							resolve (true);
 
-			    // Compare counted _events number with total past events number
-					if ((poolReopenCount > 0 && poolReopenCount == poolReopenCounter)) {
-														
-						App.loadPartnerData(true);
+				});
+			}
 
-					}	
+	  	async function registration (_event, _needRender){
 
-				});	    	
+	  		return new Promise(async function(resolve, reject){
 
-   	  }).watch(function(){poolReopenCount ++;});;
 
-	  	// Chatch user registration
-	  	App.cryptoLife.registration(
-	    	{partnerAddress: App.account},
-	    	{fromBlock: _startBlock,
-	    	toBlock:_endBlock}, 
-	    	function (error, _event){
 
-			  web3.eth.getBlock(_event.blockNumber, false, async function (_err, _block) {
-				
-					// Check a marketing plan   	
-			    switch (_event.args.mp.toString()) {
-			    	case '0' :
+							// Check a marketing plan   	
+					    switch (_event.args.mp.toString()) {
+					    	case '0' :
 
-			    		// Add new nitification to the list of notifications
-			    		addNotification(
-								'registration',
-								'Registration complete',
-								'Your Criptolife starts right now!<br>You have 3 '+App.mp[0] +' level 1 slots to start.',
-								_event,
-								_block
-								);		    		
-			    	break;
-			    	case '1' :
+						    		// Add new nitification to the list of notifications
+						    		addNotification(
+											'registration',
+											'<span class="m-reg-p1">'+l100n.localize_string("m-reg-p1")+'</span>',
+											'<span class="m-reg-p2">'+l100n.localize_string("m-reg-p2")+'</span>'+App.mp[0] +'<span class="m-reg-p3">'+l100n.localize_string("m-reg-p3")+'</span>',
+											_event
+											);		    		
+						    	break;
+						    	case '1' :
 
-			    		// Add new nitification to the list of notifications
-			    		addNotification(
-								'registration1',
-								App.mp[1] + ' activated',
-								'You have 3 '+App.mp[1] +' level 1 slots & network<br> bonuses unlocked to depth 3 now.',
-								_event,
-								_block
-								);
+						    		// Add new nitification to the list of notifications
+						    		addNotification(
+											'registration1',
+											App.mp[1] + '<span class="m-reg-p4">'+l100n.localize_string("m-reg-p4")+'</span>',
+											'<span class="m-reg-p5">'+l100n.localize_string("m-reg-p5")+'</span>'+App.mp[1] +'<span class="m-reg-p6">'+l100n.localize_string("m-reg-p6")+'</span>',
+											_event
+											);
 
-			    	break;
-			    	case '2' :
-		
-				    	// Add new nitification to the list of notifications
-			    		addNotification(
-								'registration2',
-								App.mp[2] + ' activated',
-								'You have 3 '+App.mp[2] +' level 1 slots & full network<br> bonuses unlocked now.',
-								_event,
-								_block
-								);
-			
-			    	break;
-			    }
+						    	break;
+						    	case '2' :
+					
+							    	// Add new nitification to the list of notifications
+						    		addNotification(
+											'registration2',
+											App.mp[2] + '<span class="m-reg-p4">'+l100n.localize_string("m-reg-p4")+'</span>',
+											'<span class="m-reg-p5">'+l100n.localize_string("m-reg-p5")+'</span>'+App.mp[2] +'<span class="m-reg-p7">'+l100n.localize_string("m-reg-p7")+'</span>',
+											_event
+											);
+					
+					    	break;
+					    }
 
-					// Update a last seen block
-					updateLastSeenBlock(_event);
+					    // Update last seen block in the cookie
+							updateLastSeenBlock(_event.blockNumber);
 
-					//Check for new event
-			    if (_event.blockNumber > App.currentBlock) {
+							// Check if it need for render
+							if (_needRender) {
 
-			    	// This is a new registration or marketing plan activation
+								// It's need to render
+						    	
+						    // Update Basic Income progress data
+								await App.loadBasicIncomeData();
 
-			    	// Update Top Leader bonus progress data
-						await App.loadTopLeaderData();
-
-						// Update data of the Parnter and render all
-						await App.loadPartnerData(true);
-			    } else {
-
-			    	App.renderNotifications();
-			    }
+								// Update data of the Parnter and render all
+								await App.loadPartnerData(true);
+							}
+							resolve(true);
 
 			  });
+ 	  	}
 
-   	  });
+	  	function newReferral (_event, _needRender){
 
-	  	// Catch new referral registration
-	  	App.cryptoLife.registration(
-	    	{sponsorAddress: App.account},
-	    	{fromBlock: _startBlock,
-	    	toBlock:_endBlock}, 
-	    	function (error, _event){
+	  		return new Promise (async function(resolve, reject){
 
-	    	if (_event.args.sponsorAddress != _event.args.partnerAddress) {
+		  		// Check for specific registration of the owner
+		    	if (_event.args.sponsorAddress != _event.args.partnerAddress) {
 
-				  web3.eth.getBlock(_event.blockNumber, false, async function (_err, _block) {
+		    		// It's normal registaration
 
-		    		// Check a marketing plan   
-				    switch (_event.args.mp.toString()){
-				    	case '0':
+				    		// Check a marketing plan   
+						    switch (_event.args.mp.toString()){
+						    	case '0':
+						    			// It's a basic rgistration of the referral
 
-				    		// Add new nitification to the list of notifications
-				    		addNotification(
-									'referral',
-									'New referral registered',
-									'You have new referral with ID '+ _event.args.partnerID+'.',
-									_event,
-									_block
-									);
+							    		// Add new nitification to the list of notifications
+							    		addNotification(
+												'referral',
+												'<span class="m-ref-p1">'+l100n.localize_string("m-ref-p1")+'</span>',
+												'<span class="m-ref-p2">'+l100n.localize_string("m-ref-p2")+'</span>'+ _event.args.partnerID+'.',
+												_event
+												);
 
-				    	break;
-				    	default:
+							    	break;
+							    	default:
+							    		// It's a higher marketing plan activation of the referral
 
-				    		// Add new nitification to the list of notifications
-				    		addNotification(
-									'referralUpMp'+_event.args.mp,
-									'Referral activated '+App.mp[_event.args.mp],
-									'Your referral with ID '+ _event.args.partnerID+' has '+App.mp[_event.args.mp]+' active now.',
-									_event,
-									_block
-									);
+							    		// Add new nitification to the list of notifications
+							    		addNotification(
+												'referralUpMp'+_event.args.mp,
+												'<span class="m-ref-p3">'+l100n.localize_string("m-ref-p3")+'</span>'+App.mp[_event.args.mp],
+												'<span class="m-ref-p4">'+l100n.localize_string("m-ref-p4")+'</span>'+ _event.args.partnerID+'<span class="m-ref-p5">'+l100n.localize_string("m-ref-p5")+'</span>'+App.mp[_event.args.mp]+'<span class="m-ref-p6">'+l100n.localize_string("m-ref-p6")+'</span>',
+												_event
+												);
 
-				    	break;		    		
-				    }
+						    	break;		    		
+						    }
 
-						// Update a last seen block
-						updateLastSeenBlock(_event);
+								// Update last seen block in the cookie
+								updateLastSeenBlock(_event.blockNumber);
 
-				    referralsCounter++;
-						if ((referralsCount > 0 && referralsCount == referralsCounter)) {
-															
-							await App.loadTopLeaderData();	
-							await App.loadPartnerData(true);
+								// Check if it need for render
+								if (_needRender) {
 
-						}				    	
-			    });
-				}	
-   	  }).watch(function(){referralsCount ++;});
+									// It's need to render
+						    	
+							    // Update Basic Income progress data
+									await App.loadBasicIncomeData();
 
-	  	// Chatch user level up
-	  	App.cryptoLife.levelUp(
-	    	{partnerAddress: App.account},
-	    	{fromBlock: _startBlock,
-	    	toBlock:_endBlock}, 
-	    	function(error, _event){
+									// Update data of the Parnter and render all
+									await App.loadPartnerData(true);
+								}
 
-				web3.eth.getBlock(_event.blockNumber, false, async function (_err, _block) {
-
-			    let temp =' ';
-			    if (_event.args.level > 2) {
-			   		temp = ' & less<br>';
-			    }
-				  
-				  // Add new nitification to the list of notifications
-				  addNotification(
-						'levelUp'+_event.args.mp,
-						'You\'ve reached '+App.mp[_event.args.mp]+' Level '+ _event.args.level,
-						'Reopens of '+App.mp[_event.args.mp]+' pools Level '+ (_event.args.level-1) +temp+'unlimited now.',
-						_event,
-						_block
-						);
-
-					// Update a last seen block
-					updateLastSeenBlock(_event);
-
-					levelUpCounter++;
-					if ((levelUpCount > 0 && levelUpCount == levelUpCounter)) {
-
-									
-						if (_event.blockNumber > App.currentBlock){
-								
-							await App.loadPartnerData(true);
-
-						} else {
-
-							App.renderNotifications();
-						}
-							
+								resolve(true);
 					}
+				});		
+   	  }
+
+			function levelUp (_event, _needRender){
+
+				return new Promise (async function(resolve, reject){
+
+							// Set a tmporary string
+							let temp =' ';
+
+							// Check for the level
+						  if (_event.args.level > 2) {
+
+						  	// The level higher than 2
+
+						  	// Add aditional string for the message info
+						   	temp = '<span class="m-level-p4">'+l100n.localize_string("m-level-p4")+'</span>';
+						  } else {
+
+						  	// Add second Level message info
+						   	temp = '<span class="m-level-p6">'+l100n.localize_string("m-level-p6")+'</span>';
+						  }
+							  
+							// Add new nitification to the list of notifications
+							addNotification(
+								'levelUp'+_event.args.mp,
+								App.mp[_event.args.mp]+'<span class="m-level-p2">'+l100n.localize_string("m-level-p2")+'</span>'+ _event.args.level,
+								'<span class="m-level-p3">'+l100n.localize_string("m-level-p3")+'</span>'+App.mp[_event.args.mp]+'<span class="m-level-p5">'+l100n.localize_string("m-level-p5")+'</span>'+ (_event.args.level-1) +temp,
+								_event
+							);
+
+							// Update last seen block in the cookie
+							updateLastSeenBlock(_event.blockNumber);
+
+							// Check if it need for render
+							if (_needRender) {
+
+								// It's need to render
+
+								// Update data of the Parnter and render all
+								await App.loadPartnerData(true);
+							}
+							resolve(true);
+
 				});
-	    }).watch(function(){levelUpCount ++;});
+	  	}
 
+	  	// Add a notification to the notification list
+	  	function addNotification(_type, _title, _info, _event){
 
+	  		// A notification
+				let mess = {};
 
-   	 console.log('--- Event listeners initiated ---');   	  
+				// Set a notification type
+				mess.type = _type;
+
+				// Set a notification title
+				mess.title = _title;
+
+				// Set a notifiation info
+				mess.info = _info;
+
+				// Set a notification date and time
+				mess.dateTime =  _event.timeStamp;
+
+				// Set a notification newness 
+				// It's new if a notification event block number higer then last seen block number 
+				mess.new = _event.blockNumber > App.lastSeenBlock || ((_event.blockNumber == App.registrationBlock) && (App.currentBlock == App.registrationBlock));
+
+				// Set a notification event log index to check for duplicate events
+				mess.logIndex = _event.logIndex;
+					
+				// Add new notiication to the list of notifications
+				App.notifications.push(mess);				
+	  	}
+
+	  	// Set a new value of the last seen block if it nessesary
+	  	function updateLastSeenBlock(_blockNumber){
+
+				// Largest seen block check
+				if (_blockNumber > App.lastSeenBlockNumber){
+
+					// _Event's block number is largest
+
+					App.socket.emit("setLastSeenBlock",_blockNumber);
+								
+					// Set new largest block number
+					App.lastSeenBlockNumber = _blockNumber;
+				}	  		
+	  	}	  	 		  	
+	},
+
+	recieveMassage: function(_message, _chat)	{
+	},
+
+	// Handle events of the Contract
+  listenForEvents: async function(){
+
+  	App.socket.on('event', async (_event)=>await App.eventHandling(_event, true));
+
+  	App.socket.on('message', (_message)=>App.recieveMassage(_message, _chat));
+
+		console.log('--- Event listeners initiated ---');  
+ 	  
   },
 
   // Load Registration prices from the Contract
@@ -1124,7 +1570,7 @@ App = {
 			  			let selector = ".mp"+i+"Price";
 
 			  			// Show the price
-			  			$(selector).each(function(){this.innerHTML =App.registrationPrices[i].toFixed(6);});  			
+			  			$(selector).each(function(){this.innerHTML =(App.registrationPrices[i]+App.rateCorrection).toFixed(App.cryptoDecimasNumber);});  			
 			  		}
 
 		  		});  				
@@ -1143,36 +1589,66 @@ App = {
 
   // Level up function
   levelUp: async function (mp, levelUp){
+
+  	$(".levelUpButton").attr('disabled', true);
+  	$(".levelUpFastButton").attr('disabled', true);
+  	$(".levelUpVipButton").attr('disabled', true);
+  	$(".levelUpButton i").hide();
+  	$(".levelUpFastButton i").hide();
+  	$(".levelUpVipButton i").hide();
+  	$(".levelUpText").addClass("waiting");
+  	$(".levelUpFastText").addClass("waiting");
+  	$(".levelUpVipText").addClass("waiting");
+		l100n.localize_all_pages();
+
  		if (levelUp) {
 
- 				Lobibox.notify('success', {
+ 			Lobibox.notify('success', {
+				pauseDelayOnHover: true,
+				icon: 'bx bx-chevrons-up',
+				continueDelayOnInactiveTab: false,
+				rounded: true,
+				position: 'top center',
+				msg: l100n.localize_string("a-levelup")+App.chainName
+			});
+
+			App.cryptoLife.partnerLevelUp(
+				mp, 
+				1, 
+				App.roundId.toString(), 
+				{from:App.account, value:App.nextLevelPrice[mp]*1+App.rateCorrection*10**18}
+			)
+			.then(()=>{window.location.reload})
+			.catch(function(error){
+
+				Lobibox.notify('warning', {
 					pauseDelayOnHover: true,
-					icon: 'bx bx-chevrons-up',
+					icon: 'bx bx-error',
 					continueDelayOnInactiveTab: false,
 					rounded: true,
 					position: 'top center',
-					msg: 'Sign the transaction at the Wallet!<br>When it is mined, your account will update automatically.'
+					msg: error.message
 				});
-
-			App.cryptoLife.partnerLevelUp(mp, 1, App.roundId.toString(), {from:App.account, value:App.nextLevelPrice[mp]}).catch(function(error){
-					Lobibox.notify('warning', {
-						pauseDelayOnHover: true,
-						icon: 'bx bx-error',
-						continueDelayOnInactiveTab: false,
-						rounded: true,
-						position: 'top center',
-						msg: error.message
-					});
-					console.warn(error);
- 				});
+				$(".levelUpButton").attr('disabled', false);
+				$(".levelUpFastButton").attr('disabled', false);
+				$(".levelUpVipButton").attr('disabled', false);
+  			$(".levelUpButton i").show();
+  			$(".levelUpFastButton i").show();
+  			$(".levelUpVipButton i").show();
+  			$(".levelUpText").removeClass("waiting");
+  			$(".levelUpFastText").removeClass("waiting");
+  			$(".levelUpVipText").removeClass("waiting");
+  			l100n.localize_all_pages();
+				console.warn(error);
+ 			});
 
  		} else {
 
  			let price = 0;
  			if(App.partnerId >0){
- 				price = App.nextLevelPrice[mp];
+ 				price = App.nextLevelPrice[mp]+App.rateCorrection*10**18;
  			} else {
- 				price = App.registrationPrices[mp]*10**18;
+ 				price = (App.registrationPrices[mp]+App.rateCorrection)*10**18;
  			}
 
  			if (App.balance/10**18 > price/10**18) {
@@ -1183,12 +1659,18 @@ App = {
 					continueDelayOnInactiveTab: false,
 					rounded: true,
 					position: 'top center',
-					msg: 'Sign the transaction at the Wallet!<br>When it is mined, you will be redirected to your personal account automatically.'
+					msg: l100n.localize_string("a-reg")+App.chainName
 				});
 
-	 			App.cryptoLife.registerNewPartner( App.sponsorId, mp, App.roundId.toString(), {from:App.account, value:price}).then(function(){
-				
-	 			}).catch(function(error){
+	 			App.cryptoLife.registerNewPartner( 
+	 				App.sponsorId, 
+	 				mp, 
+	 				App.roundId.toString(), 
+	 				{from:App.account, value:price}
+	 			)
+	 			.then(()=>{window.location.reload})
+	 			.catch(function(error){
+
 					Lobibox.notify('warning', {
 						pauseDelayOnHover: true,
 						icon: 'bx bx-error',
@@ -1197,6 +1679,18 @@ App = {
 						position: 'top center',
 						msg: error.message
 					});
+
+				$(".levelUpButton").attr('disabled', false);
+				$(".levelUpFastButton").attr('disabled', false);
+				$(".levelUpVipButton").attr('disabled', false);
+  			$(".levelUpText").removeClass("waiting");
+  			$(".levelUpFastText").removeClass("waiting");
+  			$(".levelUpVipText").removeClass("waiting");
+  			$(".levelUpButton i").show();
+  			$(".levelUpFastButton i").show();
+  			$(".levelUpVipButton i").show();
+  			l100n.localize_all_pages();
+					console.warn(error);
 	 			});
 	 		} else {
 
@@ -1209,9 +1703,94 @@ App = {
 					msg: 'Not enough '+ App.crypto +' at the balance to pay for Registration.<br>Please deposit some '+ App.crypto+' and try agan.'
 				});
 
+				$(".levelUpButton").attr('disabled', false);
+				$(".levelUpFastButton").attr('disabled', false);
+				$(".levelUpVipButton").attr('disabled', false);
+  			$(".levelUpText").removeClass("waiting");
+  			$(".levelUpFastText").removeClass("waiting");
+  			$(".levelUpVipText").removeClass("waiting");
+  			$(".levelUpButton i").show();
+  			$(".levelUpFastButton i").show();
+  			$(".levelUpVipButton i").show();
+  			l100n.localize_all_pages();
 	 		}
  		}
  	},
+
+	changeLang: function(_locale){
+
+		l100n.locale = _locale;
+		l100n.localize_all_pages();
+
+		//Cookie expiration date
+		let date = new Date;
+
+		//Add one year
+		date.setDate(date.getDate() + 360); 
+
+		//Convert to UTC format
+		date = date.toUTCString();
+
+		// Save the language settings to cookies   			
+		document.cookie = 'cryptolife_lang='+_locale+'; path=/; expires=' + date;
+
+		$(".dropdown-language .lang i").attr('class', App.langs[_locale].flag);
+		$(".dropdown-language .lang span")[0].innerHTML= App.langs[_locale].name;
+
+		if(App.partnerId>0){
+
+			// Render Basic Income progress
+			App.renderBasicIncomeProress();
+
+		 	App.renderRefferalLinks();
+			$(".levelCard").each(function(){
+				let mp = ['#basic', '#fast', 'vip'];
+				for (let i=0; i<mp.length; i++){
+
+					let slotsTooltip = $(this).find(mp[i] +" #slotsTooltip");
+					let reopensTooltip = $(this).find(mp[i] +" #reopensTooltip");
+					let priceTooltip = $(this).find(mp[i] + " #priceTooltip");
+				  let warningSpanD =	$(this).find(mp[i] +" #name.text-danger");
+				  let warningSpanW =	$(this).find(mp[i] +" #name.text-warning");
+					
+					slotsTooltip.attr('data-original-title', l100n.localize_string("a-slotsTooltip-p1")+App.mp[i]+l100n.localize_string("a-slotsTooltip-p2"));
+					priceTooltip.attr('data-original-title', l100n.localize_string("a-priceTooltip-p1")+App.mp[i]+l100n.localize_string("a-priceTooltip-p2"));
+					reopensTooltip.attr('data-original-title', l100n.localize_string("a-reopensTooltip-p1")+App.mp[i]+l100n.localize_string("a-reopensTooltip-p2"));
+					warningSpanD.attr('data-original-title', l100n.localize_string("a-levelWarning-d-p1")+App.mp[i]+l100n.localize_string("a-levelWarning-d-p2"));
+					warningSpanW.attr('data-original-title',l100n.localize_string("a-levelWarning-w-p1")+App.mp[i]+l100n.localize_string("a-levelWarning-w-p2"));
+				}
+				let buttonFastPriceTooltip = $(this).find("#buttonFast #priceTooltip");
+				let buttonVipPriceTooltip = $(this).find("#buttonVip #priceTooltip");
+
+				buttonFastPriceTooltip.attr('data-original-title', l100n.localize_string("a-levelup-p1")+App.mp[1]+l100n.localize_string("a-levelup-p2"));
+				buttonVipPriceTooltip.attr('data-original-title', l100n.localize_string("a-levelup-p1")+App.mp[2]+l100n.localize_string("a-levelup-p2"));
+
+			});
+
+	  	let nextLevelCard = $("#nextLevelCard");
+					
+			let buttonPriceTooltip = nextLevelCard.find("#basic #priceTooltip");
+			let buttonFastPriceTooltip = nextLevelCard.find("#buttonFast #priceTooltip");
+			let buttonVipPriceTooltip = nextLevelCard.find("#buttonVip #priceTooltip");
+
+			buttonPriceTooltip.attr('data-original-title', l100n.localize_string("a-levelup-p1")+App.mp[0]+l100n.localize_string("a-levelup-p2"));
+			buttonFastPriceTooltip.attr('data-original-title', l100n.localize_string("a-levelup-p1")+App.mp[1]+l100n.localize_string("a-levelup-p2"));
+			buttonVipPriceTooltip.attr('data-original-title', l100n.localize_string("a-levelup-p1")+App.mp[2]+l100n.localize_string("a-levelup-p2"));		    	
+		}
+	},
+
+
+	renderLangs: function(){
+		$(".dropdown-language .dropdown-item").each(function(){
+			
+			$(this).off('click').on('click',()=>{
+				let lng = $(this).attr('lang');
+				App.changeLang(lng)
+
+			});
+		});
+
+	}, 	
 
  	// Current currency change function
   changheCurrentCurrency: function (currency){
@@ -1235,55 +1814,64 @@ App = {
   },
 
   // Render an Exchanre rates list in the header section
-  renderExchangeRates: function (){
+  renderExchangeRates:  async function (){
 
-  	var requestURL = 'https://min-api.cryptocompare.com/data/price?fsym='+App.crypto+'&tsyms=USD,ILS,JPY,EUR,WAN,RUB,GBP ';
-		var request = new XMLHttpRequest();
-		request.open('GET', requestURL);
-		request.responseType = 'json';
-		try{
+  	return new Promise((resolve, reject)=>{
+
+	   	var requestURL = 'https://min-api.cryptocompare.com/data/price?fsym='+App.crypto+'&tsyms=USD,ILS,JPY,EUR,WAN,RUB,GBP ';
+
+			var request = new XMLHttpRequest();
+
+			request.open('GET', requestURL);
+
+			request.responseType = 'json';
+
+			request.onload = function() {
+				App.exchange = request.response;
+
+		  	$("#USD span")[0].innerHTML = App.exchange.USD.toFixed(2).replace(/(?!^)(?=(?:\d{3})+(?:\.|$))/gm, ' ');
+				$("#EUR span")[0].innerHTML = App.exchange.EUR.toFixed(2).replace(/(?!^)(?=(?:\d{3})+(?:\.|$))/gm, ' ');		
+				$("#ILS span")[0].innerHTML = App.exchange.ILS.toFixed(2).replace(/(?!^)(?=(?:\d{3})+(?:\.|$))/gm, ' ');
+				$("#GBP span")[0].innerHTML = App.exchange.GBP.toFixed(2).replace(/(?!^)(?=(?:\d{3})+(?:\.|$))/gm, ' ');
+				$("#JPY span")[0].innerHTML = App.exchange.JPY.toFixed(2).replace(/(?!^)(?=(?:\d{3})+(?:\.|$))/gm, ' ');
+				$("#WAN span")[0].innerHTML = App.exchange.WAN.toFixed(2).replace(/(?!^)(?=(?:\d{3})+(?:\.|$))/gm, ' ');
+				$("#RUB span")[0].innerHTML = App.exchange.RUB.toFixed(2).replace(/(?!^)(?=(?:\d{3})+(?:\.|$))/gm, ' ');
+				App.changheCurrentCurrency(App.currentCurrency);
+				resolve (true);
+			}
+
+			request.onError = function() {
+				Lobibox.notify('warning', {
+					pauseDelayOnHover: true,
+					icon: 'bx bx-error',
+					continueDelayOnInactiveTab: false,
+					rounded: true,
+					position: 'top center',
+					msg: request.statusText
+				});
+
+				console.log(request.statusText);
+				reject(request.statusText);
+			}
 
 			request.send();
-
-		} catch(error){
-			Lobibox.notify('warning', {
-				pauseDelayOnHover: true,
-				icon: 'bx bx-error',
-				continueDelayOnInactiveTab: false,
-				rounded: true,
-				position: 'top center',
-				msg: error.message
-			});
-			console.log(error);
-		}
-		request.onload = function() {
-			App.exchange = request.response;
-
-	  	$("#USD span")[0].innerHTML = App.exchange.USD.toFixed(2).replace(/(?!^)(?=(?:\d{3})+(?:\.|$))/gm, ' ');
-			$("#EUR span")[0].innerHTML = App.exchange.EUR.toFixed(2).replace(/(?!^)(?=(?:\d{3})+(?:\.|$))/gm, ' ');		
-			$("#ILS span")[0].innerHTML = App.exchange.ILS.toFixed(2).replace(/(?!^)(?=(?:\d{3})+(?:\.|$))/gm, ' ');
-			$("#GBP span")[0].innerHTML = App.exchange.GBP.toFixed(2).replace(/(?!^)(?=(?:\d{3})+(?:\.|$))/gm, ' ');
-			$("#JPY span")[0].innerHTML = App.exchange.JPY.toFixed(2).replace(/(?!^)(?=(?:\d{3})+(?:\.|$))/gm, ' ');
-			$("#WAN span")[0].innerHTML = App.exchange.WAN.toFixed(2).replace(/(?!^)(?=(?:\d{3})+(?:\.|$))/gm, ' ');
-			$("#RUB span")[0].innerHTML = App.exchange.RUB.toFixed(2).replace(/(?!^)(?=(?:\d{3})+(?:\.|$))/gm, ' ');
-			App.changheCurrentCurrency(App.currentCurrency);
-		}    
+  	});       
   },
 
-  initExchangeRates: function(){
+  initExchangeRates: async function(){
 
-		$('#USD').click(toUSD);
-	  $('#EUR').click(toEUR);    
-	  $('#ILS').click(toILS);
-	  $('#GBP').click(toGBP);
-	  $('#JPY').click(toJPY);
-	  $('#WAN').click(toWAN);
-	  $('#RUB').click(toRUB);
+		$('#USD').off('click').on('click', ()=>switchCurrency('USD'));
+	  $('#EUR').off('click').on('click', ()=>switchCurrency('EUR'));    
+	  $('#ILS').off('click').on('click', ()=>switchCurrency('ILS'));
+	  $('#GBP').off('click').on('click', ()=>switchCurrency('GBP'));
+	  $('#JPY').off('click').on('click', ()=>switchCurrency('JPY'));
+	  $('#WAN').off('click').on('click', ()=>switchCurrency('WAN'));
+	  $('#RUB').off('click').on('click', ()=>switchCurrency('RUB'));
  		
-    function toUSD() {
+    function switchCurrency(_currency) {
 
     	// Change current currency to USD
-      App.changheCurrentCurrency('USD');
+      App.changheCurrentCurrency(_currency);
 
 			// Cookie expiration date
 			let date = new Date;
@@ -1293,107 +1881,10 @@ App = {
 
 			// Convert to UTC format
 			date = date.toUTCString(); 
-			document.cookie = App.account +'_currentCurrency=USD; path=/; expires=' + date;
+			document.cookie = App.account +'_currentCurrency='+_currency+'; path=/; expires=' + date;
     }
 
-    function toEUR() {
-
-    	// Change current currency to EUR
-      App.changheCurrentCurrency('EUR');
-
-			// Cookie expiration date
-			let date = new Date;
-
-			// Add one year
-			date.setDate(date.getDate() + 360); 
-
-			// Convert to UTC format
-			date = date.toUTCString(); 
-			document.cookie = App.account +'_currentCurrency=EUR; path=/; expires=' + date;
-    }
-
-    function toILS() {
-
-    	// Change current currency to ILS
-      App.changheCurrentCurrency('ILS');
- 
- 			// Cookie expiration date
-			let date = new Date;
-
-			// Add one year
-			date.setDate(date.getDate() + 360); 
-
-			// Convert to UTC format
-			date = date.toUTCString(); 
-			document.cookie = App.account +'_currentCurrency=ILS; path=/; expires=' + date;
-
-   }
-
-    function toGBP() {
-
-    	// Change current currency to GBP
-      App.changheCurrentCurrency('GBP');
-
-			// Cookie expiration date
-			let date = new Date;
-
-			// Add one year
-			date.setDate(date.getDate() + 360); 
-
-			// Convert to UTC format
-			date = date.toUTCString(); 
-			document.cookie = App.account +'_currentCurrency=GBP; path=/; expires=' + date;
-    }
-
-    function toJPY() {
-    	
-    	// Change current currency to JPY
-      App.changheCurrentCurrency('JPY');
-
-			// Cookie expiration date
-			let date = new Date;
-
-			// Add one year
-			date.setDate(date.getDate() + 360); 
-
-			// Convert to UTC format
-			date = date.toUTCString(); 
-			document.cookie = App.account +'_currentCurrency=JPY; path=/; expires=' + date;
-    }
-	
-		function toWAN() {
-    	
-    	// Change current currency to WAN
-      App.changheCurrentCurrency('WAN');
-
-			// Cookie expiration date
-			let date = new Date;
-
-			// Add one year
-			date.setDate(date.getDate() + 360); 
-
-			// Convert to UTC format
-			date = date.toUTCString(); 
-			document.cookie = App.account +'_currentCurrency=WAN; path=/; expires=' + date;
-    }
-	
-		function toRUB() {
-    	
-    	// Change current currency to RUB
-      App.changheCurrentCurrency('RUB');
-
-			// Cookie expiration date
-			let date = new Date;
-
-			// Add one year
-			date.setDate(date.getDate() + 360); 
-
-			// Convert to UTC format
-			date = date.toUTCString(); 
-			document.cookie = App.account +'_currentCurrency=RUB; path=/; expires=' + date;
-    }
-
-    App.renderExchangeRates();
+    await App.renderExchangeRates();
   },
 
   // Render a Notifications list in the header section
@@ -1484,7 +1975,7 @@ App = {
 
 	  			break;
 	  			case 'leaderBonus': 
-	  				mess.find("#messIcon i").attr("class",'bx bx-trophy');
+	  				mess.find("#messIcon i").attr("class",'lni lni-investment');
 	  				mess.find("#messIcon").attr("class",'notify bg-warning text-white');
 
 	  			break;
@@ -1564,7 +2055,7 @@ App = {
 	  				$(".levelUpFastButton").each(function(){
 	  					this.setAttribute('data-target','#levelUpFastModal'); 
 	  					$(this).find('i').removeClass('bx-check-double').addClass('bx-chevrons-up');
-	  					$(this).find("span")[0].innerHTML = "Level Up";
+	  					$(this).find("span").removeClass('activation')[0].innerHTML = l100n.localize_string("levelUpFastText");
 	  				});
 	  				$(".modalLevelFast").each(function(){
 	  					this.innerHTML = App.level[1].length+1;
@@ -1574,7 +2065,7 @@ App = {
 	  				$(".levelUpVipButton").each(function(){
 	  					this.setAttribute('data-target','#levelUpVipModal'); 
 	  					$(this).find('i').removeClass('bx-check-double').addClass('bx-chevrons-up');
-	  					$(this).find("span")[0].innerHTML = "Level Up";
+	  					$(this).find("span").removeClass('activation')[0].innerHTML = l100n.localize_string("levelUpVipText");
 	  				});
 	  				$(".modalLevelVip").each(function(){this.innerHTML = App.level[2].length+1});
 	  				$("#modalCurrentLevelVip")[0].innerHTML = App.level[2].length;
@@ -1585,11 +2076,23 @@ App = {
 	   					$(this).find('i').removeClass('bx-chevrons-up').addClass('bx-check-double');
 	   					
 	   				});
-	   				$(".levelUpVipText").each(function(){this.innerHTML="Activate";});
+	   				$(".levelUpVipText").each(function(){
+
+	   					$(this).addClass('activation');
+	   					this.innerHTML=l100n.localize_string("levelUpVipTextA");
+	   				});
 	   			}
 	  		} else {
-	  			$(".levelUpFastText").each(function(){this.innerHTML="Activate";});
-	  			$(".levelUpVipText").each(function(){this.innerHTML="Activate";});
+	  			$(".levelUpFastText").each(function(){
+
+	   					$(this).addClass('activation');
+	   					this.innerHTML=l100n.localize_string("levelUpFastTextA");
+	  			});
+	  			$(".levelUpVipText").each(function(){
+
+	   					$(this).addClass('activation');
+	   					this.innerHTML=l100n.localize_string("levelUpVipTextA");
+	  			});
 	  			$(".levelUpFastButton").each(function(){
 	  				this.setAttribute('data-target','#registrationFastModal');
 	  				$(this).find('i').removeClass('bx-chevrons-up').addClass('bx-check-double');
@@ -1614,116 +2117,91 @@ App = {
 	  		});
 	  		if (temp){
 	  			$(this).find(".registrationText").each(function(){
-	  				this.innerHTML = "Activation";
+	  				$(this).addClass('activation');
+	  				this.innerHTML = l100n.localize_string('a-modal-reg-b2');
 	  			})
 	  		}
 
   		});
   },
 
-  // Show a New Partner registration section of the page
-  showRegistration: function(show) {
-
-  	if (show) {
-
-  		for (i = 0; i<App.registrationPrices.length; i++){
-
-  			let selector = ".mp"+i+"Price";
-  			$(selector).each(function(){this.innerHTML = App.registrationPrices[i].toFixed(6);});
-  			
-  		}
-
-  		$("#regTopLederBonus")[0].innerHTML = App.topBonusSumm/10**18;
-
-  		$("#registration").show();
-  		$("#userIdContainer").hide();
-  		$("#accountData").hide();
-  		$("#messageContainer").hide();
-			$(".nav-container").hide();
-  	} else {
-
-  		$("#registration").hide();
-  		$("#userIdContainer").show();
-  		$("#accountData").show();
- 			$("#messageContainer").show();
- 			$(".nav-container").show();
-  	}
-  },
- 
   // Render an Incomes block of the Account section 
   renderIncomes: function(){
 
-		$("#directIncome")[0].innerHTML = App.directIncome.toFixed(6);
+		$("#directIncome")[0].innerHTML = App.directIncome.toFixed(App.cryptoDecimasNumber);
 	  if (App.directIncomePlus >0){
 	    $("#directIncomePlus").show();
-	    $("#directIncomePlus")[0].innerHTML ='+' + App.directIncomePlus.toFixed(6);
+	    $("#directIncomePlus")[0].innerHTML ='+' + App.directIncomePlus.toFixed(App.cryptoDecimasNumber);
 	  } else {
 	    $("#directIncomePlus").hide();
 	  }
 
-	  $("#networkIncome")[0].innerHTML = App.networkIncome.toFixed(6);
+	  $("#networkIncome")[0].innerHTML = App.networkIncome.toFixed(App.cryptoDecimasNumber);
 	  if (App.networkIncomePlus >0){
 	    $("#networkIncomePlus").show();
-	    $("#networkIncomePlus")[0].innerHTML ='+' + App.networkIncomePlus.toFixed(6);
+	    $("#networkIncomePlus")[0].innerHTML ='+' + App.networkIncomePlus.toFixed(App.cryptoDecimasNumber);
 	  } else {
 	    $("#networkIncomePlus").hide();
 	  }
 
-	  $("#incomeCrypto")[0].innerHTML = (App.directIncome + App.networkIncome).toFixed(6);
+	  $("#incomeCrypto")[0].innerHTML = (App.directIncome + App.networkIncome).toFixed(App.cryptoDecimasNumber);
 	  if (App.networkIncomePlus + App.directIncomePlus >0){
 	    $("#incomeCryptoPlus").show();
 	    $("#incomeCryptoPlus")[0].innerHTML ='+';
-	    $("#incomeCryptoPlus")[0].innerHTML += (App.networkIncomePlus + App.directIncomePlus).toFixed(6);
+	    $("#incomeCryptoPlus")[0].innerHTML += (App.networkIncomePlus + App.directIncomePlus).toFixed(App.cryptoDecimasNumber);
 	  } else {
 	    $("#incomeCryptoPlus").hide();
 	  }
 
-	  $("#lostProfit")[0].innerHTML = App.lostProfit.toFixed(6);
+	  $("#lostProfit")[0].innerHTML = App.lostProfit.toFixed(App.cryptoDecimasNumber);
 	  if (App.lostProfitPlus >0){
 	    $("#lostProfitPlus").show();
-	    $("#lostProfitPlus")[0].innerHTML ='+' + App.lostProfitPlus.toFixed(6);
+	    $("#lostProfitPlus")[0].innerHTML ='+' + App.lostProfitPlus.toFixed(App.cryptoDecimasNumber);
 	  } else {
 	    $("#lostProfitPlus").hide();
 	  }  	
   },
 
-  // Render a Top Leader bonus progress block of the Account section
-  renderTopLeaderBonusProress: function(){
+  // Render a Basic Income progress block of the Account section
+  renderBasicIncomeProress: function(){
     
     // Top Leader card data
 
     let topMess ='';
+
+    /*
     if (App.topLeader == App.account) {
 
-	   	topMess = 'You are Top Leader now!';
+	   	topMess = l100n.localize_string("a-top-x1");
 	  } else {
 
-		  if (App.level.length < 3 || App.level[2].length < App.topMinimumLevel) {
+		  if (App.level.length < 3 || App.level[2].length < App.basicIncomeMinimumLevel) {
 
-		   	topMess = 	'Up '+App.mp[2]+' to the Level '+ App.topMinimumLevel;
+		   	topMess = 	l100n.localize_string("a-top-x2")+App.mp[2]+l100n.localize_string("a-top-x3")+ App.basicIncomeMinimumLevel;
 		  }
-		  if (App.topDelta <= App.topResult) {
+
+		  if (App.topDelta <= App.basicIncomeResult) {
 
 			 	if (topMess.length > 0) { 
 
-			 		topMess += ', invite ';
+			 		topMess += l100n.localize_string("a-top-x4");
 			 	} else { 
 
-	    		topMess = 'Invite ';
+	    		topMess = l100n.localize_string("a-top-x5");
 	    	}
 
-	    	let delta = App.topResult - App.topDelta;
+	    	let delta = App.basicIncomeResult - App.topDelta;
 	    	delta ++;
 	    	topMess+= delta + ' <i class="bx bx-group"></i>';
 	    }
 	 
 	    if (topMess.length>0) {
 
-	    	topMess += ' to become a Top Leader';
+	    	topMess += l100n.localize_string("a-top-x6");
 
 	    } else {
 
-	    	topMess = 'Top Leader Data is loading...';
+	    	topMess = l100n.localize_string("a-top-x7");
 	    }
 
 	    if (topMess.length > 45){
@@ -1731,6 +2209,30 @@ App = {
 	    	$("#topMess").removeClass("mb-3").addClass("m-0");
 	   	 	$(".list-group-flush").each(function(){$(this).removeClass("mb-0").addClass("mb-1")});
 	  	}
+	 	}
+
+	 	*/
+
+	 	if (App.level.length < 3 || App.level[2].length < App.basicIncomeMinimumLevel) {
+
+	 		topMess = 	l100n.localize_string("a-top-x2")+App.mp[2]+l100n.localize_string("a-top-x3")+ App.basicIncomeMinimumLevel;
+
+	    if (topMess.length>0) {
+
+	    	topMess += l100n.localize_string("a-top-x6");
+
+	    } else {
+
+	    	topMess = l100n.localize_string("a-top-x7");
+	    }
+	    if (topMess.length > 45){
+
+	    	$("#topMess").removeClass("mb-3").addClass("m-0");
+	   	 	$(".list-group-flush").each(function(){$(this).removeClass("mb-0").addClass("mb-1")});
+	  	}
+	 	} else {
+
+	 		topMess = l100n.localize_string("a-top-x1");
 	 	}
 
  		$("#topMess")[0].innerHTML = topMess;
@@ -1742,12 +2244,14 @@ App = {
   	$("#userIdContainer .dropdown-menu a").each(function(_number){
 
   			$(this).off('click').on('click', function(){reffealAction(_number)});
+  			$(this).find("span")[0].innerHTML = l100n.localize_string("refLink"+_number);
   	});
   	
   	function reffealAction(_number){
   		switch(_number){
 
   			case 0: 
+
   				navigator.clipboard.writeText(window.location.host+'?ref='+App.partnerId);
 		   		Lobibox.notify('success', {
 						pauseDelayOnHover: false,
@@ -1755,22 +2259,36 @@ App = {
 						continueDelayOnInactiveTab: false,
 						rounded: true,
 						position: 'top center',
-						msg: 'Refferal link is copied to the clipboard.'
+						msg: l100n.localize_string("refLink0-n")
 					});						
   			break;
   			case 1: 
-  				navigator.clipboard.writeText(window.location.host+'/account.html?ref='+App.partnerId);
+  				navigator.clipboard.writeText(window.location.host+'/marketing.html?ref='+App.partnerId);
 		   		Lobibox.notify('success', {
 						pauseDelayOnHover: false,
 						icon: 'bx bx-copy',
 						continueDelayOnInactiveTab: false,
 						rounded: true,
 						position: 'top center',
-						msg: 'Direct registration link is copied to the clipboard.'
+						msg: l100n.localize_string("refLink1-n")
 					});						
   			break;
   			case 5:
   				window.open('https://www.facebook.com/sharer.php?u='+window.location.host+'?ref='+App.partnerId,'sharer','status=0,toolbar=0,width=650,height=500');
+  			break;
+  		}
+  	}
+
+  	$("#walletContainer .dropdown-item").each(function(_number){
+
+  		$(this).off('click').on('click', function(){binanceAction(_number)});
+  	});
+
+  	function binanceAction(_number){
+  		switch (_number){
+  			case 0: window.open('https://www.binance.com/'+l100n.locale+'/buy-sell-crypto?fiat='+App.currentCurrency+'&crypto='+App.crypto+'&ref=HDJONDBN', '_blank').focus();
+  			break;
+  			case 1: window.open('https://www.binance.com/'+l100n.locale+'/buy-sell-crypto?fiat='+App.currentCurrency+'&crypto='+App.crypto+'&ref=HDJONDBN&type=SELL', '_blank').focus();
   			break;
   		}
   	}
@@ -1781,23 +2299,28 @@ App = {
 
   	$(".levelCard").each(function(i){
 
-	    $(this).find("#levelPrice")[0].innerHTML = (App.registrationPrices[0]*2**i).toFixed(6);
+	    $(this).find("#levelPrice")[0].innerHTML = (App.registrationPrices[0]*2**i+App.rateCorrection).toFixed(App.cryptoDecimasNumber);
 	    let fastRegPrice = App.registrationPrices[1] - App.registrationPrices[0];
 	    let vipRegPrice = App.registrationPrices[2] - App.registrationPrices[1];	    	
-	    $(this).find(".levelFastPrice").each(function(){this.innerHTML = (fastRegPrice*2**i).toFixed(6);});
-			$(this).find(".levelVipPrice").each(function(){this.innerHTML = (vipRegPrice*2**i).toFixed(6);});  	
+	    $(this).find(".levelFastPrice").each(function(){this.innerHTML = (fastRegPrice*2**i+App.rateCorrection).toFixed(App.cryptoDecimasNumber);});
+			$(this).find(".levelVipPrice").each(function(){this.innerHTML = (vipRegPrice*2**i+App.rateCorrection).toFixed(App.cryptoDecimasNumber);});  	
   	});
-	  $(".nextLevelPrice").each(function(){this.innerHTML = (App.nextLevelPrice[0]/10**18).toFixed(6)});
-	  $(".nextLevelPriceFast").each(function(){this.innerHTML = (App.nextLevelPrice[1]/10**18).toFixed(6)});
-	  $(".nextLevelPriceVip").each(function(){this.innerHTML = (App.nextLevelPrice[2]/10**18).toFixed(6)});
+	  $(".nextLevelPrice").each(function(){this.innerHTML = (App.nextLevelPrice[0]/10**18+App.rateCorrection).toFixed(App.cryptoDecimasNumber)});
+	  $(".nextLevelPriceFast").each(function(){this.innerHTML = (App.nextLevelPrice[1]/10**18+App.rateCorrection).toFixed(App.cryptoDecimasNumber)});
+	  $(".nextLevelPriceVip").each(function(){this.innerHTML = (App.nextLevelPrice[2]/10**18+App.rateCorrection).toFixed(App.cryptoDecimasNumber)});
+  	for (i = 0; i<App.registrationPrices.length; i++){
 
+  		let selector = ".mp"+i+"Price";
+  		$(selector).each(function(){this.innerHTML = (App.nextLevelPrice[i]/10**18+App.rateCorrection).toFixed(App.cryptoDecimasNumber);});
+  			
+  	}
   },
 
   // Render an Account section of the page
   render: function() {
 
-  	$('#balance')[0].innerHTML = (App.balance/10**18).toFixed(6);
-  	$('#cryptoLogo').attr("src","img/"+App.crypto+".svg");
+  	$('#balance')[0].innerHTML = (App.balance/10**18).toFixed(App.cryptoDecimasNumber);
+  	$('#cryptoLogo').attr("src","img/"+App.crypto+".png");
   	App.renderExchangeRates();
 
   	if (App.account.length > 12) {
@@ -1813,36 +2336,40 @@ App = {
     	App.showError(false);
 	  	if ( App.partnerId >0) {
 		
-				App.showError(false);
-		  	var nextLevelCard = $("#nextLevelCard").detach();  
-			  var pools = $("#pools");
+		  	let nextLevelCard = App.nextLevelCard.clone(true); 
+			  let pools = $("#pools");
 
 			  pools.empty();
-			  var row = $('<div class="row"></div>');
+			  let row = $('<div class="row"></div>');
 
-		    $("#topSumm")[0].innerHTML = App.topBonusSumm/10**18;
-		    $("#topResult")[0].innerHTML = App.topResult;
-		    $("#topLeaderBar").css("width", App.topBalance/App.topBonusSumm*100+"%");
-
+		    $("#topSumm")[0].innerHTML = App.basicIncomeSumm/10**18;
+		    
+		    $("#topLeaderBar").css("width", App.basicIncomeBalance/App.basicIncomeResult*100+"%");
+		    console.log(App.basicIncomeBalance/10**18, App.basicIncomeResult/10**18);
 	  		$("#userId")[0].innerHTML = App.partnerId;
 
-	  		App.showRegistration(false);
 	  		App.renderNotifications();
 	  		App.renderIncomes();
-	  		App.renderTopLeaderBonusProress();
+	  		App.renderBasicIncomeProress();
 	  		App.renderRefferalLinks();
 
 	    	// Set a text on the Basic level up button
-	    	$(".levelUpText").each(function(){ this.innerHTML = 'Level Up';});
+	    	$(".levelUpText").each(function(){ this.innerHTML = l100n.localize_string("levelUpText");});
 
 	    	// Set a current level of the Basic marketing plan
 	    	$("#level")[0].innerHTML = App.level[0].length;
+
+	    	if (App.level[0].length >= App.maxLevel){
+	    		$("#lightMaxLevelText").show();
+	    		$("#lightNextLevelPrice").hide();
+	    		$("#lightLeveUpButton").hide();
+	    	}
 
 	     	// Check level of the Fast marketing plan
 	    	if(App.level.length>1){
 
 	    		// Set a text on the Fast level up button
-	    		$(".levelUpFastText").each(function(){ this.innerHTML = 'Level Up';});
+	    		$(".levelUpFastText").each(function(){ this.innerHTML = l100n.localize_string("levelUpFastText");});
 
 	    		// Show a current level of the Fast marketing plan
 	    		$("#levelFast").show();
@@ -1850,19 +2377,32 @@ App = {
 	    		// Set a current level of the Fast marketing plan
 	    		$("#levelFast span")[0].innerHTML = App.level[1].length;
 
+	    		if (App.level[1].length >= App.maxLevel){
+		    		$("#fastMaxLevelText").show();
+		    		$("#fastNextLevelPrice").hide();
+		    		$("#fastLeveUpButton").hide();
+		    	}
+
 	    	}		
 
 	    	// Check level of the VIP marketing plan
 	    	if(App.level.length>2){
 
 	    		// Set a text on the VIP level up button
-	    		$(".levelUpVipText").each(function(){ this.innerHTML = 'Level Up';});
+	    		$(".levelUpVipText").each(function(){ this.innerHTML = l100n.localize_string("levelUpVipText");});
 
 	    		// Show a current level of the VIP marketing plan
 	    		$("#levelVip").show();	
 
 	    		// Set a current level of the VIP marketing plan
 	    		$("#levelVip span")[0].innerHTML = App.level[2].length;
+
+	    		if (App.level[2].length >= App.maxLevel){
+		    		$("#vipMaxLevelText").show();
+		    		$("#vipNextLevelPrice").hide();
+		    		$("#vipLeveUpButton").hide();
+		    		$("#vipMaxLevelText").parent().parent().parent().addClass("pb-2");
+		    	}
 	    	}	
 
 
@@ -1896,17 +2436,17 @@ App = {
 				    let slotsTooltip = levelCard.find(selector +" #slotsTooltip");
 				    let reopensTooltip = levelCard.find(selector +" #reopensTooltip");
 				    let priceTooltip = levelCard.find(selector + " #priceTooltip");
-				    slotsTooltip.attr('data-original-title', "Total number of "+App.mp[mp]+" Slots taken by partners at the Level.");
+				    slotsTooltip.attr('data-original-title', l100n.localize_string("a-slotsTooltip-p1")+App.mp[mp]+l100n.localize_string("a-slotsTooltip-p2"));
 				    slotsTooltip.css('cursor','pointer');
-				    slotsTooltip.attr('data-placement',"bottom").tooltip();
+				    slotsTooltip.attr('data-placement',"bottom");//.tooltip('enable');
 
-				    priceTooltip.attr('data-original-title', App.mp[mp]+" Slot price for Partners in your Network at the Level.");
+				    priceTooltip.attr('data-original-title', l100n.localize_string("a-priceTooltip-p1")+App.mp[mp]+l100n.localize_string("a-priceTooltip-p2"));
 				    priceTooltip.css('cursor','pointer');
-				    priceTooltip.attr('data-placement',"bottom").tooltip();
+				    priceTooltip.attr('data-placement',"bottom");//.tooltip();
 				    
-				    reopensTooltip.attr('data-original-title', "Number of reopens "+App.mp[mp]+" Pools at the Level.");
+				    reopensTooltip.attr('data-original-title', l100n.localize_string("a-reopensTooltip-p1")+App.mp[mp]+l100n.localize_string("a-reopensTooltip-p2"));
 				    reopensTooltip.css('cursor','pointer');
-				    reopensTooltip.attr('data-placement',"bottom").tooltip();
+				    reopensTooltip.attr('data-placement',"bottom");//.tooltip();
 
 			    	if (i == mpMaxLevel-1){
 			    					
@@ -1923,21 +2463,27 @@ App = {
 				    		if (slotNumber == 10) {
 				    			
 				    			warningSpan.removeClass('text-white').addClass('text-danger')
-				    			warningSpan.attr('data-original-title', App.mp[mp]+" slots of Level "+levelNumber+" are exhausted. Level Up to pr_event loss of profit.");
+				    			warningSpan.attr('data-original-title', l100n.localize_string("a-levelWarning-d-p1")+App.mp[mp]+l100n.localize_string("a-levelWarning-d-p2"));
 				    			warningSpan.css('cursor','pointer');
-				    			warningSpan.attr('data-placement',"bottom").tooltip();
+				    			warningSpan.attr('data-placement',"bottom");//.tooltip();
 
 				    		} else {
 
 				    			warningSpan.removeClass('text-white').addClass('text-warning');
-				    			warningSpan.attr('data-original-title', App.mp[mp]+" slots of Level "+levelNumber+" are running out. Level Up to pr_event loss of profit.");
+				    			warningSpan.attr('data-original-title',l100n.localize_string("a-levelWarning-w-p1")+App.mp[mp]+l100n.localize_string("a-levelWarning-w-p2"));
 				    			warningSpan.css('cursor','pointer');
-				    			warningSpan.attr('data-placement',"bottom").tooltip();
+				    			warningSpan.attr('data-placement',"bottom");//.tooltip();
 				    		}
 				    	}
 
 			    	}	    		
 		    	}
+
+					let buttonFastPriceTooltip = levelCard.find("#buttonFast #priceTooltip");
+					let buttonVipPriceTooltip = levelCard.find("#buttonVip #priceTooltip");
+
+					buttonFastPriceTooltip.attr('data-original-title', l100n.localize_string("a-levelup-p1")+App.mp[1]+l100n.localize_string("a-levelup-p2"));
+					buttonVipPriceTooltip.attr('data-original-title', l100n.localize_string("a-levelup-p1")+App.mp[2]+l100n.localize_string("a-levelup-p2"));		    	
 
 		    	levelCard.find("#poolLevel")[0].innerHTML=levelNumber;
 		    	levelCard.find("#basic .bx-user").each(function(k){ 
@@ -2053,9 +2599,23 @@ App = {
 
 		    }
 
-		    //nextLevelCard.find("#buttonUnderline")[0].innerHTML="Level Up";
-		    nextLevelCard.find("#poolLevel")[0].innerHTML=App.level[0].length+1;
-				
+		    if (App.level[0].length < App.maxLevel) {
+
+			    
+			    nextLevelCard.find("#poolLevel")[0].innerHTML=App.level[0].length+1;
+
+					let buttonPriceTooltip = nextLevelCard.find("#basic #priceTooltip");
+					buttonFastPriceTooltip = nextLevelCard.find("#buttonFast #priceTooltip");
+					buttonVipPriceTooltip = nextLevelCard.find("#buttonVip #priceTooltip");
+
+					buttonPriceTooltip.attr('data-original-title', l100n.localize_string("a-levelup-p1")+App.mp[0]+l100n.localize_string("a-levelup-p2"));
+					buttonFastPriceTooltip.attr('data-original-title', l100n.localize_string("a-levelup-p1")+App.mp[1]+l100n.localize_string("a-levelup-p2"));
+					buttonVipPriceTooltip.attr('data-original-title', l100n.localize_string("a-levelup-p1")+App.mp[2]+l100n.localize_string("a-levelup-p2"));		    	
+
+		    } else {
+
+		    	nextLevelCard.hide();
+		    }
 
 	    	$("#referrals")[0].innerHTML = App.referrals.length;
 	    	if (App.referralsPlus >0){
@@ -2098,9 +2658,12 @@ App = {
 			  App.renderPrices();
 	  	} else {
 
-	  		App.showRegistration(true);
+	  		window.location.assign('marketing.html');
 	  	}
 	  	App.setModals();
+
+	  	App.renderLangs();
+
 	  	$('[data-toggle="tooltip"]').tooltip();    	
     }
   },
@@ -2110,6 +2673,15 @@ App = {
   	// Set coin 
   	$(".crypto").each(function(){this.innerHTML = App.crypto});
 
+  	// Set blockchain name
+  	$(".chainName").each(function(){this.innerHTML = App.chainName});
+
+  	// Set site name
+  	$(".siteName").each(function(){this.innerHTML = window.location.host; });
+
+  	// Set contract address
+  	$(".contractAddress").each(function(){this.innerHTML = App.contractAddress; });
+
   	// Set names of the marketing plans 
   	$(".mp0").each(function(){this.innerHTML = App.mp[0]});
   	$(".mp1").each(function(){this.innerHTML = App.mp[1]});
@@ -2117,6 +2689,9 @@ App = {
 
   	// Show exchange rates of the current project coin
   	App.initExchangeRates();
+
+  	// Render languages switcher
+  	App.renderLangs();
 
   	// Set a next level card varible
 	  var nextLevelCard = $("#nextLevelCard");
@@ -2165,6 +2740,9 @@ App = {
 	  levelCard.find("#vip").hide();
 		if ($("#levelCard")) {
 			App.levelCardEtalon = $("#levelCard").detach();
+		}
+		if ($("#nextLevelCard")) {
+			App.nextLevelCard = $("#nextLevelCard").detach();  
 		}
 		if ($("#messege")){
 			App.messageHeight =$(".header-notifications-list").height();

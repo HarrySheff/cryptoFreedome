@@ -1,0 +1,80 @@
+/*!
+Template :	ICOCrypto @by Softnio
+Theme	 :  Default
+Version	 :	1.7.0
+Updated	 :	10.10.2019
+*/
+/*! WRITE YOUR CUSTOM STYLE **/
+.btn-calc {
+	width: 60px;
+	height: 60px;
+	border-radius: 20px;
+	margin: 5px;
+	min-width: 60px ;
+	line-height: 20px;
+	user-select: none;
+}
+
+.btn-step{
+	margin-right: 10px;
+	padding: 0px 15px;
+	min-width: 100px;
+}
+
+.btn-primary.btn-calc:hover {
+	background-color: #ffc107de;
+	color: #fff !important;
+}
+
+.calculator{
+	background-image: url("../images/bg-themes/7.png");
+	background-size: cover;
+	border-radius: 20px;
+}
+
+.calculator-item-text{
+	text-align: left !important;
+}
+
+.text-light {
+	color: #cccccc !important;
+}
+
+.text-info{
+	color: rgb(2 107 251) !important;
+}
+
+.text-primary {
+	color: #ffc107de !important;
+}
+
+#steps{
+	width: 60%;
+}
+
+
+@media (max-width: 992px){
+
+	.btn-calc{
+		width: 44px;
+		height: 44px;
+		border-radius: 15px;
+		min-width: 44px ;
+
+	}
+
+	.btn-step{
+		margin-right: 5px;
+		padding: 0px 15px;
+		min-width: 50px;
+	}
+
+	#steps{
+		width: 75%;
+	}
+
+	img {
+		max-height: 170%;
+	}
+
+}
