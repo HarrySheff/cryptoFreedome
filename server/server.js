@@ -1,3 +1,5 @@
+var util= require('util');
+var encoder = new util.TextEncoder('utf-8');
 const express = require('express');
 const app = express();
 const fs = require('fs');
