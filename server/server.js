@@ -1,5 +1,4 @@
-var util= require('util');
-var encoder = new util.TextEncoder('utf-8');
+
 const express = require('express');
 const app = express();
 const fs = require('fs');
@@ -32,6 +31,7 @@ var allEvents;
 var currentBlock;
 var startBlock;
 var dbo;
+var doubleContract;
 
 app.use(express.static(process.cwd() + '/src/'));
 app.use(express.json());
@@ -73,7 +73,7 @@ app.get('/event',  async function(req, res) {
     event: req.query.event, 
     args:{
       partnerAddress:req.query.acc.toLowerCase(), 
-      amount:0, 
+     ["amount"]:0, 
       level: req.query.level, 
       partnerID: req.query.partnerID,
       mp: req.query.mp
@@ -82,7 +82,7 @@ app.get('/event',  async function(req, res) {
     timeStamp:''
   };
 
-  socketEmit(event.args.partnerAddress.toLowerCase(), event); 
+  socketEmit(event.args["partnerAddress"].toLowerCase(), event); 
 
 
 });
@@ -91,22 +91,24 @@ run();
 
 async function modifyEvent (_event){
 
+  console.log(_event.returnValues["partnerAddress"]);
+
   let block = await web3.eth.getBlock(_event.blockNumber);
 
   let mod = {
     event: _event.event,
-    args: _event.args,
+    args: _event.returnValues,
     blockNumber: _event.blockNumber,
     logIndex:_event.logIndex, 
     timeStamp: block.timestamp*1000
   }
-  if (mod.args.amount) mod.args.amount = parseFloat(web3.utils.fromWei(mod.args.amount));
+  if (mod.args["amount"]) mod.args["amount"] = parseFloat(web3.utils.fromWei(mod.args["amount"]));
   
-  if (mod.args.mp) mod.args.mp =  parseInt(web3.utils.fromWei(mod.args.mp,'wei'));
-  if (mod.args.level) mod.args.level =  parseInt(web3.utils.fromWei(mod.args.level,'wei'));
-  if (mod.args.bonusType) mod.args.bonusType =  parseInt(web3.utils.fromWei(mod.args.bonusType,'wei')); 
-  if (mod.args.partnerID) mod.args.partnerID =  parseInt(web3.utils.fromWei(mod.args.partnerID,'wei')); 
-  if (mod.args.bonusMp) mod.args.bonusMp =  parseInt(web3.utils.fromWei(mod.args.bonusMp,'wei')); 
+  if (mod.args["mp"]) mod.args["mp"] =  parseInt(web3.utils.fromWei(mod.args["mp"],'wei'));
+  if (mod.args["level"]) mod.args["level"] =  parseInt(web3.utils.fromWei(mod.args["level"],'wei'));
+  if (mod.args["bonusType"]) mod.args["bonusType"] =  parseInt(web3.utils.fromWei(mod.args["bonusType"],'wei')); 
+  if (mod.args["partnerID"]) mod.args["partnerID"] =  parseInt(web3.utils.fromWei(mod.args["partnerID"],'wei')); 
+  if (mod.args["bonusMp"]) mod.args["bonusMp"] =  parseInt(web3.utils.fromWei(mod.args["bonusMp"],'wei')); 
   return mod;
 }
 
@@ -118,20 +120,20 @@ async function handleEvents (event, _dbo){
 
       console.log('Event ', event.event, ' is catched in block ', event.blockNumber, ' with log logIndex ', event.logIndex);
         
-      switch (event.event){
+      switch (eventMod.event){
         
         case 'registration': 
-        if (eventMod.args.mp === 0) {
+        if (eventMod.args["mp"] === 0) {
 
           try {
 
                 
-            result = await _dbo.collection('partners').find({_id:event.args.partnerAddress.toLowerCase()}).limit(1).toArray();
+            result = await _dbo.collection('partners').find({_id:eventMod.args["partnerAddress"].toLowerCase()}).limit(1).toArray();
 
             if (result.length <1){
               await _dbo.collection('partners').insertOne({
-                _id:event.args.partnerAddress.toLowerCase(),
-                partnerId: event.args.partnerID*1,
+                _id:eventMod.args["partnerAddress"].toLowerCase(),
+                partnerId: eventMod.args["partnerID"]*1,
                     network:0,
                     referrals:0,
                     lastSeenBlock: event.blockNumber,
@@ -151,9 +153,9 @@ async function handleEvents (event, _dbo){
           
           try {
 
-            await _dbo.collection('partners').updateOne({_id:event.args.partnerAddress.toLowerCase()}, {$push:{events:eventMod}});
-            socketEmit(event.args.partnerAddress.toLowerCase(), eventMod);
-            console.log('Event added to the database: activation', eventMod.args.mp);
+            await _dbo.collection('partners').updateOne({_id:eventMod.args["partnerAddress"].toLowerCase()}, {$push:{events:eventMod}});
+            socketEmit(eventMod.args["partnerAddress"].toLowerCase(), eventMod);
+            console.log('Event added to the database: activation', eventMod.args["mp"]);
             resolve(true);
           } catch (_error){
             
@@ -164,11 +166,11 @@ async function handleEvents (event, _dbo){
         }
             
         // Call new referal handling function
-        if (event.args.partnerAddress != event.args.sponsorAddress){
+        if (eventMod.args["partnerAddress"] != eventMod.args["sponsorAddress"]){
         
           try {
-            await _dbo.collection('partners').updateOne({_id:event.args.sponsorAddress.toLowerCase()}, {$push:{events:eventMod}});
-            socketEmit(event.args.sponsorAddress.toLowerCase(), eventMod);
+            await _dbo.collection('partners').updateOne({_id:eventMod.args["sponsorAddress"].toLowerCase()}, {$push:{events:eventMod}});
+            socketEmit(eventMod.args["sponsorAddress"].toLowerCase(), eventMod);
             console.log('Event added to the database: new referral registration');
             resolve(true);
           } catch (_error){
@@ -196,7 +198,7 @@ async function handleEvents (event, _dbo){
         .then(signed => {
           web3.eth.sendSignedTransaction(signed.rawTransaction)
           .on('receipt', ()=>{
-            console.log('Basic Income summ',event.args.amount,'payed to', event.args.receivers);
+            console.log('Basic Income summ',eventMod.args["amount"],'payed to', eventMod.args["receivers"]);
             resolve(true);
           })
         })
@@ -207,7 +209,7 @@ async function handleEvents (event, _dbo){
       /*
         await instance.basicIncomePay({from:'0x3EA9278376634f0197F3fc90Bf75f63065C6c82E'})
         .then(()=>{
-          console.log('Basic Income summ',event.args.amount,'payed to', event.args.receivers);
+          console.log('Basic Income summ',event.args["amount"],'payed to', event.args["receivers"]);
           resolve(true);
         })
         .catch((_error)=>{
@@ -221,9 +223,9 @@ async function handleEvents (event, _dbo){
 
       default:
         try {
-          await _dbo.collection('partners').updateOne({_id:event.args.partnerAddress.toLowerCase()}, {$push:{events:eventMod}});
-          socketEmit(event.args.partnerAddress.toLowerCase(), eventMod);
-          console.log('Event added to the database', event.event);
+          await _dbo.collection('partners').updateOne({_id:eventMod.args["partnerAddress"].toLowerCase()}, {$push:{events:eventMod}});
+          socketEmit(eventMod.args["partnerAddress"].toLowerCase(), eventMod);
+          console.log('Event added to the database', eventMod.event);
           resolve(true);
         } catch (_error){
           console.warn("Event log error: ", _error);
@@ -256,7 +258,7 @@ async function run() {
 
   try {
     web3 = new Web3(new Web3.providers.WebsocketProvider('wss://speedy-nodes-nyc.moralis.io/45d335612640a0e5a8e1d1e8/bsc/testnet/ws'));
-    const doubleContract = new web3.eth.Contract(data.abi, myContractAddress, {from: owner});
+    doubleContract = new web3.eth.Contract(data.abi, myContractAddress, {from: owner});
 
     // Connect the client to the server
     dbo = await client.connect();

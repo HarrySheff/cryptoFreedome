@@ -817,7 +817,7 @@ App = {
 
 
 		  // Is it common partner's event
-			if (_event.args.partnerAddress.toLowerCase() == App.account) {
+			if (_event.args["partnerAddress"].toLowerCase() == App.account) {
 
 				// It's a common partner's event
 	  						
@@ -851,7 +851,7 @@ App = {
 				}
 
 				// Check for referral registration case
-			} else if(_event.event == 'registration' && _event.args.sponsorAddress == App.account) {
+			} else if(_event.event == 'registration' && _event.args["sponsorAddress"] == App.account) {
 
 				// It's a refferal registration
 
@@ -870,7 +870,7 @@ App = {
 				return new Promise (async function(resolve, reject){
 
 							// Check a bonus type
-							switch (_event.args.bonusType.toString()){
+							switch (_event.args["bonusType"].toString()){
 
 								case '1':
 
@@ -882,10 +882,10 @@ App = {
 										// An income is new 
 														
 										// Increment direct income summ								
-										App.directIncome +=_event.args.amount;
+										App.directIncome +=_event.args["amount"];
 
 										//Increase a direct income plus summ	  
-										App.directIncomePlus += _event.args.amount;							
+										App.directIncomePlus += _event.args["amount"];							
 
 										// Set direct income to the database
 										App.socket.emit('setDirectIncome', App.directIncome);
@@ -895,8 +895,8 @@ App = {
 									// Add new nitification to the list of notifications 
 									addNotification(
 										'directBonus', 
-										'<span class="m-bpo-p1">'+l100n.localize_string("m-bpo-p1")+'</span>' + (_event.args.amount).toFixed(6)+' '+App.crypto, 
-										'<span class="m-bpo-p2">'+l100n.localize_string("m-bpo-p2")+'</span>'+_event.args.level+'<span class="m-bpo-p3">'+l100n.localize_string("m-bpo-p3")+'</span>'+ App.mp[_event.args.mp]+'<span class="m-bpo-p4">'+l100n.localize_string("m-bpo-p4")+'</span>',
+										'<span class="m-bpo-p1">'+l100n.localize_string("m-bpo-p1")+'</span>' + (_event.args["amount"]).toFixed(6)+' '+App.crypto, 
+										'<span class="m-bpo-p2">'+l100n.localize_string("m-bpo-p2")+'</span>'+_event.args["level"]+'<span class="m-bpo-p3">'+l100n.localize_string("m-bpo-p3")+'</span>'+ App.mp[_event.args["mp"]]+'<span class="m-bpo-p4">'+l100n.localize_string("m-bpo-p4")+'</span>',
 										_event
 									);
 											    	
@@ -912,10 +912,10 @@ App = {
 										// An income is new 
 
 										// Increment network income summ											
-										App.networkIncome += _event.args.amount;		
+										App.networkIncome += _event.args["amount"];		
 
 										// Increase a network income plus summ	  										  
-										App.networkIncomePlus += _event.args.amount;
+										App.networkIncomePlus += _event.args["amount"];
 
 										// Set network income to the database
 										App.socket.emit('setNetworkIncome', App.networkIncome);
@@ -925,7 +925,7 @@ App = {
 									addNotification(
 										'leaderBonus',
 										'<span class="m-bpo-p5">'+l100n.localize_string("m-bpo-p5")+'</span>',
-										'<span class="m-bpo-p6">'+l100n.localize_string("m-bpo-p6")+'</span>'+(_event.args.amount).toFixed(6)+' '+App.crypto+'<span class="m-bpo-p7">'+l100n.localize_string("m-bpo-p7")+'</span>',
+										'<span class="m-bpo-p6">'+l100n.localize_string("m-bpo-p6")+'</span>'+(_event.args["amount"]).toFixed(6)+' '+App.crypto+'<span class="m-bpo-p7">'+l100n.localize_string("m-bpo-p7")+'</span>',
 										_event
 									);
 
@@ -941,10 +941,10 @@ App = {
 										// An income is new 
 
 										// Increment network income summ	
-										App.networkIncome += _event.args.amount;
+										App.networkIncome += _event.args["amount"];
 
 										//Increase a network income plus summ
-										App.networkIncomePlus += _event.args.amount;
+										App.networkIncomePlus += _event.args["amount"];
 
 										// Set network income to the database
 										App.socket.emit('setNetworkIncome', App.networkIncome);
@@ -953,8 +953,8 @@ App = {
 									// Add new nitification to the list of notifications
 									addNotification(
 										'networkBonus',
-										'<span class="m-bpo-p1">'+l100n.localize_string("m-bpo-p1")+'</span>' +(_event.args.amount).toFixed(6)+' '+App.crypto, 
-										'<span class="m-bpo-p8">'+l100n.localize_string("m-bpo-p8")+'</span>'+_event.args.bonusType+'<span class="m-bpo-p9">'+l100n.localize_string("m-bpo-p9")+'</span>'+_event.args.level+'<span class="m-bpo-p10">'+l100n.localize_string("m-bpo-p10")+'</span>'+ App.mp[_event.args.mp]+'<span class="m-bpo-p11">'+l100n.localize_string("m-bpo-p11")+'</span>',
+										'<span class="m-bpo-p1">'+l100n.localize_string("m-bpo-p1")+'</span>' +(_event.args["amount"]).toFixed(6)+' '+App.crypto, 
+										'<span class="m-bpo-p8">'+l100n.localize_string("m-bpo-p8")+'</span>'+_event.args["bonusType"]+'<span class="m-bpo-p9">'+l100n.localize_string("m-bpo-p9")+'</span>'+_event.args["level"]+'<span class="m-bpo-p10">'+l100n.localize_string("m-bpo-p10")+'</span>'+ App.mp[_event.args["mp"]]+'<span class="m-bpo-p11">'+l100n.localize_string("m-bpo-p11")+'</span>',
 										_event
 									);
 
@@ -987,10 +987,10 @@ App = {
 						// The event is new 
 								    	
 						// Increase a missing income plus sum
-						App.lostProfitPlus += _event.args.amount;
+						App.lostProfitPlus += _event.args["amount"];
 
 						// Increase a missing income sum
-						App.lostProfit += _event.args.amount;
+						App.lostProfit += _event.args["amount"];
 
 						// Save missing income value to the database
 						App.socket.emit('setLostProfit', App.lostProfit);
@@ -1001,38 +1001,38 @@ App = {
 					  	let temp = '';
 
 							// Check a missing income type
-					    switch (_event.args.bonusType.toString( )){
+					    switch (_event.args["bonusType"].toString( )){
 					    	case '1':
 
 					    			// Check a level
-						    		if (_event.args.level == 1) {
+						    		if (_event.args["level"] == 1) {
 
 						    			// Missed first level income
 						    			// Partner have to just activate a required marketing plan to receive bonuses
 
 						    			// Set a reqquired marketing plan activation call prefix for a message info  
-						    			temp = '<span class="m-miss-p1">'+l100n.localize_string("m-miss-p1")+'</span>'+App.mp[_event.args.mp];
+						    			temp = '<span class="m-miss-p1">'+l100n.localize_string("m-miss-p1")+'</span>'+App.mp[_event.args["mp"]];
 
 						    			// in the case of the higher level check the required marketing plan activation
-						    		} else if (App.level.length-1 < _event.args.mp) {
+						    		} else if (App.level.length-1 < _event.args["mp"]) {
 
 						    			// The required marketing plan is no active
 
 						    			// Set a reqquired marketing plan activation and level up call prefix for a message info 
-						    			temp = '<span class="m-miss-p1">'+l100n.localize_string("m-miss-p1")+'</span>'+App.mp[_event.args.mp] + '<span class="m-miss-p2">'+l100n.localize_string("m-miss-p2")+'</span>'+ _event.args.level;
+						    			temp = '<span class="m-miss-p1">'+l100n.localize_string("m-miss-p1")+'</span>'+App.mp[_event.args["mp"]] + '<span class="m-miss-p2">'+l100n.localize_string("m-miss-p2")+'</span>'+ _event.args["level"];
 						    		} else {
 
 						    			// The required marketing plan is active
 
 						    			// Set a level up call prefix for a message info 
-						    			temp = '<span class="m-miss-p3">'+l100n.localize_string("m-miss-p3")+'</span>'+App.mp[_event.args.mp]+'<span class="m-miss-p4">'+l100n.localize_string("m-miss-p4")+'</span>'+ _event.args.level;
+						    			temp = '<span class="m-miss-p3">'+l100n.localize_string("m-miss-p3")+'</span>'+App.mp[_event.args["mp"]]+'<span class="m-miss-p4">'+l100n.localize_string("m-miss-p4")+'</span>'+ _event.args["level"];
 						    		}
 
 						    		// Add new nitification to the list of notifications
 						    		addNotification(
 											'missed',
-											'<span class="m-miss-p5">'+l100n.localize_string("m-miss-p5")+'</span>'+(_event.args.amount).toFixed(6)+' '+App.crypto,
-											temp +'<span class="m-miss-p6">'+l100n.localize_string("m-miss-p6")+'</span>' +  _event.args.level + '<span class="m-miss-p7">'+l100n.localize_string("m-miss-p7")+'</span>',
+											'<span class="m-miss-p5">'+l100n.localize_string("m-miss-p5")+'</span>'+(_event.args["amount"]).toFixed(6)+' '+App.crypto,
+											temp +'<span class="m-miss-p6">'+l100n.localize_string("m-miss-p6")+'</span>' +  _event.args["level"] + '<span class="m-miss-p7">'+l100n.localize_string("m-miss-p7")+'</span>',
 											_event
 											);
 
@@ -1041,7 +1041,7 @@ App = {
 					    	default:
 
 					    			// Chek for missed income type and depth
-						    		if (_event.args.bonusMp == 2 && _event.args.bonusType < 4){
+						    		if (_event.args["bonusMp"] == 2 && _event.args["bonusType"] < 4){
 
 						    			// It's VIP network income from a depth less than four
 
@@ -1054,8 +1054,8 @@ App = {
 						    		// Add new nitification to the list of notifications
 						    		addNotification(
 											'missed',
-											'<span class="m-miss-p5">'+l100n.localize_string("m-miss-p5")+'</span>'+(_event.args.amount).toFixed(6)+' '+App.crypto,
-											'<span class="m-miss-p1">'+l100n.localize_string("m-miss-p1")+'</span>'+App.mp[_event.args.bonusMp]+'<span class="m-miss-p9">'+l100n.localize_string("m-miss-p9")+'</span>'+temp+_event.args.bonusType+'.',
+											'<span class="m-miss-p5">'+l100n.localize_string("m-miss-p5")+'</span>'+(_event.args["amount"]).toFixed(6)+' '+App.crypto,
+											'<span class="m-miss-p1">'+l100n.localize_string("m-miss-p1")+'</span>'+App.mp[_event.args["bonusMp"]]+'<span class="m-miss-p9">'+l100n.localize_string("m-miss-p9")+'</span>'+temp+_event.args["bonusType"]+'.',
 											_event
 											);
 
@@ -1084,9 +1084,9 @@ App = {
 				  		
 					  	// Add new nitification to the list of notifications
 					    addNotification(
-								'reopen'+_event.args.mp,
+								'reopen'+_event.args["mp"],
 								'<span class="m-re-p1">'+l100n.localize_string("m-re-p1")+'</span>',
-								'<span class="m-re-p2">'+l100n.localize_string("m-re-p2")+'</span>'+App.mp[_event.args.mp]+'<span class="m-re-p3">'+l100n.localize_string("m-re-p3")+'</span>'+_event.args.level+'<span class="m-re-p4">'+l100n.localize_string("m-re-p4")+'</span>',
+								'<span class="m-re-p2">'+l100n.localize_string("m-re-p2")+'</span>'+App.mp[_event.args["mp"]]+'<span class="m-re-p3">'+l100n.localize_string("m-re-p3")+'</span>'+_event.args["level"]+'<span class="m-re-p4">'+l100n.localize_string("m-re-p4")+'</span>',
 								_event
 							);
 
@@ -1113,7 +1113,7 @@ App = {
 
 
 							// Check a marketing plan   	
-					    switch (_event.args.mp.toString()) {
+					    switch (_event.args["mp"].toString()) {
 					    	case '0' :
 
 						    		// Add new nitification to the list of notifications
@@ -1169,12 +1169,12 @@ App = {
 	  		return new Promise (async function(resolve, reject){
 
 		  		// Check for specific registration of the owner
-		    	if (_event.args.sponsorAddress != _event.args.partnerAddress) {
+		    	if (_event.args["sponsorAddress"] != _event.args["partnerAddress"]) {
 
 		    		// It's normal registaration
 
 				    		// Check a marketing plan   
-						    switch (_event.args.mp.toString()){
+						    switch (_event.args["mp"].toString()){
 						    	case '0':
 						    			// It's a basic rgistration of the referral
 
@@ -1182,7 +1182,7 @@ App = {
 							    		addNotification(
 												'referral',
 												'<span class="m-ref-p1">'+l100n.localize_string("m-ref-p1")+'</span>',
-												'<span class="m-ref-p2">'+l100n.localize_string("m-ref-p2")+'</span>'+ _event.args.partnerID+'.',
+												'<span class="m-ref-p2">'+l100n.localize_string("m-ref-p2")+'</span>'+ _event.args["partnerID"]+'.',
 												_event
 												);
 
@@ -1192,9 +1192,9 @@ App = {
 
 							    		// Add new nitification to the list of notifications
 							    		addNotification(
-												'referralUpMp'+_event.args.mp,
-												'<span class="m-ref-p3">'+l100n.localize_string("m-ref-p3")+'</span>'+App.mp[_event.args.mp],
-												'<span class="m-ref-p4">'+l100n.localize_string("m-ref-p4")+'</span>'+ _event.args.partnerID+'<span class="m-ref-p5">'+l100n.localize_string("m-ref-p5")+'</span>'+App.mp[_event.args.mp]+'<span class="m-ref-p6">'+l100n.localize_string("m-ref-p6")+'</span>',
+												'referralUpMp'+_event.args["mp"],
+												'<span class="m-ref-p3">'+l100n.localize_string("m-ref-p3")+'</span>'+App.mp[_event.args["mp"]],
+												'<span class="m-ref-p4">'+l100n.localize_string("m-ref-p4")+'</span>'+ _event.args["partnerID"]+'<span class="m-ref-p5">'+l100n.localize_string("m-ref-p5")+'</span>'+App.mp[_event.args["mp"]]+'<span class="m-ref-p6">'+l100n.localize_string("m-ref-p6")+'</span>',
 												_event
 												);
 
@@ -1226,7 +1226,7 @@ App = {
 							let temp =' ';
 
 							// Check for the level
-						  if (_event.args.level > 2) {
+						  if (_event.args["level"] > 2) {
 
 						  	// The level higher than 2
 
@@ -1240,9 +1240,9 @@ App = {
 							  
 							// Add new nitification to the list of notifications
 							addNotification(
-								'levelUp'+_event.args.mp,
-								App.mp[_event.args.mp]+'<span class="m-level-p2">'+l100n.localize_string("m-level-p2")+'</span>'+ _event.args.level,
-								'<span class="m-level-p3">'+l100n.localize_string("m-level-p3")+'</span>'+App.mp[_event.args.mp]+'<span class="m-level-p5">'+l100n.localize_string("m-level-p5")+'</span>'+ (_event.args.level-1) +temp,
+								'levelUp'+_event.args["mp"],
+								App.mp[_event.args["mp"]]+'<span class="m-level-p2">'+l100n.localize_string("m-level-p2")+'</span>'+ _event.args["level"],
+								'<span class="m-level-p3">'+l100n.localize_string("m-level-p3")+'</span>'+App.mp[_event.args["mp"]]+'<span class="m-level-p5">'+l100n.localize_string("m-level-p5")+'</span>'+ (_event.args["level"]-1) +temp,
 								_event
 							);
 
