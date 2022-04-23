@@ -5,8 +5,9 @@ const fs = require('fs');
 const TruffleContract = require("truffle-contract");
 let rawdata = fs.readFileSync(process.cwd() + '/src/contracts/CryptoLife.json');
 let data = JSON.parse(rawdata, 'utf8');
-const Web3 = require('web3')
-let web3 = new Web3(new Web3.providers.WebsocketProvider('wss://speedy-nodes-nyc.moralis.io/45d335612640a0e5a8e1d1e8/bsc/testnet/ws'));
+const Web3 = require('web3');
+let ws = new Web3.providers.WebsocketProvider('wss://speedy-nodes-nyc.moralis.io/45d335612640a0e5a8e1d1e8/bsc/testnet/ws');
+let web3 = new Web3(ws);
 const http = require('http');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
@@ -32,6 +33,16 @@ var currentBlock;
 var startBlock;
 var dbo;
 var doubleContract;
+
+ws.on('close', async (code) => {
+  console.log('ws closed', code);
+  await stop();
+  await sleep(1000); // wait before reconnect
+  ws = new Web3.providers.WebsocketProvider('wss://speedy-nodes-nyc.moralis.io/45d335612640a0e5a8e1d1e8/bsc/testnet/ws');
+  web3 = new Web3(ws);
+  run();
+
+})
 
 app.use(express.static(process.cwd() + '/src/'));
 app.use(express.json());
