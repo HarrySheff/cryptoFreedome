@@ -91,8 +91,6 @@ run();
 
 async function modifyEvent (_event){
 
-  console.log(_event.returnValues["partnerAddress"]);
-
   let block = await web3.eth.getBlock(_event.blockNumber);
 
   let mod = {
@@ -433,7 +431,7 @@ async function run() {
   } catch (_error){
     console.warn(_error);
     await stop();
-    run();
+    //run();
   }
 }
 
