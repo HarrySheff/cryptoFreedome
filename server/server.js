@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 const fs = require('fs');
 const TruffleContract = require("truffle-contract");
-let rawdata = fs.readFileSync(process.cwd() + '../src/contracts/CryptoLife.json');
+let rawdata = fs.readFileSync(process.cwd() + '/src/contracts/CryptoLife.json');
 let data = JSON.parse(rawdata, 'utf8');
 const Web3 = require('web3');
 let ws = new Web3.providers.WebsocketProvider('wss://speedy-nodes-nyc.moralis.io/45d335612640a0e5a8e1d1e8/bsc/testnet/ws');
@@ -37,7 +37,6 @@ var doubleContract;
 ws.on('close', async (code) => {
   console.log('ws closed', code);
   await stop();
-  await sleep(1000); // wait before reconnect
   ws = new Web3.providers.WebsocketProvider('wss://speedy-nodes-nyc.moralis.io/45d335612640a0e5a8e1d1e8/bsc/testnet/ws');
   web3 = new Web3(ws);
   run();
@@ -50,7 +49,7 @@ app.use(express.json());
 
 app.get('/', (req, res) => {
   res.status(200).type('text/html')
-  res.sendFile(process.cwd()+'/src/register.html');
+  res.sendFile(process.cwd()+'/src/index.html');
 });
 
 app.get('/data', async function(req, res) {
@@ -76,26 +75,6 @@ app.get('/data', async function(req, res) {
     res.json({members: membersCount,summ: basicIncomeData[1]/10**18, progress:basicIncomeProgress});
     console.log('Data send as JSON.');    
   }
-});
-
-app.get('/event',  async function(req, res) {
-
-  let event = {
-    event: req.query.event, 
-    args:{
-      partnerAddress:req.query.acc.toLowerCase(), 
-     ["amount"]:0, 
-      level: req.query.level, 
-      partnerID: req.query.partnerID,
-      mp: req.query.mp
-    }, 
-    logIndex:0, 
-    timeStamp:''
-  };
-
-  socketEmit(event.args["partnerAddress"].toLowerCase(), event); 
-
-
 });
 
 run();
