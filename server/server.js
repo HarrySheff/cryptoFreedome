@@ -35,11 +35,14 @@ var dbo;
 var doubleContract;
 
 ws.on('close', async (code) => {
-  console.log('ws closed', code);
+  console.log('ws closed reason:', code);
   await stop();
-  ws = new Web3.providers.WebsocketProvider('wss://speedy-nodes-nyc.moralis.io/45d335612640a0e5a8e1d1e8/bsc/testnet/ws');
-  web3 = new Web3(ws);
-  run();
+  setTimeout(() => { 
+    ws = new Web3.providers.WebsocketProvider('wss://speedy-nodes-nyc.moralis.io/45d335612640a0e5a8e1d1e8/bsc/testnet/ws');
+    web3 = new Web3(ws);
+    run();
+  }, 2000);
+
 
 })
 
