@@ -2345,7 +2345,6 @@ App = {
 		    $("#topSumm")[0].innerHTML = App.basicIncomeSumm/10**18;
 		    
 		    $("#topLeaderBar").css("width", App.basicIncomeBalance/App.basicIncomeResult*100+"%");
-		    console.log(App.basicIncomeBalance/10**18, App.basicIncomeResult/10**18);
 	  		$("#userId")[0].innerHTML = App.partnerId;
 
 	  		App.renderNotifications();
