@@ -367,7 +367,7 @@ let accountPageStrings = {
 		"ru": 'Сеть'
 	},
 
-	// Top Leader Bonus
+	// Basic Income Progress
 
 	'a-top-t1':{
 		selector:".a-top-t1",
@@ -435,8 +435,8 @@ let accountPageStrings = {
 
 	'a-pools':{
 		selector:"#a-pools",
-		"en": 'Active Pools',
-		"ru": 'Активные Площадки'
+		"en": 'Active Steps',
+		"ru": 'Активные Ступени'
 	},
 
 	// Level card tooltips
@@ -470,8 +470,8 @@ let accountPageStrings = {
 	// Reopens	
 	'a-reopensTooltip-p1':{
 		selector:"#a-reopensTooltip-p1",
-		"en": 'Number of reopens of the ',
-		"ru": 'Число пвторных открытий Площадки '
+		"en": 'Number of auto-renewals of the ',
+		"ru": 'Число пвторных открытий Ступени '
 	},  
 
 	'a-reopensTooltip-p2':{
@@ -581,22 +581,22 @@ let registerPageStrings = {
 	// Basic marketing plan description
 	'reg-plan-d1':{
 		selector:"#reg-plan-d1",
-		"en": 'Easy to Start',
-		"ru": 'Легкий старт'
+		"en": 'Easy to Start only eith Direct Income',
+		"ru": 'Легкий старт только с Прямым Доходом'
 	},	
 
 	// Fast marketing plan description
 	'reg-plan-d2':{
 		selector:"#reg-plan-d2",
-		"en": 'Basic Network Income',
-		"ru": 'Базовый Сетевой Доход'
+		"en": 'Direct and basic Network Incomes',
+		"ru": 'Прямой и Базовый Сетевой Доходы'
 	},	
 
 	// VIP marketing plan description
 	'reg-plan-d3':{
 		selector:"#reg-plan-d3",
-		"en": 'Maximum Network Income',
-		"ru": 'Максимальный Сетевой Доход'
+		"en": 'Direct, maximum Network and passive Basic Incomes',
+		"ru": 'Максимальные Прямой, Сетевой и Базовый Доходы'
 	},	
 
 	// Pools
@@ -761,8 +761,8 @@ let modalsPageStrings = {
 
 	'modal-p4':{
 		selector:".modal-p4",
-		"en": 'Pool of 3 Slots',
-		"ru": 'Площадку из 3 Слотов'
+		"en": '3 Slots',
+		"ru": '3 Слота'
 	},
 
 	'modal-p5':{

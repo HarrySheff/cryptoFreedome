@@ -4,20 +4,20 @@ let indexPageStrings={
 	// Title of the page
 	'browserPageTitle':{
 		selector:"title",
-		"en": "Crypto Freedome | First Web 3.0 Marketplace",
-		"ru": "Crypto Freedome | Первый Web 3.0 Маркетплейс"
+		"en": "Crypto Freedome | Web 3.0 Marketplace",
+		"ru": "Crypto Freedome | Web 3.0 Маркетплейс"
 	},
 
 	'i-title-1':{
 		selector:"#i-title-1",
-		"en": 'Get Financial Freedom Today with <span class="text-warning">Lifetime Income</span> from Web 3.0 Marketplace launch',
-		"ru": 'Получите финансовую свободу  с <span class="text-warning">Пожизненным доходом</span> от запуска Web 3.0 Маркетплейса уже сегодня'
+		"en": 'Take a step towards Freedom Today with <span class="text-warning">Lifetime Income</span> from Web 3.0 Marketplace launch',
+		"ru": 'Сделай шаг к Свободе  уже сегодня с <span class="text-warning">Пожизненным доходом</span> от запуска Web 3.0 Маркетплейса'
 	},
 
 	'i-title-2':{
 		selector:"#i-title-2",
-		"en": 'Marketplace project on the blockchain to provide Lifetime Equal Growing Basic Income to all Members. All <span class="text-warning">100% of the project profits</span> are distributed on the same terms for everyone. Cryptocurrency payouts <span class="text-warning">directly to your Wallet</span>.',
-		"ru": 'Проект маркетплейса на блокчейне для обеспечения равного растущего пожизненного Базового дохода всем участникам. Все <span class="text-warning">100% прибыли проекта</span> распределяются на одинаковых условиях для всех. Выплаты в криптовалюте <span class="text-warning">прямо на Твой Кошелек</span>.'
+		"en": 'Marketplace project on the blockchain to create Lifetime Equal growing passive Basic Income to all Members. All <span class="text-warning">100% of the project profits</span> are distributed on the same terms for everyone. Cryptocurrency payouts <span class="text-warning">directly to your Wallet</span>.',
+		"ru": 'Проект маркетплейса на блокчейне создает равный растущеий пожизненный пассивный Базовый доход всем участникам. Все <span class="text-warning">100% прибыли проекта</span> распределяются на одинаковых условиях для всех. Выплаты в криптовалюте <span class="text-warning">прямо на Твой Кошелек</span>.'
 	},
 
 	'i-logo':{
@@ -416,8 +416,8 @@ let indexPageStrings={
 
 	'i-direct-p3':{
 		selector:"#i-direct-p3",
-		"en": '<span class="text-warning">Auto-Renewal of Your Referral</span> occupies a Slot on Your Platform and <span class="text-warning">brings You Direct Income</span> and Auto-Renewals. Each Referral can occupy Slots on your Steps <span class="text-warning">an unlimited number of times</span>.',
-		"ru": '<span class="text-warning">Автообновление Твоих Рефералов</span> занимает Слоты Твоей Ступени и <span class="text-warning">приносит Прямой Доход</span> и Автообновленя. Каждый Реферал может занять Слоты твоих Ступеней <span class="text-warning">неограниченное число раз</span>.'
+		"en": '<span class="text-warning">Auto-Renewal of Your Referrals</span> occupies a Slots on Your Platform and <span class="text-warning">brings You Direct Income</span> and Auto-Renewals <span class="text-warning">to You</span>. Each Referral can occupy Slots on your Steps <span class="text-warning">an unlimited number of times</span>.',
+		"ru": '<span class="text-warning">Автообновление Твоих Рефералов</span> занимает Слоты Твоей Ступени и <span class="text-warning">приносит Прямой Доход</span> и Автообновленя <span class="text-warning">Тебе</span>. Каждый Реферал может занять Слоты твоих Ступеней <span class="text-warning">неограниченное число раз</span>.'
 	},
 
 	'i-direct-a1':{
@@ -566,7 +566,7 @@ let indexPageStrings={
 	'i-net-p3':{
 		selector:"#i-net-p3",
 		"en": '<span class="text-warning">Prime</span> - with Direct Income, Network Income 8%, 5%, 3%, 2% and 2% from depths 2 to 6. The Slot is worth the equivalent of <span class="tc-light">$200</span> in <span class="crypto">BNB</span>. <span class="text-warning">Requires Smart activation</span>.',
-		"ru": '<span class="text-warning">Smart</span> - с Прямым и Сетевым доходом 8%, 5%, 3%, 2% и 2% с глубин со 2 по 6. Слот стоит эквивалент <span class="tc-light">$200</span> в <span class="crypto">BNB</span>. Требует активации Smart.' 
+		"ru": '<span class="text-warning">Prime</span> - с Прямым и Сетевым доходом 8%, 5%, 3%, 2% и 2% с глубин со 2 по 6. Слот стоит эквивалент <span class="tc-light">$200</span> в <span class="crypto">BNB</span>. Требует активации Smart.' 
 	},
 
 	'i-net-a1':{

@@ -135,13 +135,13 @@ let messagesStrings = {
 	'm-re-p1':{
 		selector:".m-re-p1",
 		"en": 'Reopen of the pool',
-		"ru": 'Площадка открыта заново'
+		"ru": 'Ступень открыта заново'
 	},	
 
 	'm-re-p2':{
 		selector:".m-re-p2",
 		"en": 'Your ',
-		"ru": 'Ваша Площадка '
+		"ru": 'Ваша Ступень '
 	},	
 
 	'm-re-p3':{
@@ -254,7 +254,7 @@ let messagesStrings = {
 	'm-level-p3':{
 		selector:".m-level-p3",
 		"en": 'Reopens of ',
-		"ru": 'Автообновление Площадок '
+		"ru": 'Автообновление Ступени '
 	},	
 
 	'm-level-p4':{
