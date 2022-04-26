@@ -165,8 +165,8 @@ let messagesStrings = {
 
 	'm-reg-p2':{
 		selector:".m-reg-p2",
-		"en": 'Your CryptoLife starts right now!<br>You have 3 Level 1 ',
-		"ru": 'Поздравляем с началом CryptoLife!<br>У Вас есть 3 Слота '
+		"en": 'Welcome to <span class="text-info">C</span>rypto&nbsp;<span class="text-warning">F</span>reedom!<br>You have 3 Level 1 ',
+		"ru": 'Приветствуем в <span class="text-info">C</span>rypto&nbsp;<span class="text-warning">F</span>reedom!<br>У Вас есть 3 Слота '
 	},	
 
 	'm-reg-p3':{

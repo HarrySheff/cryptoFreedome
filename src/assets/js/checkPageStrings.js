@@ -1,21 +1,21 @@
 let checkPageStrings = {
 	'browserPageTitle':{
 		selector:"title",
-		"en": "Crypto Freedome | Registration",
-		"ru": "Crypto Freedome | Регистрация"
+		"en": "Crypto Freedom | Registration",
+		"ru": "Crypto Freedom | Регистрация"
 	},
 
 	
 	'logo':{
 		selector:".logo-text",
-		"en": '<span class="text-info">C</span>rypto&nbsp;<span class="text-warning">F</span>reedome',
-		"ru": '<span class="text-info">C</span>rypto&nbsp;<span class="text-warning">F</span>reedome'
+		"en": '<span class="text-info">C</span>rypto&nbsp;<span class="text-warning">F</span>reedom',
+		"ru": '<span class="text-info">C</span>rypto&nbsp;<span class="text-warning">F</span>reedom'
 	},
 
 	'mainTitle':{
 		selector:"#r-title",
-		"en": '<span class="text-info">C</span>rypto&nbsp;<span class="text-warning">F</span>reedome Registration',
-		"ru": 'Регистрация в <span class="text-info">C</span>rypto&nbsp;<span class="text-warning">F</span>reedome'
+		"en": '<span class="text-info">C</span>rypto&nbsp;<span class="text-warning">F</span>reedom Registration',
+		"ru": 'Регистрация в <span class="text-info">C</span>rypto&nbsp;<span class="text-warning">F</span>reedom'
 	},
 		
 

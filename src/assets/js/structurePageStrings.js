@@ -4,8 +4,8 @@ let structurePageStrings={
 	// Title of the page
 	'browserPageTitle':{
 		selector:"title",
-		"en": "Crypto Freedome | Network",
-		"ru": "Crypto Freedome | Партнерская сеть"
+		"en": "Crypto Freedom | Network",
+		"ru": "Crypto Freedom | Партнерская сеть"
 	},
 
 	's-title-1':{
@@ -16,8 +16,8 @@ let structurePageStrings={
 		
 	'logo':{
 		selector:".logo-text",
-		"en": '<span class="text-info">C</span>rypto&nbsp;<span class="text-warning">F</span>reedome',
-		"ru": '<span class="text-info">C</span>rypto&nbsp;<span class="text-warning">F</span>reedome'
+		"en": '<span class="text-info">C</span>rypto&nbsp;<span class="text-warning">F</span>reedom',
+		"ru": '<span class="text-info">C</span>rypto&nbsp;<span class="text-warning">F</span>reedom'
 	},
 
 	's-title-2':{

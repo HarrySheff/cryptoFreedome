@@ -4,14 +4,14 @@ let messagesPageStrings={
 	// Title of the page
 	'browserPageTitle':{
 		selector:"title",
-		"en": "Crypto Freedome | Message History",
-		"ru": "Crypto Freedome | История Сообщений"
+		"en": "Crypto Freedom | Message History",
+		"ru": "Crypto Freedom | История Сообщений"
 	},
 	
 	'logo':{
 		selector:".logo-text",
-		"en": '<span class="text-info">C</span>rypto&nbsp;<span class="text-warning">F</span>reedome',
-		"ru": '<span class="text-info">C</span>rypto&nbsp;<span class="text-warning">F</span>reedome'
+		"en": '<span class="text-info">C</span>rypto&nbsp;<span class="text-warning">F</span>reedom',
+		"ru": '<span class="text-info">C</span>rypto&nbsp;<span class="text-warning">F</span>reedom'
 	},
 
 	'm-title-1':{

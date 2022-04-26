@@ -3,8 +3,8 @@ let accountPageStrings = {
 	// Title of the page
 	'browserPageTitle':{
 		selector:"title",
-		"en": "Crypto Freedome | Account",
-		"ru": "Crypto Freedome | Аккаунт"
+		"en": "Crypto Freedom | Account",
+		"ru": "Crypto Freedom | Аккаунт"
 	},
 
 
@@ -13,8 +13,8 @@ let accountPageStrings = {
 
 	'logo':{
 		selector:".logo-text",
-		"en": '<span class="text-info">C</span>rypto&nbsp;<span class="text-warning">F</span>reedome',
-		"ru": '<span class="text-info">C</span>rypto&nbsp;<span class="text-warning">F</span>reedome'
+		"en": '<span class="text-info">C</span>rypto&nbsp;<span class="text-warning">F</span>reedom',
+		"ru": '<span class="text-info">C</span>rypto&nbsp;<span class="text-warning">F</span>reedom'
 	},
 
 	//Partner info
@@ -533,8 +533,8 @@ let registerPageStrings = {
 	// Title
 	'reg-title':{
 		selector:"#reg-title",
-		"en": '<span class="text-info">C</span>rypto&nbsp;<span class="text-warning">F</span>reedome Registration',
-		"ru": 'Регистрация <span class="text-info">C</span>rypto&nbsp;<span class="text-warning">F</span>reedome'
+		"en": '<span class="text-info">C</span>rypto&nbsp;<span class="text-warning">F</span>reedom Registration',
+		"ru": 'Регистрация <span class="text-info">C</span>rypto&nbsp;<span class="text-warning">F</span>reedom'
 	},
 
 	// Subtitle
