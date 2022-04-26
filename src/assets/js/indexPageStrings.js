@@ -4,8 +4,8 @@ let indexPageStrings={
 	// Title of the page
 	'browserPageTitle':{
 		selector:"title",
-		"en": "Crypto Freedome | Web 3.0 Marketplace",
-		"ru": "Crypto Freedome | Web 3.0 Маркетплейс"
+		"en": "Crypto Freedom | Web 3.0 Marketplace",
+		"ru": "Crypto Freedom | Web 3.0 Маркетплейс"
 	},
 
 	'i-title-1':{
@@ -22,8 +22,8 @@ let indexPageStrings={
 
 	'i-logo':{
 		selector:".logo h4",
-		"en": '<span class="text-info">C</span>rypto&nbsp;<span class="text-warning">F</span>reedome',
-		"ru": '<span class="text-info">C</span>rypto&nbsp;<span class="text-warning">F</span>reedome'
+		"en": '<span class="text-info">C</span>rypto&nbsp;<span class="text-warning">F</span>reedom',
+		"ru": '<span class="text-info">C</span>rypto&nbsp;<span class="text-warning">F</span>reedom'
 	},
 
 	// Header
