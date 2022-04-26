@@ -2320,7 +2320,7 @@ App = {
   render: function() {
 
   	$('#balance')[0].innerHTML = (App.balance/10**18).toFixed(App.cryptoDecimasNumber);
-  	$('#cryptoLogo').attr("src","img/"+App.crypto+".png");
+  	$('#cryptoLogo').attr("src","img/"+App.crypto.toLowerCase()+".png");
   	App.renderExchangeRates();
 
   	if (App.account.length > 12) {

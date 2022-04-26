@@ -1633,7 +1633,7 @@ App = {
 
 		
   	$('#balance')[0].innerHTML = (App.balance/10**18).toFixed(6);
-  	$('#cryptoLogo').attr("src","img/"+App.crypto+".svg");
+  	$('#cryptoLogo').attr("src","img/"+App.crypto.toLowerCase()+".png");
   	App.renderExchangeRates();
 
   	if (App.account.length > 12) {
