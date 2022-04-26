@@ -598,15 +598,15 @@ let indexPageStrings={
 
 	'i-bi-p1':{
 		selector:"#i-bi-p1",
-		"en": 'After accumulating a sufficient amount, a payment is made simultaneously <span class="text-warning">to all Members who have Prime Step Level 6</span> and the collection begins again.',
-		"ru": 'После сбора необходимой суммы, выплата осуществляется <span class="text-warning">всем Участникм имеющим Ступень Prime Уровня 6</span>. Затем сбор начинается снова.'
+		"en": 'The amount is accumulated for the payment of Basic Income at the same time <span class="text-warning">to all Members who have Prime Step Level 6</span>. Then the collection starts again.',
+		"ru": 'Накаплиается сумма для выплаты Базового Дохода одновременно <span class="text-warning">всем Участникм имеющим Ступень Prime Уровня 6</span>. Затем сбор начинается снова.'
 	},
 
 
 	'i-bi-p2':{
 		selector:"#i-bi-p2",
-		"en": 'If enough money is raised in less than one week,then <span class="text-warning">the next payout is doubled</span>. If the collection took more than a month, then it will be reduced by half, but not less than 1 <span class="crypto">BNB</span>.',
-		"ru": 'Если необходимая сумма собрана меньше чем за неделю, то <span class="text-warning">слудующая выплата удваивается</span>. Если же сбор занял более месяца, то щна сокращается вдвое, но не менее 1 <span class="crypto">BNB</span>.'
+		"en": 'If enough money is raised in less than one week,then <span class="text-warning">the next payout is doubled</span>. If the collection took more than a month, then the next payout will be reduced by half, but not less than 1 <span class="crypto">BNB</span>.',
+		"ru": 'Если необходимая сумма собрана меньше чем за неделю, то <span class="text-warning">слудующая выплата удваивается</span>. Если же сбор занял более месяца, то размер выплаты сокращается вдвое, но не менее 1 <span class="crypto">BNB</span>.'
 	},
 
 	'i-bi-p3':{
