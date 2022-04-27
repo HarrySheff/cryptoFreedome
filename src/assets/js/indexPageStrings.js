@@ -16,8 +16,8 @@ let indexPageStrings={
 
 	'i-title-2':{
 		selector:"#i-title-2",
-		"en": 'Marketplace project on the blockchain to create Lifetime Equal growing passive Basic Income to all Members. All <span class="text-warning">100% of the project profits</span> are distributed on the same terms for everyone. Cryptocurrency payouts <span class="text-warning">directly to your Wallet</span>.',
-		"ru": 'Проект маркетплейса на блокчейне создает равный растущеий пожизненный пассивный Базовый доход всем участникам. Все <span class="text-warning">100% прибыли проекта</span> распределяются на одинаковых условиях для всех. Выплаты в криптовалюте <span class="text-warning">прямо на Твой Кошелек</span>.'
+		"en": 'The Marketplace project on the blockchain to creates Lifetime Equal growing passive Basic Income to all Members. All <span class="text-warning">100% of the project profits</span> are distributed on the same terms for everyone. Cryptocurrency payouts <span class="text-warning">directly to your Wallet</span>.',
+		"ru": 'Проект Маркетплейса на блокчейне создает равный растущеий пожизненный пассивный Базовый доход всем участникам. Все <span class="text-warning">100% прибыли проекта</span> распределяются на одинаковых условиях для всех. Выплаты в криптовалюте <span class="text-warning">прямо на Твой Кошелек</span>.'
 	},
 
 	'i-logo':{
@@ -205,8 +205,8 @@ let indexPageStrings={
 
 	'i-about-p1':{
 		selector:"#i-about-p1",
-		"en": 'Today, marketplaces like AliExpress, Amazon, Ebay and thousands of others generate billions of dollars in profits for their owners. We create a source of income according to their principle for all ordinary people thanks to web 3.0 technologies.',
-		"ru": 'Сегодня маркетплейсы как AliExpress, Amazon, Ebay и тысячи других генерируют миллиарды долларов прибыли для их владельцев. Мы создаем источник дохода по их принципу для всех обычных людей благодаря технологиям веб 3.0.'
+		"en": 'Today, marketplaces like AliExpress, Amazon, Ebay and thousands of others generate billions of dollars in profits for their owners. We will distribute these billions as a source of income <span class="text-warning">for ordinary people</span> thanks to web 3.0 technologies.',
+		"ru": 'Сегодня маркетплейсы как AliExpress, Amazon, Ebay и тысячи других генерируют миллиарды долларов прибыли для их владельцев. Мы распределим эти миллиарды в виде источника дохода <span class="text-warning">для обычных людей</span> благодаря технологиям веб 3.0.'
 	},
 
 
