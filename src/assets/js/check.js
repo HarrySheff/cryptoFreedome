@@ -591,7 +591,7 @@ App = {
 						msg: l100n.localize_string('pop-up')
 					});
 					alert(1);
-		  		ethereum.request({ method:"wallet_switchEthereumChain", params:[{chainId:App.mainChainId}]}).catch((_error)=>{
+		  		ethereum.request({ method:"wallet_switchEthereumChain", params:[{chainId:App.mainChainId}]}).then(()=>alert(11)).catch((_error)=>{
 		  						alert(2);
 		  			if (_error != null) {
 		  				let options = {
