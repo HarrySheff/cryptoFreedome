@@ -98,7 +98,7 @@ let checkPageStrings = {
 	},
 
 	'ch1-p2-m':{
-		selector:"#r-ch2-p1-m",
+		selector:"#r-ch1-p1-m",
 		"en": "Sites working with Blockchain and smart contracts can't be open in a simple mobile browser. The Mobile Wallet has a special browser for them.",
 		"ru": "Сайты, работающие с блокчейном и смарт-контрактами, нельзя открыть в простом мобильном браузере. В Мобильном Кошельке для них есть специальный браузер."
 	},
