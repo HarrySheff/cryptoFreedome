@@ -590,7 +590,7 @@ App = {
 						position: 'top center',
 						msg: l100n.localize_string('pop-up')
 					});
-
+					alert(1);
 		  		ethereum.request({ method:"wallet_switchEthereumChain", params:[{chainId:App.mainChainId}]}).catch((_error)=>{
 
 		  			if (_error != null) {
@@ -611,6 +611,7 @@ App = {
 		  					method:"wallet_addEthereumChain", 
 		  					params:[options]
 		  				}).then(function(){
+		  						alert(2);
 		  						ethereum.request({ method:"wallet_switchEthereumChain", params:[{chainId:App.mainChainId}]}).catch((_error)=>alert(_error));
 		  				});
 		  			}
