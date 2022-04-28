@@ -590,9 +590,9 @@ App = {
 						position: 'top center',
 						msg: l100n.localize_string('pop-up')
 					});
-					alert(1);
-		  		ethereum.request({ method:"wallet_switchEthereumChain", params:[{chainId:App.mainChainId}]}).then(()=>alert(11)).catch((_error)=>{
-		  						alert(2);
+
+		  		ethereum.request({ method:"wallet_switchEthereumChain", params:[{chainId:App.mainChainId}]}).catch((_error)=>{
+
 		  			if (_error != null) {
 		  				let options = {
 		  					chainId:App.mainChainId,
@@ -606,13 +606,12 @@ App = {
 		  					},
 		  					blockExplorerUrls:[App.explorerUrl]	
 		  				}
-		  						alert(3);
+
 		  				ethereum.request({ 
 		  					method:"wallet_addEthereumChain", 
 		  					params:[options]
 		  				}).then(function(){
-		  						alert(4);
-		  						ethereum.request({ method:"wallet_switchEthereumChain", params:[{chainId:App.mainChainId}]}).catch((_error)=>alert(_error));
+		  						ethereum.request({ method:"wallet_switchEthereumChain", params:[{chainId:App.mainChainId}]});
 		  				});
 		  			}
 		  		});

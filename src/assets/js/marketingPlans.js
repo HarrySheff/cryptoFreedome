@@ -277,6 +277,142 @@ App = {
 		    console.warn("User denied account access");
 
 		  }
+
+		// Try to get an account from the wallet
+		  try {
+
+		  	// Log the step start
+		  	console.log('--- Try request an account ---');
+
+		  	// Show the login text istead of the page content
+		  	App.showError(true, l100n.localize_string("err-login-h"), l100n.localize_string("err-login-p"))
+
+		    // Request account access
+		    let accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+		    
+		    // Check the acounts array
+		    if (accounts && accounts.length > 0){
+
+		    	// The accounts array is setted and not empty
+
+		    	// Set the account as first in the acounts array
+		    	App.account = accounts[0];
+		    } else {
+
+		    	// The accounts array is not setted
+
+		    	// Mark the page as has an error
+		    	App.hasError = true;
+
+		    	// Shoe the error text instead of the page content
+			    App.showError(true, l100n.localize_string("err-access-h"), l100n.localize_string("err-access-p"));
+
+			    // Render the page
+			    return App.render();
+		    }
+
+		  } catch (error) {
+
+		    // User denied account access
+
+		    // Mark the page has an error
+		    App.hasError = true;
+
+		    // Show the error text instead of the content
+		    App.showError(true, l100n.localize_string("err-access-h"), l100n.localize_string("err-access-p"));
+
+		    // Log the error
+		    console.warn("User denied account access");
+
+		    // Render the page
+		    return App.render();
+		  }
+
+		  // Try to get chain ID
+		  try {
+
+		  	// Set the chain ID from the wallet
+		  	App.chainId = await ethereum.request({ method: 'eth_chainId' });
+
+		  } catch (error){
+
+		  	// Somthing wrong
+
+		  	// Show the error popup
+				Lobibox.notify('warning', {
+					pauseDelayOnHover: true, 
+					icon: 'bx bx-error',
+					continueDelayOnInactiveTab: false,
+					rounded: true,
+					position: 'top center',
+					msg: error.message
+				});
+
+				// Log the error		
+	  		console.warn(error);
+
+	  		// Mark the page as has an error
+	  		App.hasError = true;
+
+	  		// Show he error text instead of the content
+	  		App.showError(true, l100n.localize_string("err-chprob-h"), l100n.localize_string("err-chprob-p"));
+
+	  		// Rnder the page
+	  		return App.render();
+
+		  }
+		  
+		  // Check the chain ID
+		  if (App.chainId !== App.mainChainId){
+
+		  	// Connected to the wrong chain
+		  	
+	  		if (ethereum.isMetaMask){
+
+	  			App.hasError = true;
+	  			App.showError(true, l100n.localize_string("err-wrongM-h"), l100n.localize_string("err-wrongM-p1")+App.chainName+l100n.localize_string("err-wrongM-p2"));
+	  			$('#chainSwithcLink').off('click').on('click', async function(){
+
+	  				await ethereum.request({ method:"wallet_switchEthereumChain", params:[{chainId:App.mainChainId}]})
+	  				.catch(function(_error){
+
+	  					// Have an error
+
+		  				let options = {
+		  					chainId:App.mainChainId,
+		  					chainName: App.chainName,
+		  					rpcUrls:[App.providerAddress],
+		  					iconUrls: [window.location.host+'/img/bnb.png'],
+		  					nativeCurrency:{
+		  						name:'BNB',
+		  						symbol:'BNB',
+		  						decimals: 18
+		  					},
+		  					blockExplorerUrls:[App.explorerUrl]	
+		  				}
+
+		  				ethereum.request({ 
+		  					method:"wallet_addEthereumChain", 
+		  					params:[options]
+		  				}).then(function(){
+		  						ethereum.request({ method:"wallet_switchEthereumChain", params:[{chainId:App.mainChainId}]});
+		  				});
+
+	  				});
+
+	  			});
+
+	  		} else {
+
+	  			App.hasError = true;
+	  			App.showError(true,  l100n.localize_string("err-wrong-h"), l100n.localize_string("err-wrong-p1")+App.chainName+l100n.localize_string("err-wrong-p2"));
+	  		}
+
+
+	  		// Rnder the page
+	  		return App.render();
+
+		  }		  
 		  
 		}
 
