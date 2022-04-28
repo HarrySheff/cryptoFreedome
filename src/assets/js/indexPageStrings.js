@@ -359,8 +359,8 @@ let indexPageStrings={
 
 	'i-mem-p1':{
 		selector:"#i-mem-p1",
-		"en": 'There are 3 consecutive Bonus plans Light, Smart and Prime with 16 Levels in each of them. To register, activate the next Bonus Plan or upgrade a Level, a Slot of the corresponding Bonus Plan and Level is required.',
-		"ru": 'Есть 3 последовательных Бонусных плана Light, Smart и Prime по 16 Уровней в каждом из них. Для регистрации, активации следующего Бонусного плана или повышения Уровня требуется Слот соответствующего Бонусного плана и Уровня.' 
+		"en": 'There are 3 consecutive Bonus plans Light, Smart and Prime with 16 Levels in each of them. To register, activate the next Bonus Plan or upgrade an it\'s Level, a Slot of the corresponding Bonus Plan and Level is required.',
+		"ru": 'Есть 3 последовательных Бонусных плана Light, Smart и Prime по 16 Уровней в каждом из них. Для регистрации, активации следующего Бонусного плана или повышения его Уровня требуется Слот соответствующего Бонусного плана и Уровня.' 
 	},
 
 	'i-mem-p2':{
