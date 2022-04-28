@@ -592,7 +592,7 @@ App = {
 					});
 					alert(1);
 		  		ethereum.request({ method:"wallet_switchEthereumChain", params:[{chainId:App.mainChainId}]}).catch((_error)=>{
-
+		  						alert(2);
 		  			if (_error != null) {
 		  				let options = {
 		  					chainId:App.mainChainId,
@@ -606,12 +606,12 @@ App = {
 		  					},
 		  					blockExplorerUrls:[App.explorerUrl]	
 		  				}
-
+		  						alert(3);
 		  				ethereum.request({ 
 		  					method:"wallet_addEthereumChain", 
 		  					params:[options]
 		  				}).then(function(){
-		  						alert(2);
+		  						alert(4);
 		  						ethereum.request({ method:"wallet_switchEthereumChain", params:[{chainId:App.mainChainId}]}).catch((_error)=>alert(_error));
 		  				});
 		  			}
