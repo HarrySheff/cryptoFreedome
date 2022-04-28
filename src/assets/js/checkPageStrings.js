@@ -104,31 +104,31 @@ let checkPageStrings = {
 	},
 
 	'ch1-p3-m':{
-		selector:"#r-ch3-p1-m",
+		selector:"#r-ch1-p3-m",
 		"en": "You can fast open this site through ",
 		"ru": "Вы можете быстро отктыть этот сайт через "
 	},
 
 	'ch1-p4-m-1':{
-		selector:"#r-ch4-p1-m-1",
+		selector:"#r-ch1-p4-m-1",
 		"en": "If You don't have ",
 		"ru": "Если у Вас не установлен "
 	},
 
 	'ch1-p4-m-2':{
-		selector:"#r-ch4-p1-m-2",
+		selector:"#r-ch1-p4-m-2",
 		"en": " it will be offered to be installed.",
 		"ru": ", то откроется страница установки приложения."
 	},
 
 	'ch1-p5-m':{
-		selector:"#r-ch5-p1-m",
+		selector:"#r-ch1-p5-m",
 		"en": "The Wallet contains Your accounts (named addresses in Blockchain) where You will make and receive Your cryptocurrency payments.",
 		"ru": "В Кошельке находятся Ваши счета блокчейна (называются адресами), которые Вы будете использовать для отправки и получения платежей в криптовалюте."
 	},
 
 	'ch1-p6-m':{
-		selector:"#r-ch6-p1-m",
+		selector:"#r-ch1-p6-m",
 		"en": '<span class="text-danger">!!! Attention !!!</span> Never give anyone the secret key or the recovery phrase for Your addresses!',
 		"ru": '<span class="text-danger">!!! Внимание !!!</span> Никогда никому не сообщайте секретный ключ и фразу восстановленя ваших адресов!'
 	},
