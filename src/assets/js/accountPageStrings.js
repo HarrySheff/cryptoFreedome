@@ -435,8 +435,8 @@ let accountPageStrings = {
 
 	'a-pools':{
 		selector:"#a-pools",
-		"en": 'Active Steps',
-		"ru": 'Активные Ступени'
+		"en": 'Active Bonus plans',
+		"ru": 'Активные Бонусные планы'
 	},
 
 	// Level card tooltips
@@ -470,13 +470,13 @@ let accountPageStrings = {
 	// Reopens	
 	'a-reopensTooltip-p1':{
 		selector:"#a-reopensTooltip-p1",
-		"en": 'Number of auto-renewals of the ',
-		"ru": 'Число пвторных открытий Ступени '
+		"en": 'Number of Auto-Renewals of the ',
+		"ru": 'Число Автообновлений '
 	},  
 
 	'a-reopensTooltip-p2':{
 		selector:"#a-reopensTooltip-p2",
-		"en": ' Pool at the Level',
+		"en": ' at the Level',
 		"ru": ' на Уровне'
 	},
 
@@ -540,8 +540,8 @@ let registerPageStrings = {
 	// Subtitle
 	'reg-sub':{
 		selector:"#reg-sub",
-		"en": 'Select the appropriate Step. Higher Steps can be activated at any time.<br>Missed incomes are <span class="text-warning">non-refundable</span>.',
-		"ru": 'Выберите подходящую Ступень.<br>Ступени более высокого уровня могут быть активированы в любое время.<br>Упущеный доход <span class="text-warning">не возмещается</span>.'
+		"en": 'Select the appropriate Bonus plan. Higher Bonus plans can be activated at any time.<br>Missed incomes are <span class="text-warning">non-refundable</span>.',
+		"ru": 'Выберите подходящий Бонусный план.<br>Бонусные планы более высокого уровня могут быть активированы в любое время.<br>Упущеный доход <span class="text-warning">не возмещается</span>.'
 	},
 
 	// Registration button
@@ -588,8 +588,8 @@ let registerPageStrings = {
 	// Fast marketing plan description
 	'reg-plan-d2':{
 		selector:"#reg-plan-d2",
-		"en": 'Direct and basic Network Incomes',
-		"ru": 'Прямой и Базовый Сетевой Доходы'
+		"en": 'Direct and small Network Incomes',
+		"ru": 'Прямой и небольшой Сетевой Доходы'
 	},	
 
 	// VIP marketing plan description
@@ -608,8 +608,8 @@ let registerPageStrings = {
 
 	'reg-p1-1':{
 		selector:".reg-p1-1",
-		"en": 'Two auto-renewals ',
-		"ru": 'Два автообновления '
+		"en": 'Two Auto-Renewals ',
+		"ru": 'Два Автообновления '
 	},	
 
 	'reg-p2':{

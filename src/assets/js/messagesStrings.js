@@ -134,14 +134,14 @@ let messagesStrings = {
 
 	'm-re-p1':{
 		selector:".m-re-p1",
-		"en": 'Reopen of the pool',
-		"ru": 'Ступень открыта заново'
+		"en": 'The Level Auto-Renewal',
+		"ru": 'Автообновление Уровня'
 	},	
 
 	'm-re-p2':{
 		selector:".m-re-p2",
 		"en": 'Your ',
-		"ru": 'Ваша Ступень '
+		"ru": 'Ваш '
 	},	
 
 	'm-re-p3':{
@@ -151,8 +151,8 @@ let messagesStrings = {
 	},	
 	'm-re-p4':{
 		selector:".m-re-p4",
-		"en": ' pool was reopened.',
-		"ru": ' открыта заново.'
+		"en": ' was renewed.',
+		"ru": ' обновлен.'
 	},	
 
 	// Registration
@@ -253,8 +253,8 @@ let messagesStrings = {
 
 	'm-level-p3':{
 		selector:".m-level-p3",
-		"en": 'Reopens of ',
-		"ru": 'Автообновление Ступени '
+		"en": 'Auto-Renewals of ',
+		"ru": 'Автообновление '
 	},	
 
 	'm-level-p4':{
@@ -265,7 +265,7 @@ let messagesStrings = {
 
 	'm-level-p5':{
 		selector:".m-level-p5",
-		"en": ' Pools Level ',
+		"en": ' Level ',
 		"ru": '<br>Уровня '
 	},	
 

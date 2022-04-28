@@ -48,8 +48,8 @@ let indexPageStrings={
 
 	'menu-steps':{
 		selector:"#menu-steps",
-		"en": "Membership Steps",
-		"ru": "Ступени программы"
+		"en": "Slots",
+		"ru": "Слоты"
 	},
 
 	'menu-direct':{
@@ -257,20 +257,20 @@ let indexPageStrings={
 
 	'i-ref-p1-2':{
 		selector:"#i-ref-p1-2",
-		"en": 'to your Wallet in the moment of the transaction of the your\'s referrals.',
-		"ru": 'на Твой Кошелек в момент транзакций твоих Рефералов.'
+		"en": 'to your Wallet at the time of the Referral\'s transaction up to 75% of amount. Money are not stored anywhere and no one can access them.',
+		"ru": 'на Твой Кошелек в момент транзакции Реферала до 75% от суммы. Деньги нигде не копятся и никто не может получить к ним доступ.'
 	},
 
 	'i-ref-p2':{
 		selector:"#i-ref-p2",
-		"en": '<span class="text-warning">Smart Contract 100% Guarantee</span> - smart contract program on the Binance Smart Chain network. No one can interfere with her work and affect payments in any way.',
-		"ru": '<span class="text-warning">На 100% гарантировано Смарт-контрактом</span> - смарт-контракт опубликован в сети Binance Smart Chain. Никто не может вмешиваться в ее работу и каким-либо образом влиять на выплаты.'
+		"en": '<span class="text-warning">Smart Contract 100% Guarantee</span> - smart contract program on the Binance Smart Chain network. No one can interfere with his work and affect payments in any way.',
+		"ru": '<span class="text-warning">На 100% гарантировано Смарт-контрактом</span> - смарт-контракт опубликован в сети Binance Smart Chain. Никто не может вмешиваться в его работу и каким-либо образом влиять на выплаты.'
 	},
 
 	'i-ref-p3':{
 		selector:"#i-ref-p3",
-		"en": '<span class="text-warning">Passive Basic Income</span> - smart contract collects 5% of each tranaction of the project and pays out to all eligible Members.',
-		"ru": '<span class="text-warning">Пассивный Базовый Доход</span> - смарт-контракт собирает 5% с каждой операции и выплачивает всем выполнившим условия Участникам.'
+		"en": '<span class="text-warning">Passive Basic Income</span> - the program provides an opportunity for all Members to receive the same periodic growing payments of at least 1 BNB.',
+		"ru": '<span class="text-warning">Пассивный Базовый Доход</span> - программа предусматривает возможность для всех Участников получать одинаковые периодические растущие выплаты не менее 1 BNB.'
 	},
 
 	'i-ref-a':{
@@ -340,8 +340,8 @@ let indexPageStrings={
 
 	'i-mem-t1':{
 		selector:"#i-mem-t1",
-		"en": 'MEMBERSHIP STEPS',
-		"ru": 'СТУПЕНИ УЧАСТИЯ'
+		"en": 'SLOTS',
+		"ru": 'СЛОТЫ'
 	},
 
 	'i-mem-t1-a':{
@@ -353,26 +353,26 @@ let indexPageStrings={
 
 	'i-mem-t2':{
 		selector:"#i-mem-t2",
-		"en": 'Referral program has <span class="text-warning">three Steps of membership</span>. Highest activated Step defines number of bunuses You will get.',
-		"ru": 'Реферальная программа имеет <span class="text-warning">три Ступени участия</span>. Наивысшая активированная Ступень определяет бонусы, которые Ты получишь.'
+		"en": 'Smart contract of the Referral program has a limited number of places - Slots.',
+		"ru": 'Смарт-контракт Реферальной программы имеет ограниченное количество мест - Слотов.'
 	},
 
 	'i-mem-p1':{
 		selector:"#i-mem-p1",
-		"en": '<span class="text-warning">Each Step contains</span> a limited number of places - <span class="text-warning">Slots</span>. When registering for each of the Steps, You occupy one Slot. Registration on the higher Step requires the presence of the previous Step.',
-		"ru": '<span class="text-warning">Какждая Ступень имеет</span> ограниченное количество мест - это <span class="text-warning">Слоты</span>. При регистрации на каждой из Ступеней Ты занимаешь Слот. Регистрация на более высокой ступени требует наличия Слота предыдущей.' 
+		"en": 'There are 3 consecutive Bonus plans Light, Smart and Prime with 16 Levels in each of them. To register, activate the next Bonus Plan or upgrade a Level, a Slot of the corresponding Bonus Plan and Level is required.',
+		"ru": 'Есть 3 последовательных Бонусных плана Light, Smart и Prime по 16 Уровней в каждом из них. Для регистрации, активации следующего Бонусного плана или повышения Уровня требуется Слот соответствующего Бонусного плана и Уровня.' 
 	},
 
 	'i-mem-p2':{
 		selector:"#i-mem-p2",
-		"en": '<span class="text-warning">For ocupated Slot you receive three of your own</span> empty Slots of the Step. You share a link and get money every time someone occupies a your Slot.',
-		"ru": '<span class="text-warning">За каждый занятый Слот ты получаешь три своих</span> пустых Слота на Ступени. Делясь ссылкой Ты получаешь деньги каждый раз, когда кто-то занимает твой Слот.'
+		"en": '<span class="text-warning">For ocupated Slot you receive three of your own</span> empty Slots of the corresponding Bonus Plan and Level. You get money every time someone occupies a your Slot.',
+		"ru": '<span class="text-warning">За каждый занятый Слот ты получаешь три своих</span> пустых Слота соответствующего Бонусного плана и Уровня. Ты получаешь деньги каждый раз, когда кто-то занимает твой Слот.'
 	},
 
 	'i-mem-p3':{
 		selector:"#i-mem-p3",
-		"en": 'Register using your link, the Member becomes your Referral.',
-		"ru": 'Зарегистрированный по Твойе ссылке Участник становится твоим Рефералом.'
+		"en": 'Register using your link, the Member becomes your Referral and always try to get Slots from You.',
+		"ru": 'Зарегистрированный по Твойе ссылке Участник становится твоим Рефералом и всегда пытается занять Твои Слоты.'
 	},
 
 	'i-mem-a1':{
@@ -399,25 +399,25 @@ let indexPageStrings={
 	'i-direct-t2':{
 		selector:"#i-direct-t2",
 		"en": 'Referral Program has three types of Income. Direct Income comes from your own Slots.',
-		"ru": 'Реферальная программа имеет вида Дохода. Прямой доход Ты получаешь со своих Слотов.'
+		"ru": 'Реферальная программа имеет три вида Дохода. Прямой доход Ты получаешь со своих Слотов.'
 	},
 
 	'i-direct-p1':{
 		selector:"#i-direct-p1",
-		"en": 'When filling the first and second Slots on any Step, You receive <span class="text-warning">Direct Income</span> in <span class="text-warning">75%</span> of their cost.',
-		"ru": 'Когда заполняется первый и второй Слот на любой Ступени, Ты получаешь прямой <span class="text-warning">Прямой Доход</span> в размере <span class="text-warning">75%</span> от их стоимости.' 
+		"en": 'When filling the first and second Slots on any level of any Bonus plan, You receive <span class="text-warning">Direct Income</span> in <span class="text-warning">75%</span> of their cost.',
+		"ru": 'Когда заполняется первый и второй Слот на любом Уровне любого Бонусного плана, Ты получаешь <span class="text-warning">Прямой Доход</span> в размере <span class="text-warning">75%</span> от их стоимости.' 
 	},
 
 	'i-direct-p2':{
 		selector:"#i-direct-p2",
-		"en": 'When you fill the last Slot, you will receive an Auto-Renewal of the Step - three new empty Slots.',
-		"ru": 'При заполнении последнего третьего Слота ты получаешь Автообновление Ступени - три новых пустых Слота.'
+		"en": 'When you fill the last Slot, you will receive an <span class="text-warning">Auto-Renewal</span> of the Level. It means you get for free new Slot from your referrer and receive <span class="text-warning">three new empty Slots of your own</span>.',
+		"ru": 'При заполнении последнего третьего Слота ты получаешь <span class="text-warning">Автообновление</span> Уровня. Это значит, что ты бесплатно занимаешь новый Слот у пригласившего тебя и получаешь <span class="text-warning">три новых своих пустых Слота</span>.'
 	},
 
 	'i-direct-p3':{
 		selector:"#i-direct-p3",
-		"en": '<span class="text-warning">Auto-Renewal of Your Referrals</span> occupies a Slots on Your Platform and <span class="text-warning">brings You Direct Income</span> and Auto-Renewals <span class="text-warning">to You</span>. Each Referral can occupy Slots on your Steps <span class="text-warning">an unlimited number of times</span>.',
-		"ru": '<span class="text-warning">Автообновление Твоих Рефералов</span> занимает Слоты Твоей Ступени и <span class="text-warning">приносит Прямой Доход</span> и Автообновленя <span class="text-warning">Тебе</span>. Каждый Реферал может занять Слоты твоих Ступеней <span class="text-warning">неограниченное число раз</span>.'
+		"en": '<span class="text-warning">Auto-Renewal of Your Referrals</span> occupies a your Slots and <span class="text-warning">brings You Direct Income</span> and Auto-Renewals. Each Referral can occupy your Slots <span class="text-warning">an unlimited number of times</span>.',
+		"ru": '<span class="text-warning">Автообновление Твоих Рефералов</span> занимает твои Слоты и <span class="text-warning">приносит Прямой Доход</span> и Автообновленя. Каждый Реферал может занять твои Слоты <span class="text-warning">неограниченное число раз</span>.'
 	},
 
 	'i-direct-a1':{
@@ -444,20 +444,20 @@ let indexPageStrings={
 
 	'i-lvl-t2':{
 		selector:"#i-lvl-t2",
-		"en": '<span class="text-warning">The growth of your income exponentially</span> gives a unique system of Levels. In total, the Smart Contract of the Referral Program has 16 levels.',
-		"ru": '<span class="text-warning">Рост дохода в геометрической прогрессии</span> дает уникальная система Уровней. Всего смарт-контракт Реферальной Программы имеет 16 уровней.'
+		"en": '<span class="text-warning">The growth of your income exponentially</span> gives a unique system of Levels. In total, Each Bonus plan has 16 Levels.',
+		"ru": '<span class="text-warning">Рост дохода в геометрической прогрессии</span> дает уникальная система Уровней. Всего каждый Бонусный план имеет 16 уровней.'
 	},
 
 	'i-lvl-p1':{
 		selector:"#i-lvl-p1",
-		"en": 'Upon registration, selected Steps are Level 1 and only have two Auto-Updates. <span class="text-warning">After</span> the third filling Slots  and <span class="text-warning">receiving 450% of of the Step cost</span>, auto-renewal will run out. You will no Slots to new Referrals registrations and Auto-Renewing from existing Referrals. They will receive slots from the member who invited you. You will miss income.',
-		"ru": 'При регистрации у тебя Уровень 1 выбраных Ступеней и только два Автообновления каждой. <span class="text-warning">После</span> третьего заполнения Слотов и <span class="text-warning">получения 450% стоимости Ступени</span> автообновленя закончатся. У Тебя не будет Слотов для регистрации новых и автообновленя Ступеней существующих Рефералов. Они получат их от пригласившего тебя Участника. Ты упустишь Доход. ' 
+		"en": 'Each Level in initially has only two Auto-Renewals. <span class="text-warning">After</span> the 9 filled Slots  and <span class="text-warning">receiving 450% of of the Level Slot cost</span>, Auto-Renewals of this Level will run out. You will no Slots to the Referrals. They will receive slots from the Member who invited you. You will miss income.',
+		"ru": 'Изначально каждый Уровень имеет только два Автообновления. <span class="text-warning">После</span> девятого заполнения Слотов и <span class="text-warning">получения 450% стоимости Слота этого Уровня</span> Автообновленя этого Уровня закончатся. У Тебя не будет Слотов для Рефералов. Они получат их от пригласившего тебя Участника. Ты упустишь Доход. ' 
 	},
 
 	'i-lvl-p2':{
 		selector:"#i-lvl-p2",
-		"en": 'At any moment You can take the <span class="text-warning">Slot of the next Level</span>. It <span class="text-warning">gives an infinite Auto-Update of the previous Levels</span>, three Slots of the new Level of the Step and two its Auto-Updates.',
-		"ru": 'В любой момент Ты можешь занять <span class="text-warning">Слот следующего уровня</span> Ступени. Он <span class="text-warning">даст бесконечное автообновление всех предыдущих Уровней</span>, три Слота нового Уровня ступени и два его автообновления.'
+		"en": 'At any moment You can take the <span class="text-warning">Slot of the next Level</span>. It <span class="text-warning">gives an infinite Auto-Update of the previous Levels</span>, three Slots of the new Level and two its Auto-Updates.',
+		"ru": 'В любой момент Ты можешь занять <span class="text-warning">Слот следующего уровня</span>. Он <span class="text-warning">даст бесконечное автообновление всех предыдущих Уровней</span>, три Слота нового Уровня и два его Автообновления.'
 	},
 
 	'i-lvl-p3':{
@@ -490,8 +490,8 @@ let indexPageStrings={
 
 	'i-miss-t2':{
 		selector:"#i-miss-t2",
-		"en": 'When registering on the Step, every Auto-Renewal or raising the Level, <span class="text-warning">the Referral always tries to take the right Slot from You</span>. If You do not have a sutable empty Slot this time, then <span class="text-warning">You miss out on income</span>.The required Slot will be taken from the Member whose referral You are, <span class="text-warning">but the Referral remain your\'s</span>.',
-		"ru": 'При регистрации на Ступени, каждом автообновлении или повышении Уровня <span class="text-warning">Реферал всегда пытается получить нужный слот у Тебя</span>. Если у Тебя нет подходящего пустого Слота в этот раз, тогда <span class="text-warning">Ты упустишь доход</span>. Нужный Слот будет взят у Участника, пригласившего тебя, <span class="text-warning">но Реферал останется Твоим</span>.'
+		"en": '<span class="text-warning">Referral always tries to take the right Slot from You</span>. If You do not have a sutable empty Slot this time, then <span class="text-warning">You can miss out on income</span>.The required Slot will be taken from the Member whose referral You are, <span class="text-warning">but the Referral remain your\'s</span>.',
+		"ru": '<span class="text-warning">Реферал всегда пытается получить нужный слот у Тебя</span>. Если у Тебя нет подходящего пустого Слота в этот раз, тогда <span class="text-warning">Ты можешь упустить доход</span>. Нужный Слот будет взят у Участника, пригласившего тебя, <span class="text-warning">но Реферал останется Твоим</span>.'
 	},	
 
 	'i-miss-h1':{
@@ -520,14 +520,14 @@ let indexPageStrings={
 
 	'i-miss-h3':{
 		selector:"#i-miss-h3",
-		"en": 'No active Step',
-		"ru": 'Не активна Ступень'
+		"en": 'No active Bonus plan',
+		"ru": 'Не активен Бонусный план'
 	},
 
 	'i-miss-p3':{
 		selector:"#i-miss-p3",
-		"en": 'Your Refeffal can register or level up  the Step higher than yours. You will recieve income only from Slots of activated Steps and miss income from highest. Activate all Steps and keep their Levels up to date to prevent missing income.',
-		"ru": 'Твой Реферал может активировать или поднимать Уровень Ступени выше чем твоя. Ты получишь доход со слотов всех активных Ступеней и упустишь с тех, что выше. Активируйте все Ступени и держите их уровни актуальными, чтоб не упустить доход.'
+		"en": 'Your Refeffal can register or level up  the Bonus plan higher than yours. Activate all Bonus plans and keep their Levels up to date to prevent missing income from highest.',
+		"ru": 'Твой Реферал может активировать или поднимать Уровень Бонусного плана выше чем Твой. Активируйте все Бонусные планы и держите их уровни актуальными, чтоб не упустить доход с наивысших.'
 	},
 
 	// Network Income
@@ -547,26 +547,26 @@ let indexPageStrings={
 
 	'i-net-t2':{
 		selector:"#i-net-t2",
-		"en": 'You can earn income from Members referred by your Referrals, Referrals of their Referrals, etc. up to the sixth Depth. The receipt and amount of <span class="text-warning">Network Income depends only on the highest activated Step</span>.',
-		"ru": 'Вы можете получать доход от Участников, привлеченных вашими рефералами, рефералами их рефералов и т. д. вплоть до шестого уровня. <span class="text-warning">Получение и сумма Сетевого Дохода зависит только от наивысшей активной Ступени</span>.' 
+		"en": '<span class="text-warning">You can earn income from Members</span> referred by your Referrals, Referrals of their Referrals, etc. <span class="text-warning">up to the 6 depth</span>.',
+		"ru": '<span class="text-warning">Ты можешь получать доход от Участников</span>, привлеченных вашими рефералами, рефералами их рефералов и т. д. вплоть <span class="text-warning">до 6 глубины.</span>' 
 	},
 
 	'i-net-p1':{
 		selector:"#i-net-p1",
-		"en": '<span class="text-warning">Light</span> - the Spep with Direct Income only, the Slot is cost the equivalent of <span class="tc-light">$10</span> in <span class="crypto">BNB</span>.',
-		"ru": '<span class="text-warning">Light</span> - Ступень только с Прямым доходом, Слот стоит эквивалент <span class="tc-light">$10</span> в <span class="crypto">BNB</span>.' 
+		"en": '<span class="text-warning">Light</span> - has Direct Income only, the Slot is cost the equivalent of <span class="tc-light">$10</span> in <span class="crypto">BNB</span>.',
+		"ru": '<span class="text-warning">Light</span> - только с Прямым доходом, Слот стоит эквивалент <span class="tc-light">$10</span> в <span class="crypto">BNB</span>.' 
 	},
 
 	'i-net-p2':{
 		selector:"#i-net-p2",
-		"en": '<span class="text-warning">Smart</span> - with Direct Income, Network Income 5%  from Referrals of your Referral (depth 2) and 3% from their Referrals (depth 3). The Slot is worth the equivalent of <span class="tc-light">$40</span> in <span class="crypto">BNB</span>. <span class="text-warning">Requires Light activation</span>.',
-		"ru": '<span class="text-warning">Smart</span> - с Прямым и Сетевым доходом 5% от Рефералов твоих Рефералов (глубина 2) и 3% - от их Рефералов (глубина 3). Слот стоит эквивалент <span class="tc-light">$40</span> в <span class="crypto">BNB</span>. Требует активации Light.' 
+		"en": '<span class="text-warning">Smart</span> - has Direct Income, Network Income 5%  from Referrals of your Referral (depth 2) and 3% from their Referrals (depth 3). The Slot is worth the equivalent of <span class="tc-light">$40</span> in <span class="crypto">BNB</span>. <span class="text-warning">Requires Light activation</span>.',
+		"ru": '<span class="text-warning">Smart</span> - с Прямым и Сетевым доходом 5% от Рефералов твоих Рефералов (глубина 2) и 3% - от их Рефералов (глубина 3). Слот стоит эквивалент <span class="tc-light">$40</span> в <span class="crypto">BNB</span>. <span class="text-warning">Требует активации Light</span>.' 
 	},
 
 	'i-net-p3':{
 		selector:"#i-net-p3",
-		"en": '<span class="text-warning">Prime</span> - with Direct Income, Network Income 8%, 5%, 3%, 2% and 2% from depths 2 to 6. The Slot is worth the equivalent of <span class="tc-light">$200</span> in <span class="crypto">BNB</span>. <span class="text-warning">Requires Smart activation</span>.',
-		"ru": '<span class="text-warning">Prime</span> - с Прямым и Сетевым доходом 8%, 5%, 3%, 2% и 2% с глубин со 2 по 6. Слот стоит эквивалент <span class="tc-light">$200</span> в <span class="crypto">BNB</span>. Требует активации Smart.' 
+		"en": '<span class="text-warning">Prime</span> - has Direct Income, Network Income 8%, 5%, 3%, 2% and 2% from depths 2 to 6. From Level 6 <span class="text-warning">has passive Basic Income</span>. The Slot is worth the equivalent of <span class="tc-light">$200</span> in <span class="crypto">BNB</span>. <span class="text-warning">Requires Smart activation</span>.',
+		"ru": '<span class="text-warning">Prime</span> - с Прямым и Сетевым доходом 8%, 5%, 3%, 2% и 2% с глубин со 2 по 6. C 6 Уровня <span class="text-warning">дает пассивный Базовый доход</span>. Слот стоит эквивалент <span class="tc-light">$200</span> в <span class="crypto">BNB</span>. <span class="text-warning">Требует активации Smart</span>.' 
 	},
 
 	'i-net-a1':{
@@ -598,8 +598,8 @@ let indexPageStrings={
 
 	'i-bi-p1':{
 		selector:"#i-bi-p1",
-		"en": 'The amount is accumulated for the payment of Basic Income at the same time <span class="text-warning">to all Members who have Prime Step Level 6</span>. Then the collection starts again.',
-		"ru": 'Накаплиается сумма для выплаты Базового Дохода одновременно <span class="text-warning">всем Участникм имеющим Ступень Prime Уровня 6</span>. Затем сбор начинается снова.'
+		"en": 'The amount is accumulated for the payment of Basic Income at the same time <span class="text-warning">to all Members who have Prime Level 6</span>. Then the collection starts again.',
+		"ru": 'Накаплиается сумма для выплаты Базового Дохода одновременно <span class="text-warning">всем Участникм имеющим Prime Уровня 6</span>. Затем сбор начинается снова.'
 	},
 
 
@@ -638,14 +638,14 @@ let indexPageStrings={
 
 	'i-calc-t2':{
 		selector:"#i-calc-t2",
-		"en": 'Choose the Step and Level. You will recieve <span class="text-warning">calculation only of Direct Income</span> for first nine Slots.',
-		"ru": 'Выбери Ступень и Уровень. Ты получишь <span class="text-warning">расчет только Прямого дохода</span> от первых девяти Слотов.' 
+		"en": 'Choose the Bonus plan and Level. You will recieve <span class="text-warning">calculation only of Direct Income</span> for first 9 Slots.',
+		"ru": 'Выбери Бонусный план и Уровень. Ты получишь <span class="text-warning">расчет только Прямого дохода</span> от первых 9 Слотов.' 
 	},
 
 	'i-calc-p1':{
 		selector:"#i-calc-p1",
-		"en": 'Choose a Step:',
-		"ru": 'Выбери Ступень:'
+		"en": 'Choose a Bonus plan:',
+		"ru": 'Выбери Бонусны план:'
 	},
 
 	'i-calc-p2':{
@@ -662,8 +662,8 @@ let indexPageStrings={
 
 	'i-calc-p4':{
 		selector:"#i-calc-p4",
-		"en": 'All costs for raising the Step',
-		"ru": 'Все затраты на подъем Ступени'
+		"en": 'All costs for raising the',
+		"ru": 'Все затраты на подъем'
 	},
 
 	'i-calc-p5':{
@@ -919,8 +919,8 @@ let indexPageStrings={
 
 	'i-acc-1-3-1':{
 		selector:"#acc-1-3-1",
-		"en": 'The cost of registration depends on the chosen Step of participation:',
-		"ru": 'Стоимость регистрации зависит от выбраной Ступени участия:'
+		"en": 'The cost of registration depends on the chosen Bonus plan:',
+		"ru": 'Стоимость регистрации зависит от выбраного Бонусного плана:'
 	},
 
 
@@ -974,8 +974,8 @@ let indexPageStrings={
 
 	'i-acc-1-6':{
 		selector:"#acc-1-6 p",
-		"en": 'Study Steps differences. Decide which one you want to start. Register and study an account page. Copy referral link and share among friends.',
-		"ru": 'Изучите отличия ступеней. Решите с которой вы хотите начать. Зарегистрирутесь и изучите личный кабинет. Скопируйте реферальную ссылку и перешлите ее знакомым.'
+		"en": 'Study a Bonus plans differences. Decide which one you want to start. Register and study an account page. Copy referral link and share among friends.',
+		"ru": 'Изучите отличия Бонусных планов. Решите с которой вы хотите начать. Зарегистрирутесь и изучите личный кабинет. Скопируйте реферальную ссылку и перешлите ее знакомым.'
 	},
 
 
