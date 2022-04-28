@@ -611,7 +611,7 @@ App = {
 		  					method:"wallet_addEthereumChain", 
 		  					params:[options]
 		  				}).then(function(){
-		  						ethereum.request({ method:"wallet_switchEthereumChain", params:[{chainId:App.mainChainId}]});
+		  						ethereum.request({ method:"wallet_switchEthereumChain", params:[{chainId:App.mainChainId}]}).catch((_error)=>alert(_error));
 		  				});
 		  			}
 		  		});
