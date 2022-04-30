@@ -179,7 +179,7 @@ NioApp = function (NioApp, $, window, document) {
 
 		// Split link on parts with and without arguments
 		let valueParts = window.location.href.split("?");
-		console.log(valueParts);
+
 		// Check parts number
 		if(valueParts.length == 2) {
 

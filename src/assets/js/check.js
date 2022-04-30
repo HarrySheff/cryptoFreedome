@@ -571,9 +571,7 @@ App = {
 
     $('#binanceWidget > div > div:nth-child(2)').attr('style','box-sizing: border-box; display: flex; font-size: 24px; white-space: nowrap;');
 
-		$(".minimumSummToRegister").each(function(){this.innerHTML = (App.registrationPrices[0]+App.correction + App.transactionFee).toFixed(6);});
-		$(".correction").each(function(){this.innerHTML = App.correction+ App.transactionFee});
-		$(".maxSummToRegister").each(function(){this.innerHTML = (App.registrationPrices[2]+App.correction+ App.transactionFee).toFixed(6);});
+		$(".minimumSummToRegister").each(function(){this.innerHTML = (App.registrationPrices[App.regMP]+App.correction + App.transactionFee).toFixed(6);});
 		
 		if (window.ethereum){
 			if (ethereum.isMetaMask){
