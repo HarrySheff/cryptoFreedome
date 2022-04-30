@@ -41,8 +41,26 @@ let messagesStrings = {
 	'm-bpo-p7':{
 		selector:".m-bpo-p7",
 		"en": '.<br>Thanks for your membership!',
-		"ru": '.<br>Спасибо, что участвуете!'
+		"ru": '.<br>Спасибо за участие!'
+	},
+
+	'm-bpo-p5-m':{
+		selector:".m-bpo-p5-m",
+		"en": 'Basic Income missed',
+		"ru": 'Упущен Базовый Доход'
 	},	
+
+	'm-bpo-p6-m':{
+		selector:".m-bpo-p6-m",
+		"en": 'Have been paid ',
+		"ru": 'Выплата '
+	},	
+
+	'm-bpo-p7-m':{
+		selector:".m-bpo-p7-m",
+		"en": '.<br>You need Prime Level 6 to received next.',
+		"ru": '.<br>Чтоб получить следующую нужен Prome Уровня 6.'
+	},			
 
 	'm-bpo-p8':{
 		selector:".m-bpo-p8",

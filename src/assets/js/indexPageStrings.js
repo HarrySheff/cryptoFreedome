@@ -16,7 +16,7 @@ let indexPageStrings={
 
 	'i-title-2':{
 		selector:"#i-title-2",
-		"en": 'The Marketplace project on the blockchain to creates Lifetime Equal growing passive Basic Income to all Members. All <span class="text-warning">100% of the project profits</span> are distributed on the same terms for everyone. Cryptocurrency payouts <span class="text-warning">directly to your Wallet</span>.',
+		"en": 'The Marketplace project on the blockchain to create Lifetime Equal growing passive Basic Income to all Members. All <span class="text-warning">100% of the project profits</span> are distributed on the same terms for everyone. Cryptocurrency payouts <span class="text-warning">directly to your Wallet</span>.',
 		"ru": 'Проект Маркетплейса на блокчейне создает равный растущеий пожизненный пассивный Базовый доход всем участникам. Все <span class="text-warning">100% прибыли проекта</span> распределяются на одинаковых условиях для всех. Выплаты в криптовалюте <span class="text-warning">прямо на Твой Кошелек</span>.'
 	},
 
@@ -199,7 +199,7 @@ let indexPageStrings={
 
 	'i-about-title':{
 		selector:"#about .nk-block-text .title",
-		"en": 'Our Goal is pasive <span class="text-warning">Basic Income</span> for All People',
+		"en": 'Our Goal is passive <span class="text-warning">Basic Income</span> for All People',
 		"ru": 'Наша цель - пассивный <span class="text-warning">Базовый доход</span> для всех'
 	},
 
@@ -257,14 +257,14 @@ let indexPageStrings={
 
 	'i-ref-p1-2':{
 		selector:"#i-ref-p1-2",
-		"en": 'to your Wallet at the time of the Referral\'s transaction up to 75% of amount. Money are not stored anywhere and no one can access them.',
+		"en": 'to your Wallet at the time of the Referral\'s transaction up to 75% of it\'s amount. Money is not stored anywhere and no one can access them.',
 		"ru": 'на Твой Кошелек в момент транзакции Реферала до 75% от суммы. Деньги нигде не копятся и никто не может получить к ним доступ.'
 	},
 
 	'i-ref-p2':{
 		selector:"#i-ref-p2",
-		"en": '<span class="text-warning">Smart Contract 100% Guarantee</span> - smart contract program on the Binance Smart Chain network. No one can interfere with his work and affect payments in any way.',
-		"ru": '<span class="text-warning">На 100% гарантировано Смарт-контрактом</span> - смарт-контракт опубликован в сети Binance Smart Chain. Никто не может вмешиваться в его работу и каким-либо образом влиять на выплаты.'
+		"en": '<span class="text-warning">Smart Contract 100% Guarantee</span> - smart contract program on the Binance Smart Chain network. No one can interfere with the operation of the algorithm and affect the payout in any way.',
+		"ru": '<span class="text-warning">На 100% гарантировано Смарт-контрактом</span> - смарт-контракт опубликован в сети Binance Smart Chain. Никто не может вмешиваться в работу алгоритма и каким-либо образом влиять на выплату.'
 	},
 
 	'i-ref-p3':{
@@ -320,7 +320,7 @@ let indexPageStrings={
 
 	'i-easy-p2':{
 		selector:"#i-easy-p2",
-		"en": 'Shere linvite ink  for as more people as you wish.',
+		"en": 'Share the invite link with as many people as you wish.',
 		"ru": 'Поделитесь ссылкой со столькими людьми, сколькими захотите.'
 	},
 
@@ -332,7 +332,7 @@ let indexPageStrings={
 
 	'i-easy-p3':{
 		selector:"#i-easy-p3",
-		"en": 'Get Income from all operations all invited people Lifetime.',
+		"en": 'Get Income from all operations of all invited people Lifetime.',
 		"ru": 'Получайте Доход со всех операций приглашенных людей Пожизненно.'
 	},
 
@@ -359,25 +359,25 @@ let indexPageStrings={
 
 	'i-mem-p1':{
 		selector:"#i-mem-p1",
-		"en": 'There are 3 consecutive Bonus plans Light, Smart and Prime with 16 Levels in each of them. <span class="text-warning">To register</span>, activate the next Bonus Plan or upgrade an it\'s Level, <span class="text-warning">a Slot</span> of the corresponding Bonus Plan and Level <span class="text-warning">is required</span>.',
+		"en": 'There are 3 consecutive Bonus plans Light, Smart and Prime with 16 Levels in each of them. <span class="text-warning">To register</span>, or activate the next Bonus Plan, or upgrade an its Level, <span class="text-warning">a Slot</span> of the corresponding Bonus Plan and Level <span class="text-warning">is required</span>.',
 		"ru": 'Есть 3 последовательных Бонусных плана Light, Smart и Prime по 16 Уровней в каждом из них. <span class="text-warning">Для регистрации</span>, активации следующего Бонусного плана или повышения его Уровня <span class="text-warning">требуется Слот</span> соответствующего Бонусного плана и Уровня.' 
 	},
 
 	'i-mem-p2':{
 		selector:"#i-mem-p2",
-		"en": '<span class="text-warning">For ocupated Slot you receive three of your own</span> empty Slots of the corresponding Bonus Plan and Level. You get money every time someone occupies a your Slot.',
+		"en": '<span class="text-warning">For ocupated Slot you receive three of your own</span> empty Slots of the corresponding Bonus Plan and Level. You receive money every time someone occupies your Slot.',
 		"ru": '<span class="text-warning">За каждый занятый Слот ты получаешь три своих</span> пустых Слота соответствующего Бонусного плана и Уровня. Ты получаешь деньги каждый раз, когда кто-то занимает твой Слот.'
 	},
 
 	'i-mem-p3':{
 		selector:"#i-mem-p3",
-		"en": 'Register using your link, the Member becomes your Referral and always try to get Slots from You.',
+		"en": 'Someone who registered using your link, becomes your Referral and always tries to get Slots from You.',
 		"ru": 'Зарегистрированный по Твойе ссылке Участник становится твоим Рефералом и всегда пытается занять Твои Слоты.'
 	},
 
 	'i-mem-a1':{
 		selector:"#i-mem-a1",
-		"en": 'How much I can earn?',
+		"en": 'How much can I earn?',
 		"ru": 'Сколько я могу заработать?'
 	},	
 
@@ -410,19 +410,19 @@ let indexPageStrings={
 
 	'i-direct-p2':{
 		selector:"#i-direct-p2",
-		"en": 'When you fill the last Slot, you will receive an <span class="text-warning">Auto-Renewal</span> of the Level. It means you get for free new Slot from your referrer and receive <span class="text-warning">three new empty Slots of your own</span>.',
-		"ru": 'При заполнении последнего третьего Слота ты получаешь <span class="text-warning">Автообновление</span> Уровня. Это значит, что ты бесплатно занимаешь новый Слот у пригласившего тебя и получаешь <span class="text-warning">три новых своих пустых Слота</span>.'
+		"en": 'When you fill the last Slot, you will receive an <span class="text-warning">Auto-Renewal</span> of the Level. It means you get new Slot from from the Member who invited you for free and receive <span class="text-warning">three new empty your own Slots</span>.',
+		"ru": 'При заполнении последнего третьего Слота ты получаешь <span class="text-warning">Автообновление</span> Уровня. Это значит, что ты бесплатно занимаешь новый Слот у пригласившего тебя Участника и получаешь <span class="text-warning">три новых своих пустых Слота</span>.'
 	},
 
 	'i-direct-p3':{
 		selector:"#i-direct-p3",
-		"en": '<span class="text-warning">Auto-Renewal of Your Referrals</span> occupies a your Slots and <span class="text-warning">brings You Direct Income</span> and Auto-Renewals. Each Referral can occupy your Slots <span class="text-warning">an unlimited number of times</span>.',
+		"en": '<span class="text-warning">Auto-Renewal of Your Referrals</span> occupies your Slots and <span class="text-warning">brings You Direct Income</span> and Auto-Renewals. Each Referral can occupy your Slots <span class="text-warning">unlimited number of times</span>.',
 		"ru": '<span class="text-warning">Автообновление Твоих Рефералов</span> занимает твои Слоты и <span class="text-warning">приносит Прямой Доход</span> и Автообновленя. Каждый Реферал может занять твои Слоты <span class="text-warning">неограниченное число раз</span>.'
 	},
 
 	'i-direct-a1':{
 		selector:"#i-direct-a1",
-		"en": 'How I can earn more?',
+		"en": 'How can I earn more?',
 		"ru": 'Как получить больше?'
 	},	
 
@@ -444,25 +444,25 @@ let indexPageStrings={
 
 	'i-lvl-t2':{
 		selector:"#i-lvl-t2",
-		"en": '<span class="text-warning">The growth of your income exponentially</span> gives a unique system of Levels. In total, Each Bonus plan has 16 Levels.',
+		"en": '<span class="text-warning">The growth of your income exponentially</span> gives a unique system of Levels. Each Bonus plan has 16 Levels in total.',
 		"ru": '<span class="text-warning">Рост дохода в геометрической прогрессии</span> дает уникальная система Уровней. Всего каждый Бонусный план имеет 16 уровней.'
 	},
 
 	'i-lvl-p1':{
 		selector:"#i-lvl-p1",
-		"en": 'Each Level in initially has only two Auto-Renewals. <span class="text-warning">After</span> the 9 filled Slots  and <span class="text-warning">receiving 450% of of the Level Slot cost</span>, Auto-Renewals of this Level will run out. You will no Slots to the Referrals. They will receive slots from the Member who invited you. You will miss income.',
+		"en": 'Each Level initially has two Auto-Renewals only. <span class="text-warning">As soon as</span> 9 slots are filled and <span class="text-warning">450% of the Level Slot cost is received</span>, the Auto-Renewals of this Level will end. n this case you will not have Slots for your Referrals. They will receive slots from the Member who invited you. You will miss your income.',
 		"ru": 'Изначально каждый Уровень имеет только два Автообновления. <span class="text-warning">После</span> девятого заполнения Слотов и <span class="text-warning">получения 450% стоимости Слота этого Уровня</span> Автообновленя этого Уровня закончатся. У Тебя не будет Слотов для Рефералов. Они получат их от пригласившего тебя Участника. Ты упустишь Доход. ' 
 	},
 
 	'i-lvl-p2':{
 		selector:"#i-lvl-p2",
-		"en": 'At any moment You can take the <span class="text-warning">Slot of the next Level</span>. It <span class="text-warning">gives an infinite Auto-Update of the previous Levels</span>, three Slots of the new Level and two its Auto-Updates.',
+		"en": 'At any moment You can occupy <span class="text-warning">the Slot of the next Level</span>. It <span class="text-warning">gives an infinite Auto-Update of the previous Levels</span>, three Slots of the new Level and two its Auto-Updates.',
 		"ru": 'В любой момент Ты можешь занять <span class="text-warning">Слот следующего уровня</span>. Он <span class="text-warning">даст бесконечное автообновление всех предыдущих Уровней</span>, три Слота нового Уровня и два его Автообновления.'
 	},
 
 	'i-lvl-p3':{
 		selector:"#i-lvl-p3",
-		"en": 'Slots of the new Level cost twice as much as the previous one <span class="text-warning">and bring twice as much Income</span>. Moving up the levels of your Referrals will takes Slots higher and higher Levels, and bring more and more income to You.',
+		"en": 'Slots of the new Level cost twice as much as the previous one <span class="text-warning">and bring twice more Income</span>. Moving up the levels of your Referrals will occupy Slots higher and higher Levels, and bring more and more income to You.',
 		"ru": 'Слот нового Уровня стоит в два раза дороже предыдущего <span class="text-warning">и принесет в два раза больше Дохода</span>. Продвижение по Уровням Твоих рефералов будет занимать Слоты большего и большего Уровней, и приносить больше и больше Дохода.'
 	},
 
@@ -490,7 +490,7 @@ let indexPageStrings={
 
 	'i-miss-t2':{
 		selector:"#i-miss-t2",
-		"en": '<span class="text-warning">Referral always tries to take the right Slot from You</span>. If You do not have a sutable empty Slot this time, then <span class="text-warning">You can miss out on income</span>.The required Slot will be taken from the Member whose referral You are, <span class="text-warning">but the Referral remain your\'s</span>.',
+		"en": '<span class="text-warning">Referral always tries to take the right Slot from You</span>. If You do not have a suitable empty Slot this time, then <span class="text-warning">You can miss out on income</span>.The required Slot will be taken from the Member whose referral You are, <span class="text-warning">but the Referral remains your\'s</span>.',
 		"ru": '<span class="text-warning">Реферал всегда пытается получить нужный слот у Тебя</span>. Если у Тебя нет подходящего пустого Слота в этот раз, тогда <span class="text-warning">Ты можешь упустить доход</span>. Нужный Слот будет взят у Участника, пригласившего тебя, <span class="text-warning">но Реферал останется Твоим</span>.'
 	},	
 
@@ -502,7 +502,7 @@ let indexPageStrings={
 
 	'i-miss-p1':{
 		selector:"#i-miss-p1",
-		"en": 'After two Auto-Renewals Slots at the Level can exhausted. You need level up to prevent missing income.',
+		"en": 'After two Auto-Renewals Slots at the Level can be exhausted. You need to raise your level to prevent missing income.',
 		"ru": 'После двух Автообновлений Слоты на уровне могут закончиться. Тебе надо поднять Уровень чтоб не упустить доход.'
 	},
 
@@ -514,7 +514,7 @@ let indexPageStrings={
 
 	'i-miss-p2':{
 		selector:"#i-miss-p2",
-		"en": 'Your Referral need a Slot of the Level higher then yours.  To prevent missing income you can stay one level more than you Referrals.',
+		"en": 'Your Referral needs a Slot of the Level higher then yours.  To prevent missing income you can stay one level higher than you Referrals.',
 		"ru": 'Твоему Рефералу нужун слот выше Уровня, чем твой. Чтоб не упустить доход будь на один уровень выше своих Рефералов.'
 	},
 
@@ -526,7 +526,7 @@ let indexPageStrings={
 
 	'i-miss-p3':{
 		selector:"#i-miss-p3",
-		"en": 'Your Refeffal can register or level up  the Bonus plan higher than yours. Activate all Bonus plans and keep their Levels up to date to prevent missing income from highest.',
+		"en": 'Your Refeffal can register or rise the Bonus plan higher than yours. Activate all Bonus plans and keep their Levels up to date to prevent missing income from highest.',
 		"ru": 'Твой Реферал может активировать или поднимать Уровень Бонусного плана выше чем Твой. Активируйте все Бонусные планы и держите их уровни актуальными, чтоб не упустить доход с наивысших.'
 	},
 
@@ -553,7 +553,7 @@ let indexPageStrings={
 
 	'i-net-p1':{
 		selector:"#i-net-p1",
-		"en": '<span class="text-warning">Light</span> - has Direct Income only, the Slot is cost the equivalent of <span class="tc-light">$10</span> in <span class="crypto">BNB</span>.',
+		"en": '<span class="text-warning">Light</span> - has Direct Income only, the Slot cost is the equivalent of <span class="tc-light">$10</span> in <span class="crypto">BNB</span>.',
 		"ru": '<span class="text-warning">Light</span> - только с Прямым доходом, Слот стоит эквивалент <span class="tc-light">$10</span> в <span class="crypto">BNB</span>.' 
 	},
 
@@ -565,13 +565,13 @@ let indexPageStrings={
 
 	'i-net-p3':{
 		selector:"#i-net-p3",
-		"en": '<span class="text-warning">Prime</span> - has Direct Income, Network Income 8%, 5%, 3%, 2% and 2% from depths 2 to 6. From Level 6 <span class="text-warning">has passive Basic Income</span>. The Slot is worth the equivalent of <span class="tc-light">$200</span> in <span class="crypto">BNB</span>. <span class="text-warning">Requires Smart activation</span>.',
+		"en": '<span class="text-warning">Prime</span> - has Direct Income, Network Income 8%, 5%, 3%, 2% and 2% from depths 2 to 6. Starting Level 6 it gives <span class="text-warning">a passive Basic Income</span>. The Slot is worth the equivalent of <span class="tc-light">$200</span> in <span class="crypto">BNB</span>. <span class="text-warning">Requires Smart activation</span>.',
 		"ru": '<span class="text-warning">Prime</span> - с Прямым и Сетевым доходом 8%, 5%, 3%, 2% и 2% с глубин со 2 по 6. C 6 Уровня <span class="text-warning">дает пассивный Базовый доход</span>. Слот стоит эквивалент <span class="tc-light">$200</span> в <span class="crypto">BNB</span>. <span class="text-warning">Требует активации Smart</span>.' 
 	},
 
 	'i-net-a1':{
 		selector:"#i-net-a1",
-		"en": 'How get a passive income?',
+		"en": 'How to get a passive income?',
 		"ru": 'Как получить пассивный доход?'
 	},
 
@@ -606,7 +606,7 @@ let indexPageStrings={
 	'i-bi-p2':{
 		selector:"#i-bi-p2",
 		"en": 'If enough money is raised in less than one week,then <span class="text-warning">the next payout is doubled</span>. If the collection took more than a month, then the next payout will be reduced by half, but not less than 1 <span class="crypto">BNB</span>.',
-		"ru": 'Если необходимая сумма собрана меньше чем за неделю, то <span class="text-warning">слудующая выплата удваивается</span>. Если же сбор занял более месяца, то размер выплаты сокращается вдвое, но не менее 1 <span class="crypto">BNB</span>.'
+		"ru": 'Если необходимая сумма собрана меньше чем за неделю, то <span class="text-warning">следующая выплата удваивается</span>. Если же сбор занял более месяца, то размер выплаты сокращается вдвое, но не менее 1 <span class="crypto">BNB</span>.'
 	},
 
 	'i-bi-p3':{
@@ -638,7 +638,7 @@ let indexPageStrings={
 
 	'i-calc-t2':{
 		selector:"#i-calc-t2",
-		"en": 'Choose the Bonus plan and Level. You will recieve <span class="text-warning">calculation only of Direct Income</span> for first 9 Slots.',
+		"en": 'Choose the Bonus plan and Level. You will recieve <span class="text-warning">calculation only of Direct Income</span> for the first 9 Slots.',
 		"ru": 'Выбери Бонусный план и Уровень. Ты получишь <span class="text-warning">расчет только Прямого дохода</span> от первых 9 Слотов.' 
 	},
 
@@ -719,7 +719,7 @@ let indexPageStrings={
 
 	'i-roadmap-t2':{
 		selector:"#i-roadmap-t2",
-		"en": '<span class="text-warning">The Project</span> has already started and is in the process of establishing a Members Network. It <span class="text-warning">allows You to make money</span> on its expansion <span class="text-warning">today</span>.',
+		"en": '<span class="text-warning">The Project</span> has already beenx started and is in the process of establishing a Members Network. It <span class="text-warning">allows You to make money</span> on its expansion <span class="text-warning">today</span>.',
 		"ru": '<span class="text-warning">Проект</span> уже запущен и находится в процессе создания сети участников. Он <span class="text-warning">позволяет Тебе зарабатывать деньги</span> на его расширении <span class="text-warning">уже сегодня</span>.' 
 	},
 
@@ -773,7 +773,7 @@ let indexPageStrings={
 
 	'i-roadmap-p4':{
 		selector:"#i-roadmap-p4",
-		"en": 'Launch of the mobile Best versions of the and first seers contracts.',
+		"en": 'Launch of the mobile app of the and first contracts.',
 		"ru": 'Запуск мобильной версии и первых контрактов.'
 	},
 
@@ -869,7 +869,7 @@ let indexPageStrings={
 
 	'i-faq-t2':{
 		selector:"#i-faq-t2",
-		"en": 'We’ve provided a bit of Project, wallets, cryptocurrencies, and few others.',
+		"en": 'We’ve answered some common questions regarding Project, wallets, cryptocurrencies, and a few other topics.',
 		"ru": 'Мы ответили на часть вопросов о Проекте, кошельках, криптовалютах и другом.' 
 	},
 
@@ -887,7 +887,7 @@ let indexPageStrings={
 
 	'i-acc-1-1-t':{
 		selector:"#acc-1-1-t",
-		"en": 'It\'s safe?',
+		"en": 'Is it safe?',
 		"ru": 'Это безопасно?'
 	},
 
@@ -949,14 +949,14 @@ let indexPageStrings={
 
 	'i-acc-1-4':{
 		selector:"#acc-1-4 p",
-		"en": 'No. The Project have no periodical payments and subscriptions. All purchases have an unlimited lifespan.',
+		"en": 'No. The Project has no periodical payments and subscriptions. All purchases have an unlimited lifespan.',
 		"ru": 'Нет. Проект не имеет периодических платежей и подписок. Все покупки имеют неограниченный срок действия.'
 	},
 
 
 	'i-acc-1-5-t':{
 		selector:"#acc-1-5-t",
-		"en": 'Do I need special knowledge?',
+		"en": 'Do I need a special knowledge?',
 		"ru": 'Мне нужны специальные знания?'
 	},
 
@@ -974,7 +974,7 @@ let indexPageStrings={
 
 	'i-acc-1-6':{
 		selector:"#acc-1-6 p",
-		"en": 'Study a Bonus plans differences. Decide which one you want to start. Register and study an account page. Copy referral link and share among friends.',
+		"en": 'Study Bonus plan differences. Decide which one you want to start from. Register and study an account page. Copy referral link and share among friends.',
 		"ru": 'Изучите отличия Бонусных планов. Решите с которой вы хотите начать. Зарегистрирутесь и изучите личный кабинет. Скопируйте реферальную ссылку и перешлите ее знакомым.'
 	},
 

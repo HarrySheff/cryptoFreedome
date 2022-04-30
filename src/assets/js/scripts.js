@@ -179,7 +179,7 @@ NioApp = function (NioApp, $, window, document) {
 
 		// Split link on parts with and without arguments
 		let valueParts = window.location.href.split("?");
-
+		console.log(valueParts);
 		// Check parts number
 		if(valueParts.length == 2) {
 
@@ -193,7 +193,7 @@ NioApp = function (NioApp, $, window, document) {
 
 			// If exist second part, return a value from start to splitter "&"
 			if (parts.length == 2) {
-			   	temp = parseInt(parts.pop().split("&").shift(),10);
+			   	let temp = parseInt(parts.pop().split("&").shift(),10);
 			   	console.log( "Set sponsor ID: ", temp);
 
 				// Cookie expiration date
