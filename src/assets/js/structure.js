@@ -47,6 +47,7 @@ App = {
 	currentTimeToPricesUpdate: 120,
 	roundId: 0,
 	hasError: false,
+	events:[],
 	eventsSet: new Set(),
 	commission: 0.001,
 	lastSeenBlockNumber: 0,

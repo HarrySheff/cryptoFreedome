@@ -7,6 +7,12 @@ let accountPageStrings = {
 		"ru": "Crypto Freedom | Аккаунт"
 	},
 
+	// Title of the page
+	'browserPageTitleMarketing':{
+		selector:"title.marketing",
+		"en": "Crypto Freedom | Marketing Plans",
+		"ru": "Crypto Freedom | Бонусные планы"
+	},
 
 	// Header
 
@@ -390,7 +396,7 @@ let accountPageStrings = {
 
 	'a-top-x1':{
 		selector:"#a-top-x1",
-		"en": 'You get Basic Income!',
+		"en": 'You are getting Basic Income!',
 		"ru": 'Вы получаете Базовый Доход!'
 	},
 
