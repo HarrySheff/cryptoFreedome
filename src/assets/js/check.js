@@ -573,6 +573,10 @@ App = {
 
 		$(".minimumSummToRegister").each(function(){this.innerHTML = (App.registrationPrices[App.regMP]+App.correction + App.transactionFee).toFixed(6);});
 		
+		$(".dapp-link").each(function(){
+
+			$(this).attr('href', $(this).attr("href")+"?ref="+App.sponsorId+"&mp="+App.regMP);
+		});
 		if (window.ethereum){
 			if (ethereum.isMetaMask){
 				$('#haveMetamask').show();
