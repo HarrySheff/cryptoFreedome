@@ -593,7 +593,7 @@ App = {
 							continueDelayOnInactiveTab: false,
 							rounded: true,
 							position: 'top center',
-							msg: l100n.localize_string('pop-up')
+							msg: "network switched"//l100n.localize_string('pop-up')
 						});
 		  		}).catch((_error)=>{
 
@@ -615,14 +615,14 @@ App = {
 		  					method:"wallet_addEthereumChain", 
 		  					params:[options]
 		  				}).then(function(){
-					  					
+
 								Lobibox.notify('success', {
 									pauseDelayOnHover: true,
 									icon: 'bx bx-check',
 									continueDelayOnInactiveTab: false,
 									rounded: true,
 									position: 'top center',
-									msg: l100n.localize_string('pop-up')
+									msg: "network added"//l100n.localize_string('pop-up')
 								});
 		  						ethereum.request({ method:"wallet_switchEthereumChain", params:[{chainId:App.mainChainId}]});
 		  				});
