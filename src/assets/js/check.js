@@ -584,16 +584,18 @@ App = {
 
 				$('#haveMetamask').off('click').on('click', async function(){
 
-					Lobibox.notify('success', {
-						pauseDelayOnHover: true,
-						icon: 'bx bx-check',
-						continueDelayOnInactiveTab: false,
-						rounded: true,
-						position: 'top center',
-						msg: l100n.localize_string('pop-up')
-					});
 
-		  		ethereum.request({ method:"wallet_switchEthereumChain", params:[{chainId:App.mainChainId}]}).catch((_error)=>{
+		  		ethereum.request({ method:"wallet_switchEthereumChain", params:[{chainId:App.mainChainId}]}).then(()=>{
+
+						Lobibox.notify('success', {
+							pauseDelayOnHover: true,
+							icon: 'bx bx-check',
+							continueDelayOnInactiveTab: false,
+							rounded: true,
+							position: 'top center',
+							msg: l100n.localize_string('pop-up')
+						});
+		  		}).catch((_error)=>{
 
 		  			if (_error != null) {
 		  				let options = {
@@ -613,6 +615,15 @@ App = {
 		  					method:"wallet_addEthereumChain", 
 		  					params:[options]
 		  				}).then(function(){
+					  					
+								Lobibox.notify('success', {
+									pauseDelayOnHover: true,
+									icon: 'bx bx-check',
+									continueDelayOnInactiveTab: false,
+									rounded: true,
+									position: 'top center',
+									msg: l100n.localize_string('pop-up')
+								});
 		  						ethereum.request({ method:"wallet_switchEthereumChain", params:[{chainId:App.mainChainId}]});
 		  				});
 		  			}
