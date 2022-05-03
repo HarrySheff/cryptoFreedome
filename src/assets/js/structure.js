@@ -1794,7 +1794,7 @@ App = {
 	  	function addFillers(_count, _depth, _rowAfter){
 
 	  		for (let i = _depth; i>-1; i--){
-	  			if (_rowAfter < referralRow[i].length) {
+	  			if (_rowAfter+1 < referralRow[i].length) {
 
 	  				referralRow[i] = referralRow[i].slice(0,_rowAfter+1).concat(new Array(_count).fill(1)).concat(referralRow[i].slice(_rowAfter+1));
 	  			} else {
