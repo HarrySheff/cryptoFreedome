@@ -33,6 +33,8 @@ var currentBlock;
 var startBlock;
 var dbo;
 var doubleContract;
+var lastSeenBlock;
+var lastLogIndex;
 
 ws.on('close', async (code) => {
   console.log('ws closed reason:', code);
@@ -107,6 +109,8 @@ async function handleEvents (event, _dbo){
 
   return new Promise(async function(resolve, reject){
 
+    if (event.blockNumber > lastSeenBlock || event.logIndex > lastLogIndex) {
+
       let eventMod = await modifyEvent(event);
 
       console.log('Event ', event.event, ' is catched in block ', event.blockNumber, ' with log logIndex ', event.logIndex);
@@ -170,62 +174,76 @@ async function handleEvents (event, _dbo){
           }
               
         }
-      break;
-      case 'basicIncomeReadyToPay':
-        let encoded = doubleContract.methods.basicIncomePay().encodeABI()
+        break;
+        case 'basicIncomeReadyToPay':
+          let encoded = doubleContract.methods.basicIncomePay().encodeABI()
 
-        var tx = {
-            from: owner,
-            to : myContractAddress,
-            data : encoded,
-            gas: await web3.eth.estimateGas({
+          var tx = {
               from: owner,
-              to: myContractAddress,
-              data:encoded
-              })*2
-        }
+              to : myContractAddress,
+              data : encoded,
+              gas: await web3.eth.estimateGas({
+                from: owner,
+                to: myContractAddress,
+                data:encoded
+                })*2
+          }
 
-        web3.eth.accounts.signTransaction(tx, 'e00e1c950b6bf191ac684c88cefbf75e09a0036fd9013d7ecf726b6b6a4b31ae')
-        .then(signed => {
-          web3.eth.sendSignedTransaction(signed.rawTransaction)
-          .on('receipt', ()=>{
-            console.log('Basic Income summ',eventMod.args["amount"],'payed to', eventMod.args["receivers"]);
+          web3.eth.accounts.signTransaction(tx, 'e00e1c950b6bf191ac684c88cefbf75e09a0036fd9013d7ecf726b6b6a4b31ae')
+          .then(signed => {
+            web3.eth.sendSignedTransaction(signed.rawTransaction)
+            .on('receipt', async ()=>{
+              console.log('Basic Income summ',eventMod.args["amount"],'payed to', eventMod.args["receivers"]);
+              resolve(true);
+            })
+          })
+
+
+
+
+        /*
+          await instance.basicIncomePay({from:'0x3EA9278376634f0197F3fc90Bf75f63065C6c82E'})
+          .then(()=>{
+            console.log('Basic Income summ',event.args["amount"],'payed to', event.args["receivers"]);
             resolve(true);
           })
-        })
+          .catch((_error)=>{
+            console.warn("Event log error: ", _error);
+            reject(_error);
+          });
 
 
+          */
+        break;
 
+        default:
+          try {
+            await _dbo.collection('partners').updateOne({_id:eventMod.args["partnerAddress"].toLowerCase()}, {$push:{events:eventMod}});
+            socketEmit(eventMod.args["partnerAddress"].toLowerCase(), eventMod);
+            console.log('Event added to the database', eventMod.event);
+            resolve(true);
+          } catch (_error){
+            console.warn("Event log error: ", _error);
+            reject(_error);
+          }
+        break;
+      } 
 
-      /*
-        await instance.basicIncomePay({from:'0x3EA9278376634f0197F3fc90Bf75f63065C6c82E'})
-        .then(()=>{
-          console.log('Basic Income summ',event.args["amount"],'payed to', event.args["receivers"]);
-          resolve(true);
-        })
-        .catch((_error)=>{
-          console.warn("Event log error: ", _error);
-          reject(_error);
-        });
+      try {
+        console.log('Udating lastSeenBlock of the server');
+        lastSeenBlock = event.blockNumber;
+        lastLogIndex = event.logIndex;
+        await dbo.collection('server').updateOne({_id:0},{$set:{lastSeenBlock:lastSeenBlock, lastLogIndex:lastLogIndex}});
+        console.log('Server\'s lastSeenBlock was updated');
+      } catch (_error){
 
-
-        */
-      break;
-
-      default:
-        try {
-          await _dbo.collection('partners').updateOne({_id:eventMod.args["partnerAddress"].toLowerCase()}, {$push:{events:eventMod}});
-          socketEmit(eventMod.args["partnerAddress"].toLowerCase(), eventMod);
-          console.log('Event added to the database', eventMod.event);
-          resolve(true);
-        } catch (_error){
-          console.warn("Event log error: ", _error);
-          reject(_error);
-        }
-      break;
-    } 
-
+        console.log(_error);
+      } 
+    } else {
+      resolve (true);
+    }
   });
+
 }
 
 function socketEmit(_acc, _event){
@@ -269,14 +287,17 @@ async function run() {
       // Set starting block number
       let blockToRead;
       try {
-        blockToRead = await dbo.collection('server').find({_id:0}).lastSeenBlock;
+        result = await dbo.collection('server').find({_id:0}).limit(1).toArray();
+        lastSeenBlock = result[0].lastSeenBlock;
+        lastLogIndex = result[0].lastLogIndex;
+        blockToRead = lastSeenBlock;
       } catch (_error){
 
         console.log(_error);
         blockToRead = startBlock ;
+        lastSeenBlock = startBlock;
+        lastLogIndex = -1;
       }
-
-      //blockToRead = startBlock ;
 
       result = await dbo.collection('partners').find({_id:owner.toLowerCase()}).limit(1).toArray();
 
@@ -296,6 +317,17 @@ async function run() {
         // Decrease start block number
         blockToRead+=5000;
 
+
+        try {
+          console.log('Udating lastSeenBlock of the server');
+          lastSeenBlock = blockToRead;
+          lastLogIndex = -1;
+          await dbo.collection('server').updateOne({_id:0},{$set:{lastSeenBlock:lastSeenBlock, lastLogIndex:lastLogIndex}});
+          console.log('Server\'s lastSeenBlock was updated');
+        } catch (_error){
+
+          console.log(_error);
+        } 
       }
         
       console.log( "Left to read: ",1);
@@ -307,7 +339,9 @@ async function run() {
 
       try {
         console.log('Udating lastSeenBlock of the server');
-        await dbo.collection('server').updateOne({_id:0},{$set:{lastSeenBlock:currentBlock}});
+        lastSeenBlock = currentBlock;
+        lastLogIndex = -1;        
+        await dbo.collection('server').updateOne({_id:0},{$set:{lastSeenBlock:lastSeenBlock, lastLogIndex:lastLogIndex}});
         console.log('Server\'s lastSeenBlock was updated');
       } catch (_error){
 
@@ -430,11 +464,14 @@ async function run() {
 
 async function stop(){
 
+
   if (client) await client.close();
   console.log('--- The dabase connection close ---');
   //if (instance2) await instance2.stopWatching();
   //console.log('--- Blockchain wathing stoped ---');
   if (server) await server.close();
-  console.log('--- Http listening stoped ---')
+  console.log('--- Http listening stoped ---');
+
+
 }
 

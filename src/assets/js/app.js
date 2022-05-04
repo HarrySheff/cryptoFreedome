@@ -1059,19 +1059,6 @@ App = {
 
 								break;
 
-								case '10':
-
-									// It's a missed Basic Income
-									// Add new nitification to the list of notifications
-									addNotification(
-										'leaderBonusMissed',
-										'<span class="m-bpo-p5">'+l100n.localize_string("m-bpo-p5")+'</span>',
-										'<span class="m-bpo-p6">'+l100n.localize_string("m-bpo-p6")+'</span>'+(_event.args["amount"]).toFixed(App.cryptoDecimasNumber)+' '+App.crypto+'<span class="m-bpo-p7">'+l100n.localize_string("m-bpo-p7")+'</span>',
-										_event
-									);
-
-								break;
-
 								default:
 
 									// It's a network income
