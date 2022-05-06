@@ -109,7 +109,7 @@ async function handleEvents (event, _dbo){
 
   return new Promise(async function(resolve, reject){
 
-    if (event.blockNumber > lastSeenBlock || event.logIndex > lastLogIndex) {
+    if (event.blockNumber > lastSeenBlock || (event.blockNumber == lastSeenBlock && event.logIndex > lastLogIndex)) {
 
       let eventMod = await modifyEvent(event);
 
