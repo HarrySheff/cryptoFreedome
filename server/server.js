@@ -268,12 +268,11 @@ async function run() {
   try {
     web3 = new Web3(new Web3.providers.WebsocketProvider('wss://speedy-nodes-nyc.moralis.io/45d335612640a0e5a8e1d1e8/bsc/testnet/ws'));
     doubleContract = new web3.eth.Contract(data.abi, myContractAddress, {from: owner});
-
     // Connect the client to the server
     dbo = await client.connect();
     dbo = dbo.db("cryptoLife");
     console.log("--- Connected to the database ---");
-    instance2 = await doubleContract.deploy({data:data.bytecode})._parent;
+    instance2 = await doubleContract.deploy({data:data.bytecode, arguments:[1]})._parent;
     console.log("--- instance2 deployed ---");
     //instance = await cryptoLife.deployed();
     //console.log("--- instance deployed ---");
