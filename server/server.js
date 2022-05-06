@@ -16,7 +16,7 @@ const { MongoClient } = require("mongodb");
 const uri = "mongodb://localhost:27017/?maxPoolSize=20&w=majority";
 const client = new MongoClient(uri);
 const owner = '0x3EA9278376634f0197F3fc90Bf75f63065C6c82E';
-const myContractAddress = '0xdC3d6Cf792e562c341eA377f96B828Ea0d5A1831';
+const myContractAddress = '0xa86e3f8805ea1430c6899a7eebc1bda65e4aea33'; // old '0xdC3d6Cf792e562c341eA377f96B828Ea0d5A1831';
 
 
 // Instance a new truffle contract from the artifact

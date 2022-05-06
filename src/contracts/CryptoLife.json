@@ -83247,15 +83247,34 @@
           ],
           "name": "registration",
           "type": "event"
+        },
+        "0xa9b92a373d3473c612a19cd22a98189cc78b3487a6b8e6e045bbd1a3cc0e3b25": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address[]",
+              "name": "receivers",
+              "type": "address[]"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            }
+          ],
+          "name": "basicIncomeReadyToPay",
+          "type": "event"
         }
       },
       "links": {},
-      "address": "0x05fD2E91AdD91150a56CFfF0ECF046676Cf032f7",
-      "transactionHash": "0x7b49fda9ff4d0ee8de95bb1bae5f3d2f8809182dd90467663e5519ecdc5ca362"
+      "address": "0xc42269589000F26Bf0cC93F22EAD4F8d11aEE9D1",
+      "transactionHash": "0x1516d08895d6131003bf3bd39d9286dd7fb57c6f69dc7d302eb027d2d1a944a0"
     }
   },
   "schemaVersion": "3.4.3",
-  "updatedAt": "2022-05-04T11:34:34.815Z",
+  "updatedAt": "2022-05-06T10:39:45.289Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},
