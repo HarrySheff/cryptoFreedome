@@ -16,7 +16,7 @@ const { MongoClient } = require("mongodb");
 const uri = "mongodb://localhost:27017/?maxPoolSize=20&w=majority";
 const client = new MongoClient(uri);
 const owner = '0x3EA9278376634f0197F3fc90Bf75f63065C6c82E';
-const myContractAddress = '0xa86e3f8805ea1430c6899a7eebc1bda65e4aea33'; // old '0xdC3d6Cf792e562c341eA377f96B828Ea0d5A1831';
+const myContractAddress = '0x104b53046D73ce683e4a3dCbaEa77C12bf76C84e'; // old '0xdC3d6Cf792e562c341eA377f96B828Ea0d5A1831';
 
 
 // Instance a new truffle contract from the artifact
@@ -276,7 +276,7 @@ async function run() {
     dbo = await client.connect();
     dbo = dbo.db("cryptoLife");
     console.log("--- Connected to the database ---");
-    instance2 = await doubleContract.deploy({data:data.bytecode, arguments:[1]})._parent;
+    instance2 = await doubleContract.deploy({data:data.bytecode})._parent;
     console.log("--- instance2 deployed ---");
     //instance = await cryptoLife.deployed();
     //console.log("--- instance deployed ---");
@@ -302,10 +302,14 @@ async function run() {
         lastLogIndex = -1;
       }
 
+
       result = await dbo.collection('partners').find({_id:owner.toLowerCase()}).limit(1).toArray();
 
-      if (result.length <1) blockToRead = startBlock ;
-
+      if (result.length <1) {
+        blockToRead = startBlock ;
+        lastSeenBlock = startBlock;
+        lastLogIndex = -1;
+      }
       console.log('Start reading blockchain logs');
       // Loop until the range of the last blocks is reduced to 5000 or all new messages is in the list and list size above the limit
       while (blockToRead + 5000 < currentBlock){
@@ -334,11 +338,6 @@ async function run() {
       }
         
       console.log( "Left to read: ",1);
-<<<<<<< HEAD
-
-=======
-        
->>>>>>> parent of 331130c (new contract code added)
       // Listern events in the current range
       all = await instance2.getPastEvents('allEvents',{fromBlock:blockToRead, toBlock:currentBlock});
       for (event of all) await handleEvents(event, dbo);
