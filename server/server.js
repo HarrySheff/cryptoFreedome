@@ -176,28 +176,32 @@ async function handleEvents (event, _dbo){
         }
         break;
         case 'basicIncomeReadyToPay':
-          let encoded = doubleContract.methods.basicIncomePay().encodeABI()
+          if (await instance2.methods.isCommisionTransfered().call({from:owner})){
+            let encoded = doubleContract.methods.basicIncomePay().encodeABI()
 
-          var tx = {
-              from: owner,
-              to : myContractAddress,
-              data : encoded,
-              gas: await web3.eth.estimateGas({
+            var tx = {
                 from: owner,
-                to: myContractAddress,
-                data:encoded
-                })*2
-          }
+                to : myContractAddress,
+                data : encoded,
+                gas: await web3.eth.estimateGas({
+                  from: owner,
+                  to: myContractAddress,
+                  data:encoded
+                  })*2
+            }
 
-          web3.eth.accounts.signTransaction(tx, 'e00e1c950b6bf191ac684c88cefbf75e09a0036fd9013d7ecf726b6b6a4b31ae')
-          .then(signed => {
-            web3.eth.sendSignedTransaction(signed.rawTransaction)
-            .on('receipt', async ()=>{
-              console.log('Basic Income summ',eventMod.args["amount"],'payed to', eventMod.args["receivers"]);
-              resolve(true);
+            web3.eth.accounts.signTransaction(tx, 'e00e1c950b6bf191ac684c88cefbf75e09a0036fd9013d7ecf726b6b6a4b31ae')
+            .then(signed => {
+              web3.eth.sendSignedTransaction(signed.rawTransaction)
+              .on('receipt', async ()=>{
+                console.log('Basic Income summ',eventMod.args["amount"],'payed to', eventMod.args["receivers"]);
+                resolve(true);
+              })
             })
-          })
-
+          } else {
+            console.log('Basic Income payment logged: summ',eventMod.args["amount"],'payed to', eventMod.args["receivers"]);
+            resolve(true);            
+          }
 
 
 
@@ -334,7 +338,7 @@ async function run() {
       }
         
       console.log( "Left to read: ",1);
-      console.log(startBlock,blockToRead,currentBlock);        
+
       // Listern events in the current range
       all = await instance2.getPastEvents('allEvents',{fromBlock:blockToRead, toBlock:currentBlock});
       for (event of all) await handleEvents(event, dbo);
