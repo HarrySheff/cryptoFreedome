@@ -252,7 +252,7 @@ let indexPageStrings={
 	'i-ref-p1-1':{
 		selector:"#i-ref-p1-1",
 		"en": '<span class="text-warning">Instant Payments</span> - direct payouts in cryptocurrency',
-		"ru": '<span class="text-warning">Мгновенные платежы</span> - прямые выплаты в криптовалюте'
+		"ru": '<span class="text-warning">Мгновенные платежи</span> - прямые выплаты в криптовалюте'
 	},
 
 	'i-ref-p1-2':{
