@@ -738,9 +738,15 @@ let registerPageStrings = {
 
 	'reg-top-p4':{
 		selector:".reg-top-p4",
-		"en": 'Available from Level',
-		"ru": 'Доступен с Уровня'
+		"en": 'Available from ',
+		"ru": 'Сейчас доступен с '
 	},
+
+	'reg-top-p5':{
+		selector:".reg-top-p5",
+		"en": ' Level now',
+		"ru": '-го Уровня'
+	}
 };
 
 let modalsPageStrings = {

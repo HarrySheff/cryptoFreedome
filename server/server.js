@@ -4,9 +4,11 @@ const app = express();
 const fs = require('fs');
 const TruffleContract = require("truffle-contract");
 let rawdata = fs.readFileSync(process.cwd() + '/src/contracts/CryptoLife.json');
+const wss = fs.readFileSync(process.cwd() + "/server/.wss").toString().trim();
+const mnemonic = fs.readFileSync(process.cwd() + "/server/.secret").toString().trim();
 let data = JSON.parse(rawdata, 'utf8');
 const Web3 = require('web3');
-let ws = new Web3.providers.WebsocketProvider('wss://speedy-nodes-nyc.moralis.io/45d335612640a0e5a8e1d1e8/bsc/testnet/ws');
+let ws = new Web3.providers.WebsocketProvider(wss);
 let web3 = new Web3(ws);
 const http = require('http');
 const server = http.createServer(app);
@@ -15,8 +17,8 @@ const io = new Server(server);
 const { MongoClient } = require("mongodb");
 const uri = "mongodb://localhost:27017/?maxPoolSize=20&w=majority";
 const client = new MongoClient(uri);
-const owner = '0x3EA9278376634f0197F3fc90Bf75f63065C6c82E';
-const myContractAddress = '0x104b53046D73ce683e4a3dCbaEa77C12bf76C84e'; // old '0xdC3d6Cf792e562c341eA377f96B828Ea0d5A1831';
+const owner = '0xaD90d8090317BFEa17365470aD3507BB64001E63';
+const myContractAddress = '0xE73E74c9d9A09b58F29E370dEe3c5648BDa8609d'; // old '0xdC3d6Cf792e562c341eA377f96B828Ea0d5A1831';
 
 
 // Instance a new truffle contract from the artifact
@@ -40,7 +42,7 @@ ws.on('close', async (code) => {
   console.log('ws closed reason:', code);
   await stop();
   setTimeout(() => { 
-    ws = new Web3.providers.WebsocketProvider('wss://speedy-nodes-nyc.moralis.io/45d335612640a0e5a8e1d1e8/bsc/testnet/ws');
+    ws = new Web3.providers.WebsocketProvider(wss);
     web3 = new Web3(ws);
     run();
   }, 2000);
@@ -65,7 +67,7 @@ app.get('/data', async function(req, res) {
 
     let basicIncomeProgress = (basicIncomeData[0]/basicIncomeData[2])*80+12;
 
-    res.json({members: membersCount,summ: basicIncomeData[1]/10**18, progress:basicIncomeProgress});
+    res.json({members: membersCount,summ: basicIncomeData[1]/10**18, progress:basicIncomeProgress, minLevel:basicIncomeData[4]});
     console.log('Data send as JSON.');
   }
   catch (_error){
@@ -190,7 +192,7 @@ async function handleEvents (event, _dbo){
                   })*2
             }
 
-            web3.eth.accounts.signTransaction(tx, 'e00e1c950b6bf191ac684c88cefbf75e09a0036fd9013d7ecf726b6b6a4b31ae')
+            web3.eth.accounts.signTransaction(tx, mnemonic)
             .then(signed => {
               web3.eth.sendSignedTransaction(signed.rawTransaction)
               .on('receipt', async ()=>{
@@ -270,7 +272,7 @@ function socketEmit(_acc, _event){
 async function run() {
 
   try {
-    web3 = new Web3(new Web3.providers.WebsocketProvider('wss://speedy-nodes-nyc.moralis.io/45d335612640a0e5a8e1d1e8/bsc/testnet/ws'));
+    web3 = new Web3(new Web3.providers.WebsocketProvider(wss));
     doubleContract = new web3.eth.Contract(data.abi, myContractAddress, {from: owner});
     // Connect the client to the server
     dbo = await client.connect();

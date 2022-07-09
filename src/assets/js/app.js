@@ -4,8 +4,8 @@ App = {
   account: '0x0000000000000000000000000000000000000000',
   crypto: "BNB",
   chainId: 0,
-  chainName: 'Smart Chain - Testnet',
-  mainChainId: '0x61', // '0x539',
+  chainName: 'Smart Chain',
+  mainChainId: '0x38', //'0x61',
   balance: 0,
   exchange: {},
   currentRate: 0,
@@ -2485,15 +2485,15 @@ App = {
 					buttonVipPriceTooltip.attr('data-original-title', l100n.localize_string("a-levelup-p1")+App.mp[2]+l100n.localize_string("a-levelup-p2"));		    	
 
 		    	levelCard.find("#poolLevel")[0].innerHTML=levelNumber;
-		    	levelCard.find("#basic .bx-user").each(function(k){ 
+		    	levelCard.find("#basic .slot").each(function(k){ 
 
 		    		if (k<(App.level[0][i]-1)%3){
 
-		    			$(this).addClass('text-white-1');
+		    			$(this).removeClass('bx-circle').addClass("bx-dollar-circle").addClass('text-white-1');
 		    		}
 		    		else if ($(this).hasClass('text-white-1')) {
 
-		    			$(this).removeClass('text-white-1');
+		    			$(this).removeClass('text-white-1').removeClass('bx-dollar-circle').addClass('bx-circle');
 
 		    		}
 
@@ -2516,11 +2516,11 @@ App = {
 
 				    		if (k<(App.level[1][i]-1)%3){
 
-				    			$(this).addClass('text-info');
+				    			$(this).removeClass('bx-circle').addClass("bx-dollar-circle").addClass('text-info');
 				    		}
 				    		else if ($(this).hasClass('text-info')) {
 
-				    			$(this).removeClass('text-info')
+				    			$(this).removeClass('bx-dollar-circle').addClass('bx-circle').removeClass('text-info')
 
 				    		}
 
@@ -2558,11 +2558,11 @@ App = {
 
 				    		if (k<(App.level[2][i]-1)%3){
 
-				    			$(this).addClass('text-warning');
+				    			$(this).removeClass('bx-circle').addClass("bx-dollar-circle").addClass('text-warning');
 				    		}
 				    		else if ($(this).hasClass('text-warning')) {
 
-				    			$(this).removeClass('text-warning')
+				    			$(this).removeClass('bx-dollar-circle').addClass('bx-circle').removeClass('text-warning')
 
 				    		}
 

@@ -3,8 +3,8 @@ App = {
   contracts: {},
   crypto: "BNB",
   chainId: 0,
-  chainName: 'Smart Chain - Testnet',
-  mainChainId: '0x61', // '0x539',
+  chainName: 'Smart Chain',
+  mainChainId: '0x38', //'0x61',
   balance: 0,
   exchange: {},
   currentRate: 0,
@@ -1124,6 +1124,8 @@ App = {
   	} else {
     	$('#walletContainer').hide();
     }
+
+    $("#topLeaderMaxLevel")[0].innerHTML = App.basicIncomeMinimumLevel;
 
     if (!App.hasError){
     	App.showError(false);

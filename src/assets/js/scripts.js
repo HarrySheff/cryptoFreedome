@@ -5,7 +5,7 @@
 
 var NioApp = (function (jQ, win, doc){
     "use strict";
-    var NioApp = {AppInfo: {name: "CryptoLife", package: "1.0.0", version: "1.0.0", author: "Silver Dragon"} },
+    var NioApp = {AppInfo: {name: "Crypto Freedom", package: "1.0.0", version: "1.0.0", author: "Silver Dragon"} },
         components = {docReady: [], docReadyDefer: [], winLoad: [], winLoadDefer: []};
 
     jQ(doc).ready(docReady);
