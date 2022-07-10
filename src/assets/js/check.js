@@ -5,7 +5,7 @@ App = {
   crypto: "BNB",
   chainId: 0,
   chainName: 'Smart Chain',
-  mainChainId: '0x539', //'0x61',
+  mainChainId: '0x38', //'0x61',
   balance: 0,
   exchange: {},
   currentRate: 0,
