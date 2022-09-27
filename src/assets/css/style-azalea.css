@@ -1142,7 +1142,7 @@ hr { position: relative; z-index: 5; }
 .btn-secondary:hover { background-color: #ffc107; border-color: #ffc107; }
 .btn-secondary.btn-outline:hover { background-color: #f8aa38; border-color: #f8aa38; }
 .btn-info { background-color: #026bfb; border-color: #026bfb; }
-.btn-info:hover { background-color border-color: #014baf; }
+.btn-info:hover { background-color: #ffc107; border-color: #014baf; }
 .btn-info.btn-outline:hover { border-color: #026bfb; }
 .btn-warning { background-color: #f6be26; border-color: #f6be26; }
 .btn-warning:hover { background-color: #c79408; border-color: #c79408; }

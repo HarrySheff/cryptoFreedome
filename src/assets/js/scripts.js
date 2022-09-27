@@ -132,6 +132,7 @@ NioApp = function (NioApp, $, window, document) {
 
 		$(".lang i").attr('class', NioApp.langs[_locale].flag);
 		$(".lang span")[0].innerHTML= NioApp.langs[_locale].name;
+		$('[data-toggle="tooltip"]').tooltip();
     }
 
     // Number of Members

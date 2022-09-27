@@ -4,20 +4,22 @@ let indexPageStrings={
 	// Title of the page
 	'browserPageTitle':{
 		selector:"title",
-		"en": "Crypto Freedom | Web 3.0 Marketplace",
-		"ru": "Crypto Freedom | Web 3.0 Маркетплейс"
+		"en": "Crypto Freedom | Web 3.0 Platform",
+		"ru": "Crypto Freedom | Web 3.0 Платформа"
 	},
-
+ 
 	'i-title-1':{
 		selector:"#i-title-1",
-		"en": 'Take a step towards Freedom Today with <span class="text-warning">Lifetime Income</span> from Web 3.0 Marketplace launch',
-		"ru": 'Сделай шаг к Свободе  уже сегодня с <span class="text-warning">Пожизненным доходом</span> от запуска Web 3.0 Маркетплейса'
+		"en":'Changing businesses. <span class="text-warning">Changing lives</span>.',
+		"ru": 'Меняем бизнесы. <span class="text-warning">Меняем жизни</span>.'
 	},
 
 	'i-title-2':{
 		selector:"#i-title-2",
-		"en": 'The Marketplace project on the blockchain to create Lifetime Equal growing passive Basic Income to all Members. All <span class="text-warning">100% of the project profits</span> are distributed on the same terms for everyone. Cryptocurrency payouts <span class="text-warning">directly to your Wallet</span>.',
-		"ru": 'Проект Маркетплейса на блокчейне создает равный растущеий пожизненный пассивный Базовый доход всем участникам. Все <span class="text-warning">100% прибыли проекта</span> распределяются на одинаковых условиях для всех. Выплаты в криптовалюте <span class="text-warning">прямо на Твой Кошелек</span>.'
+		"en": '<span class="text-warning">The Platform allows</span> businesses around the world to legally and securely accept payments in cryptocurrencies, and You can <span class="text-warning">receive a constant growing income</span> by simply sharing a link.',
+		"ru": '<span class="text-warning">Платформа позволяет</span> бизнесу по всему миру легально и безопасно принимать платежи в криптовалюте, а Тебе - <span class="text-warning">получать постоянный растущий доход</span>, просто поделившись ссылкой.'
+		/*"ru": 'Мы создаем <span class="text-warning">Базовый Доход для обычных людей</span> переводя существуюущие бизнесы на Web 3.0 технологии. Зарегистрируйся, поделись ссылкой и получай гарантированные <span class="text-white" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Смарт-контракт - это цифровое соглашение, опубликованное в сети блокчейн, которое невозможно изменить или нарушить любой из сторон." style="cursor: pointer;" id="a-total-t1"><span id="a-total-p1">смарт-контрактом</span> <sup><i class="bx bx-info-circle small"></i></sup></span> <span class="text-warning"> мгновенные и периодические выплаты</span> за помощь в развитии и популяризации Платформы!'
+	*/
 	},
 
 	'i-logo':{
@@ -48,8 +50,8 @@ let indexPageStrings={
 
 	'menu-steps':{
 		selector:"#menu-steps",
-		"en": "Slots",
-		"ru": "Слоты"
+		"en": "Basics",
+		"ru": "Основы"
 	},
 
 	'menu-direct':{
@@ -117,7 +119,7 @@ let indexPageStrings={
 	// Main 
 
 	'i-more':{
-		selector:"#i-more",
+		selector:".i-more",
 		"en": 'MORE INFO&nbsp<em class="icon ti ti-arrow-down"></em>',
 		"ru": 'Подробнее&nbsp<em class="icon ti ti-arrow-down"></em>'
 	},	
@@ -205,15 +207,27 @@ let indexPageStrings={
 
 	'i-about-p1':{
 		selector:"#i-about-p1",
-		"en": 'Today, marketplaces like AliExpress, Amazon, Ebay and thousands of others generate billions of dollars in profits for their owners. We will distribute these billions as a source of income <span class="text-warning">for ordinary people</span> thanks to web 3.0 technologies.',
-		"ru": 'Сегодня маркетплейсы как AliExpress, Amazon, Ebay и тысячи других генерируют миллиарды долларов прибыли для их владельцев. Мы распределим эти миллиарды в виде источника дохода <span class="text-warning">для обычных людей</span> благодаря технологиям веб 3.0.'
+		"en": 'Cryptocurrencies were created over a decade ago to give the world a free and unified economy. However, their use is still limited by law.',
+		"ru": 'Криповалюты созданы более десятка лет назад, чтоб дать миру свободную и единую экономику. Но до сих пор их использование ограничено законодательно.'
 	},
 
 
 	'i-about-p2':{
 		selector:"#i-about-p2",
-		"en": 'We are not dreamers and enter the fight against giants <span class="text-warning">with a clear plan and step by step solution</span>. Now we are building a consumer base thanks to a referral program with unprecedented payouts.',
-		"ru": 'Мы не мечтатели и вступаем в борьбу с гигантами <span class="text-warning">с четким планом и поэтапным решением</span>. Сейчас - создаем базу потребителей благодаря реферальной прграмме с беспрецедентными выплатами.'
+		"en": 'We are creating a Platform and Community where everyone can use, and businesses can legally and safely accept cryptocurrency as a means of payment.',
+		"ru": 'Мы создаем Платформу и Сообщество, где каждый может использовать, а бизнес - легально и безопасно принимать криптовалюту, как средство платежа. '
+	},
+
+	'i-about-p3':{
+		selector:"#i-about-p3",
+		"en": '<span class="text-warning">The basis of the Platform is</span> a unique Referral Program that automatically pays <span class="text-warning">100% of the profits</span> to Community <span class="text-warning">Members</span>.',
+		"ru": '<span class="text-warning">Основа Платформы - </span>уникальная Реферальная Программа, автоматически выплачивающая <span class="text-warning">100% прибыли Участникам</span> Сообщества.'
+	},
+
+	'i-about-p4':{
+		selector:"#i-about-p4",
+		"en": 'The Referral Program encourages both the contribution of each Members and makes regular payments of Basic Income according to the same rules for All.',
+		"ru": 'Реферальная Программа поощряет как вклад каждого Участника, так и делает регулярные выплаты Базового Дохода по единым для Всех правилам.'
 	},
 
 	'i-about-a1':{
@@ -246,7 +260,7 @@ let indexPageStrings={
 	'i-ref-t2':{
 		selector:"#i-ref-t2",
 		"en": 'We are creating a Network of Members on a reimbursable basis to attract suppliers with the most profitable offers to the Marketplace.',
-		"ru": 'Мы создаем Сеть Участников на возмездной основе для привлечения поставщиков с наиболее выгодными предложениями на Маркетплейс.'
+		"ru": 'Наша цель - сделать экономически свободными как можно обольше людей и патим за расширение Сообщества. '
 	},
 
 	'i-ref-p1-1':{
@@ -258,19 +272,19 @@ let indexPageStrings={
 	'i-ref-p1-2':{
 		selector:"#i-ref-p1-2",
 		"en": 'to your Wallet at the time of the Referral\'s transaction up to 75% of it\'s amount. Money is not stored anywhere and no one can access them.',
-		"ru": 'на Твой Кошелек в момент транзакции Реферала до 75% от суммы. Деньги нигде не копятся и никто не может получить к ним доступ.'
+		"ru": ' <span class="text-warning">до 75% от суммы</span> на Твой Кошелек в момент транзакции Реферала. Деньги нигде не копятся и никто не может получить к ним доступ.'
 	},
 
 	'i-ref-p2':{
 		selector:"#i-ref-p2",
-		"en": '<span class="text-warning">Smart Contract 100% Guarantee</span> - smart contract program on the Binance Smart Chain network. No one can interfere with the operation of the algorithm and affect the payout in any way.',
-		"ru": '<span class="text-warning">На 100% гарантировано Смарт-контрактом</span> - смарт-контракт опубликован в сети Binance Smart Chain. Никто не может вмешиваться в работу алгоритма и каким-либо образом влиять на выплату.'
+		"en": '<span class="text-warning">Smart Contract 100% Guarantee</span> - it published <span class="text-warning">in the Binance Smart Chain network</span>. No one can interfere with the operation of the algorithm and affect the payout in any way.',
+		"ru": '<span class="text-warning">На 100% гарантировано Смарт-контрактом</span> - он опубликован <span class="text-warning">в сети Binance Smart Chain</span>. Никто не может вмешиваться в работу алгоритма и каким-либо образом влиять на выплату.'
 	},
 
 	'i-ref-p3':{
 		selector:"#i-ref-p3",
-		"en": '<span class="text-warning">Passive Basic Income</span> - the program provides an opportunity for all Members to receive the same periodic growing payments of at least 1 BNB.',
-		"ru": '<span class="text-warning">Пассивный Базовый Доход</span> - программа предусматривает возможность для всех Участников получать одинаковые периодические растущие выплаты не менее 1 BNB.'
+		"en": '<span class="text-warning">Passive Basic Income</span> - the program provides an opportunity <span class="text-warning">for all Members</span> to receive the same periodic growing payments of <span class="text-warning">at least 1 BNB</span>.',
+		"ru": '<span class="text-warning">Пассивный Базовый Доход</span> - программа предусматривает возможность <span class="text-warning">для всех Участников</span> получать одинаковые периодические растущие выплаты <span class="text-warning">не менее 1 BNB</span>.'
 	},
 
 	'i-ref-a':{
@@ -302,46 +316,46 @@ let indexPageStrings={
 
 	'i-easy-h1':{
 		selector:"#i-easy-h1",
-		"en": '1. Registration',
-		"ru": '1. Регистрируйтесь'
+		"en": 'Stable',
+		"ru": 'Стабильно'
 	},
 
 	'i-easy-p1':{
 		selector:"#i-easy-p1",
-		"en": 'Simple registration with crypto wallet Address.',
-		"ru": 'Легкая регистрация по адресу криптовалютного Кошелька'
+		"en": 'The amount of payouts is tied to USD and is recalculated every 2 minutes.',
+		"ru": 'Размер выплат привязан к USD и пересчитывается каждые 2 минуты.'
 	},
 
 	'i-easy-h2':{
 		selector:"#i-easy-h2",
-		"en": '2. Share',
-		"ru": '2. Делитесь'
+		"en": 'Secure',
+		"ru": 'Безопасно'
 	},
 
 	'i-easy-p2':{
 		selector:"#i-easy-p2",
-		"en": 'Share the invite link with as many people as you wish.',
-		"ru": 'Поделитесь ссылкой со столькими людьми, сколькими захотите.'
+		"en": 'Instant payouts are guaranteed by a <span class="text-white" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="A smart contract is a digital agreement published on the blockchain network that cannot be changed or violated by either party." style="cursor: pointer;" id="a-total-t1"><span id="a-total-p1">smart contract</span> <sup><i class="bx bx-info-circle small"></i></sup></span> with full <span class="text-white" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Смарт-контракт делает выплаты автоматически без участия людей. Он не имеет внешних методов вывода средств, что гарантирует защиту от взлома и мошенничества." style="cursor: pointer;" id="a-total-t1"><span id="a-total-p1">automation</span> <sup><i class="bx bx-info-circle small"></i></sup></span>.',
+		"ru": 'Мгновенные выплаты гарантированы <span class="text-white" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Смарт-контракт - это цифровое соглашение, опубликованное в сети блокчейн, которое невозможно изменить или нарушить любой из сторон." style="cursor: pointer;" id="a-total-t1"><span id="a-total-p1">смарт-контрактом</span> <sup><i class="bx bx-info-circle small"></i></sup></span> с полной <span class="text-white" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Смарт-контракт делает выплаты автоматически без участия людей. Он не имеет внешних методов вывода средств, что гарантирует защиту от взлома и мошенничества." style="cursor: pointer;" id="a-total-t1"><span id="a-total-p1">автоматизацией</span> <sup><i class="bx bx-info-circle small"></i></sup></span>.'
 	},
 
 	'i-easy-h3':{
 		selector:"#i-easy-h3",
-		"en": '3. Get Income',
-		"ru": '3. Получайте Доход'
+		"en": '<span class="text-warning">Forever and ever</span>',
+		"ru": '<span class="text-warning">Всю жизнь</span>'
 	},
 
 	'i-easy-p3':{
 		selector:"#i-easy-p3",
-		"en": 'Get Income from all operations of all invited people Lifetime.',
-		"ru": 'Получайте Доход со всех операций приглашенных людей Пожизненно.'
+		"en": 'Privileges and benefits do not expire and do not require renewal.',
+		"ru": 'Привилегии и выплаты не имеют срока действия и не требуют продления.'
 	},
 
 	// Membership Steps
 
 	'i-mem-t1':{
 		selector:"#i-mem-t1",
-		"en": 'SLOTS',
-		"ru": 'СЛОТЫ'
+		"en": 'BASICS',
+		"ru": 'ОСНОВЫ'
 	},
 
 	'i-mem-t1-a':{
@@ -353,8 +367,8 @@ let indexPageStrings={
 
 	'i-mem-t2':{
 		selector:"#i-mem-t2",
-		"en": 'Smart contract of the Referral program has a limited number of places - Slots.',
-		"ru": 'Смарт-контракт Реферальной программы имеет ограниченное количество мест - Слотов.'
+		"en": 'Smart contract of the Referral Program has a limited number of places - Slots.',
+		"ru": 'Смарт-контракт Реферальной Программы имеет ограниченное количество мест - Слотов.'
 	},
 
 	'i-mem-p1':{

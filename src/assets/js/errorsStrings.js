@@ -130,8 +130,8 @@ let errorPageStrings = {
 
 	'err-access-p':{
 		selector:"#err-access-p",
-		"en": '<span id="err-access-p">Plaese allow the CryptoLife access to the Wallet.</span>',
-		"ru": '<span id="err-access-p">Пожалуйста, разрешите CryptoLife доступ к Кошельку.</span>'
+		"en": '<span id="err-access-p">Plaese allow the Crypto Freedom access to the Wallet.</span>',
+		"ru": '<span id="err-access-p">Пожалуйста, разрешите Crypto Freedom доступ к Кошельку.</span>'
 	},		
 
 	// Common
@@ -143,8 +143,8 @@ let errorPageStrings = {
 
 	'err-access-pl':{
 		selector:"#err-access-p",
-		"en": 'Plaese allow the CryptoLife access to the Wallet.',
-		"ru": 'Пожалуйста, разрешите CryptoLife доступ к Кошельку.'
+		"en": 'Plaese allow the Crypto Freedom access to the Wallet.',
+		"ru": 'Пожалуйста, разрешите Crypto Freedom доступ к Кошельку.'
 	},	
 
 	// Chain problem
